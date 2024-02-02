@@ -1,0 +1,5 @@
+2023-12-07 16:29:31,165 - mylogger - DEBUG - debug message
+2023-12-07 16:29:31,165 - mylogger - INFO - info message
+2023-12-07 16:29:31,165 - mylogger - WARNING - warning message
+2023-12-07 16:29:31,165 - mylogger - ERROR - error message
+2023-12-07 16:29:31,165 - mylogger - CRITICAL - critical message

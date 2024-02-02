@@ -47,6 +47,7 @@ class C:
     def div(self):
         try:
             sum = self.a / self.b
+            return sum
         except ZeroDivisionError:
             print('分母不能为0')
         else:

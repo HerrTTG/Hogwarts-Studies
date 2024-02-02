@@ -1,0 +1,2 @@
+2023-12-07 16:42:03,054 - ERROR - 生成不同的两个日志文件.py[:48] - This is an error message
+2023-12-07 16:42:03,055 - CRITICAL - 生成不同的两个日志文件.py[:49] - This is a critical message
