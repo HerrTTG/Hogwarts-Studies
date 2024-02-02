@@ -44,7 +44,10 @@ P:实现控制，用来控制菜单的输出与功能的选择，直到用户选
 O: 参考P中的要求 
 '''
 
-import pyinputplus,os,time
+import os
+import pyinputplus
+import time
+
 
 class Managementsystem:
 
@@ -222,6 +225,7 @@ class Operationsystem(Managementsystem):
                     print(self.ls[0])
                     for i in ls:
                         print(i)
+                    time.sleep(3)
         else:
             for item in self.ls:
                 print(item)
