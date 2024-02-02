@@ -45,14 +45,16 @@ O: 参考P中的要求
 '''
 
 import os
-import pyinputplus
 import time
+
+import pyinputplus
 
 
 class Managementsystem:
 
     @classmethod
     def intro(cls):
+        """界面展示，参与无限循环。用类方法来调用，不限制对象"""
         print("****************************************")
         print("*            学生管理系统                *")
         print("*         1. 添加新学生信息               *")
@@ -67,6 +69,7 @@ class Managementsystem:
         print("****************************************")
 
     def start(self,):
+        """系统初始化，根据数据的opcode将对应的信息写入对象的属性中。并且会区分opcode的业务而排除不需要的数据输入"""
         try:
             self.opcode=pyinputplus.inputInt('请输出操作方式:',min=0,max=8,limit=3)
             assert self.opcode !=8
@@ -97,8 +100,9 @@ class Managementsystem:
 
 class Operationsystem(Managementsystem):
     def readdata(self):
+        """读取或者建立数据文件，进入循环前或者opcode为0时运行。保证对象属性self.ls的最时效性
+           本地数据文本采用csv格式"""
         self.ls=[]
-        #读取或者建立数据文件
         if os.path.isfile('./data.csv'):
             with open('./data.csv','r',encoding='utf-8') as f:
                 for i in f.readlines():
@@ -109,6 +113,8 @@ class Operationsystem(Managementsystem):
             with open('./data.csv','w',encoding='utf-8') as f:
                 f.write('编号,学号,姓名,年龄,性别\n')
     def selectmune(self):
+        """菜单多态方法，根据opcode的不同，返回不同的类方法名。注意是返回方法名，而不进行调用.
+           此举是为了再次判断opcode是否为8,如果为8,执行保存退出操作.在返回false,使大循环break"""
         if self.opcode==8:
             Operationsystem.autoexit(self)
             return False
@@ -118,12 +124,15 @@ class Operationsystem(Managementsystem):
             return d[self.opcode]
 
     def cancle(self):
+        """取消变革你方法，对应opcode==0  本质就是刷新self.ls 再去读取当前数据文件一次"""
         self.readdata()
         print('取消所有变更成功')
         time.sleep(2)
 
     @classmethod
     def autoexit(cls,self):
+        """名虽autoexit，但不aoto。当opcode为8时会从菜单方法中被调用。检查self.ls是否有数据，即是否被读取或者修改过。
+           将self.ls的数据覆盖到本地文本中"""
         if self.opcode == 8 and len(self.ls)>=1:
             fo=open('./data.csv', 'w', encoding='utf-8')
             for i in self.ls:
@@ -239,7 +248,7 @@ if __name__=='__main__':
         Managementsystem.intro()
         a.start()
         b=a.selectmune()
-        if b:#只要不是8 返回的就是对应的函数名
+        if b:  # 只要不是8 返回的就是对应的函数名，8 会返回False 导致进入esle中触发break
             b()
         else:
             break
