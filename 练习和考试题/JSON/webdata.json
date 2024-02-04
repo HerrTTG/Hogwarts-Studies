@@ -1,0 +1,18 @@
+{
+  "code": 200,
+  "msg": "success",
+  "data": [
+    {
+      "goods_id": "g0001",
+      "goods_name": "iPhone12",
+      "goods_price": 6999,
+      "is_use": true
+    },
+    {
+      "goods_id": "g0002",
+      "goods_name": "iPhone13",
+      "goods_price": 7999,
+      "is_use": false
+    }
+  ]
+}
