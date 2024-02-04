@@ -106,8 +106,12 @@ class Operationsystem(Managementsystem):
         if os.path.isfile('./data.csv'):
             with open('./data.csv','r',encoding='utf-8') as f:
                 for i in f.readlines():
+                    # f.readlines将返回所有行，每一行作为一个单独的元素形成的list
+                    # 循环遍历这个list 变量i,此时就代表是每一行的字符串如'编号,学号,姓名,年龄,性别\n'
                     i=i.replace('\n','')
+                    #去除小尾巴
                     self.ls.append(i.split(','))
+                    #将字符串i 按照,分割为一个list 在加入self.ls中。形成一个二维的列表
                 #print(self.ls)
         else:
             with open('./data.csv','w',encoding='utf-8') as f:
@@ -137,6 +141,11 @@ class Operationsystem(Managementsystem):
             fo=open('./data.csv', 'w', encoding='utf-8')
             for i in self.ls:
                 fo.writelines(','.join(i)+'\n')
+                # 与读取时同理，i 变量为self.ls中的每一个元素，即每一行形成的一维列表。
+                # ','.join(i) 表示用逗号作为分隔符在每一个元素之间，从i列表中。返回的是一个字符串即'编号,学号,姓名,年龄,性别'
+                # 最后加上小尾巴
+                # writelines按行写入。
+                #小TIP:join里面传入的一定是个一个可迭代对象。
             fo.close()
 
     def add(self):
