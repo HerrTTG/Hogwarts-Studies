@@ -128,7 +128,7 @@ class Operationsystem(Managementsystem):
             return d[self.opcode]
 
     def cancle(self):
-        """取消变革你方法，对应opcode==0  本质就是刷新self.ls 再去读取当前数据文件一次"""
+        """取消任何数据变更方法，对应opcode==0  本质就是刷新self.ls 再去读取当前数据文件一次"""
         self.readdata()
         print('取消所有变更成功')
         time.sleep(2)
