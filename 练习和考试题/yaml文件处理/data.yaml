@@ -1,0 +1,17 @@
+cool_list:
+  - 10
+  - 15
+  - 12
+
+hard_list:
+  - { key: value }
+  - [ 1,2,3 ]
+  - test:
+      - 1
+      - 2
+      - 3
+
+twice_list:
+  - - { a: AA }
+    - { b: BB }
+    - { c: CC }

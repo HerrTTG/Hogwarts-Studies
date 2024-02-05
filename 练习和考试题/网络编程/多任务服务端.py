@@ -2,6 +2,9 @@ import socket
 import threading
 
 
+# 小扩展，尝试修改服务器能够和一个客户端多次重复的交互。
+
+
 class MultiTaskTCPServer(object):
     # 在初始化方法中对服务端socket进行初始化操作
     def __init__(self, ip="", port=8080):
