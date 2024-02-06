@@ -1,7 +1,7 @@
 import pytest
 
 
-# pip install allure-pytest and allure
+# pip install allure-pytest_and_allure
 
 def test_case1():
     assert True

@@ -13,7 +13,7 @@ import yaml
 """
 
 """
-测试计划设计:
+测试计划设计:https://github.com/HerrTTG/Hogwarts-Studies/blob/main/homework/pytest%20and%20allure/%E6%B5%8B%E8%AF%95%E8%AE%A1%E5%88%92.docx
 """
 
 """
@@ -29,6 +29,7 @@ import yaml
 """
 测试结果:
 利用Allure技术生成结果报告。
+
 """
 
 
@@ -57,6 +58,8 @@ with open("加法.yaml", "r", encoding='utf-8') as file:
 with open("除法.yaml", "r", encoding='utf-8') as file:
     data2 = yaml.safe_load(file)
 
+
+# 加法用例
 @pytest.mark.parametrize("a, b, c", data1)
 def test_add(a, b, c):
     tester = Calculator()
@@ -68,6 +71,7 @@ def test_add(a, b, c):
         raise '其他错误'
 
 
+#除法用例
 @pytest.mark.parametrize("a, b, c", data2)
 def test_div(a, b, c):
     tester = Calculator()
