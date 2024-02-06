@@ -54,14 +54,32 @@ class Calculator:
 with open("加法.yaml", "r", encoding='utf-8') as file:
     data1 = yaml.safe_load(file)
 
+with open("除法.yaml", "r", encoding='utf-8') as file:
+    data2 = yaml.safe_load(file)
 
 @pytest.mark.parametrize("a, b, c", data1)
-def test_add1(a, b, c):
+def test_add(a, b, c):
     tester = Calculator()
     try:
         assert tester.add(a, b) == c, '测试结果与预期不符'
     except TypeError:
         pass
+    except:
+        raise '其他错误'
+
+
+@pytest.mark.parametrize("a, b, c", data2)
+def test_div(a, b, c):
+    tester = Calculator()
+    try:
+        assert tester.div(a, b) == c, '测试结果与预期不符'
+    except TypeError:
+        pass
+    except ZeroDivisionError:
+        pass
+    except:
+        raise '其他错误'
+
 
 
 if __name__ == '__main__':
