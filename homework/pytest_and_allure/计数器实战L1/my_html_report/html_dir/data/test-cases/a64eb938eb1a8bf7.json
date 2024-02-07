@@ -1,0 +1,91 @@
+{
+  "uid": "a64eb938eb1a8bf7",
+  "name": "test_add[-232-0-\\u53c2\\u6570\\u5927\\u5c0f\\u8d85\\u51fa\\u8303\\u56f4]",
+  "fullName": "计算器实战L1#test_add",
+  "historyId": "d88877b5295c5a0d61985549340acccf",
+  "time": {
+    "start": 1707275169188,
+    "stop": 1707275169189,
+    "duration": 1
+  },
+  "status": "passed",
+  "flaky": false,
+  "newFailed": false,
+  "beforeStages": [],
+  "testStage": {
+    "status": "passed",
+    "steps": [],
+    "attachments": [
+      {
+        "uid": "2f7209cf74fd0472",
+        "name": "stdout",
+        "source": "2f7209cf74fd0472.txt",
+        "type": "text/plain",
+        "size": 53
+      }
+    ],
+    "parameters": [],
+    "shouldDisplayMessage": false,
+    "attachmentsCount": 1,
+    "hasContent": true,
+    "stepsCount": 0
+  },
+  "afterStages": [],
+  "labels": [
+    {
+      "name": "suite",
+      "value": "计算器实战L1"
+    },
+    {
+      "name": "host",
+      "value": "ZJS-E14"
+    },
+    {
+      "name": "thread",
+      "value": "51140-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "计算器实战L1"
+    },
+    {
+      "name": "resultFormat",
+      "value": "allure2"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "-232"
+    },
+    {
+      "name": "b",
+      "value": "0"
+    },
+    {
+      "name": "c",
+      "value": "'参数大小超出范围'"
+    }
+  ],
+  "links": [],
+  "hidden": true,
+  "retry": true,
+  "extra": {
+    "categories": [],
+    "tags": []
+  },
+  "source": "a64eb938eb1a8bf7.json",
+  "parameterValues": [
+    "-232",
+    "0",
+    "'参数大小超出范围'"
+  ]
+}

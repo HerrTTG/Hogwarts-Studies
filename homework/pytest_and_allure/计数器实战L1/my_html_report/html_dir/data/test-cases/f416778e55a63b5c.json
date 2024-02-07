@@ -1,0 +1,85 @@
+{
+  "uid": "f416778e55a63b5c",
+  "name": "test_add[99.0-0-99.0]",
+  "fullName": "计算器实战L1#test_add",
+  "historyId": "f6c0a1b1534b5216862fc43494c83881",
+  "time": {
+    "start": 1707275169382,
+    "stop": 1707275169382,
+    "duration": 0
+  },
+  "status": "passed",
+  "flaky": false,
+  "newFailed": false,
+  "beforeStages": [],
+  "afterStages": [],
+  "labels": [
+    {
+      "name": "suite",
+      "value": "计算器实战L1"
+    },
+    {
+      "name": "host",
+      "value": "ZJS-E14"
+    },
+    {
+      "name": "thread",
+      "value": "51140-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "计算器实战L1"
+    },
+    {
+      "name": "resultFormat",
+      "value": "allure2"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "99.0"
+    },
+    {
+      "name": "b",
+      "value": "0"
+    },
+    {
+      "name": "c",
+      "value": "99.0"
+    }
+  ],
+  "links": [],
+  "hidden": false,
+  "retry": false,
+  "extra": {
+    "severity": "normal",
+    "retries": [
+      {
+        "uid": "3a33db37e523a82",
+        "status": "passed",
+        "time": {
+          "start": 1707275169382,
+          "stop": 1707275169382,
+          "duration": 0
+        }
+      }
+    ],
+    "categories": [],
+    "tags": []
+  },
+  "source": "f416778e55a63b5c.json",
+  "parameterValues": [
+    "99.0",
+    "0",
+    "99.0"
+  ]
+}
