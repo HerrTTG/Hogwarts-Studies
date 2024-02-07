@@ -29,7 +29,7 @@ import yaml
 """
 测试结果:
 利用Allure技术生成结果报告。
-https://github.com/HerrTTG/Hogwarts-Studies/blob/main/homework/pytest_and_allure/%E8%AE%A1%E6%95%B0%E5%99%A8%E5%AE%9E%E6%88%98L1/Allure%20Report.html
+https://github.com/HerrTTG/Hogwarts-Studies/tree/main/homework/pytest_and_allure/%E8%AE%A1%E6%95%B0%E5%99%A8%E5%AE%9E%E6%88%98L1/my_html_report/html_dir
 """
 
 
