@@ -102,4 +102,4 @@ def test_div_error(a, b, c):
 
 
 if __name__ == '__main__':
-    pytest.main(['./计算器实战L2.py', '-vs', '--clean-alluredir=./testresult/'])
+    pytest.main(['./计算器实战L2.py', '-vs'])
