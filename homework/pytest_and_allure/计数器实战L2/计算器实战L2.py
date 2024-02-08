@@ -93,6 +93,7 @@ def test_add_error(a, b, c):
         assert error_info.type is TypeError
 
 
+# 除法异常场景
 @pytest.mark.parametrize("a, b, c", data4)
 def test_div_error(a, b, c):
     tester = Calculator()
