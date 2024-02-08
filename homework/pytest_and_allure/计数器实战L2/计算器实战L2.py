@@ -89,15 +89,16 @@ def test_div(a, b, c):
 def test_add_error(a, b, c):
     with pytest.raises(TypeError) as error_info:
         tester = Calculator()
-        assert tester.add(a, b)
+        assert tester.add(a, b) == c, '测试结果与预期不符'
         assert error_info.type is TypeError
 
 
 @pytest.mark.parametrize("a, b, c", data4)
 def test_div_error(a, b, c):
     tester = Calculator()
-    with pytest.raises((TypeError, ZeroDivisionError)):
-        assert tester.div(a, b)
+    with pytest.raises((TypeError, ZeroDivisionError)) as error_info:
+        assert tester.div(a, b) == c, '测试结果与预期不符'
+        assert error_info.type is TypeError or error_info.type is ZeroDivisionError
 
 
 if __name__ == '__main__':
