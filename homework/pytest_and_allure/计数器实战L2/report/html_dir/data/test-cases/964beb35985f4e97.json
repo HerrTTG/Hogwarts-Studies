@@ -1,0 +1,155 @@
+{
+  "uid": "964beb35985f4e97",
+  "name": "除法测试用例：-99.1/1",
+  "fullName": "计算器实战L2.Test#test_div",
+  "historyId": "850d78d900cfa7ea5252949374942fb4",
+  "time": {
+    "start": 1708153312283,
+    "stop": 1708153312283,
+    "duration": 0
+  },
+  "description": "\n        计算器基础功能的除法用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a/b\n        步骤二：\n        断言a/b==c\n        超出范围的无效输入返回 参数大小超出范围\n        参数大小超出范围 亦由参数化带入c变量中\n        ",
+  "descriptionHtml": "<pre><code>    计算器基础功能的除法用例。\n    使用数据参数化的方法,调用getdate函数获取用例的参数。\n    步骤一：\n    计算a/b\n    步骤二：\n    断言a/b==c\n    超出范围的无效输入返回 参数大小超出范围\n    参数大小超出范围 亦由参数化带入c变量中\n</code></pre>\n",
+  "status": "passed",
+  "flaky": false,
+  "newFailed": false,
+  "beforeStages": [],
+  "testStage": {
+    "description": "\n        计算器基础功能的除法用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a/b\n        步骤二：\n        断言a/b==c\n        超出范围的无效输入返回 参数大小超出范围\n        参数大小超出范围 亦由参数化带入c变量中\n        ",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "测试步骤一,计算结果",
+        "time": {
+          "start": 1708153312283,
+          "stop": 1708153312283,
+          "duration": 0
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false,
+        "stepsCount": 0,
+        "hasContent": false
+      },
+      {
+        "name": "测试步骤二,比较结果是否符合预期",
+        "time": {
+          "start": 1708153312283,
+          "stop": 1708153312283,
+          "duration": 0
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false,
+        "stepsCount": 0,
+        "hasContent": false
+      }
+    ],
+    "attachments": [
+      {
+        "uid": "411deebc32f3ed76",
+        "name": "stdout",
+        "source": "411deebc32f3ed76.txt",
+        "type": "text/plain",
+        "size": 53
+      }
+    ],
+    "parameters": [],
+    "attachmentsCount": 1,
+    "shouldDisplayMessage": false,
+    "stepsCount": 2,
+    "hasContent": true
+  },
+  "afterStages": [],
+  "labels": [
+    {
+      "name": "feature",
+      "value": "除法功能"
+    },
+    {
+      "name": "epic",
+      "value": "计算器需求"
+    },
+    {
+      "name": "story",
+      "value": "除法一般场景"
+    },
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "tag",
+      "value": "basetest"
+    },
+    {
+      "name": "suite",
+      "value": "计算器实战L2"
+    },
+    {
+      "name": "subSuite",
+      "value": "Test"
+    },
+    {
+      "name": "host",
+      "value": "ZJS-E14"
+    },
+    {
+      "name": "thread",
+      "value": "20200-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "计算器实战L2"
+    },
+    {
+      "name": "resultFormat",
+      "value": "allure2"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "-99.1"
+    },
+    {
+      "name": "b",
+      "value": "1"
+    },
+    {
+      "name": "c",
+      "value": "'参数大小超出范围'"
+    }
+  ],
+  "links": [],
+  "hidden": false,
+  "retry": false,
+  "extra": {
+    "severity": "normal",
+    "retries": [],
+    "categories": [],
+    "tags": [
+      "basetest"
+    ]
+  },
+  "source": "964beb35985f4e97.json",
+  "parameterValues": [
+    "-99.1",
+    "1",
+    "'参数大小超出范围'"
+  ]
+}

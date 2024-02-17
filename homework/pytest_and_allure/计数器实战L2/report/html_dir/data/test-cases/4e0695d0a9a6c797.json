@@ -1,0 +1,131 @@
+{
+  "uid": "4e0695d0a9a6c797",
+  "name": "加法异常场景：0+None",
+  "fullName": "计算器实战L2.Test#test_add_raise",
+  "historyId": "b53bc24fc4160105518e582686fa2ba3",
+  "time": {
+    "start": 1708153312921,
+    "stop": 1708153312921,
+    "duration": 0
+  },
+  "description": "\n        计算器进阶功能的异常处理用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a+b\n        步骤二：\n        断言errinfo.type is TypeError\n        因为输入中a或者b中包含一些无效的非整数输入，应该抛出TypeError。\n        用异常捕获的方法来判断的异常是否符合预期，对于其他异常将抛出失败。\n        c变量用参数化来传入异常类型。\n        ",
+  "descriptionHtml": "<pre><code>    计算器进阶功能的异常处理用例。\n    使用数据参数化的方法,调用getdate函数获取用例的参数。\n    步骤一：\n    计算a+b\n    步骤二：\n    断言errinfo.type is TypeError\n    因为输入中a或者b中包含一些无效的非整数输入，应该抛出TypeError。\n    用异常捕获的方法来判断的异常是否符合预期，对于其他异常将抛出失败。\n    c变量用参数化来传入异常类型。\n</code></pre>\n",
+  "status": "passed",
+  "flaky": false,
+  "newFailed": false,
+  "beforeStages": [],
+  "testStage": {
+    "description": "\n        计算器进阶功能的异常处理用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a+b\n        步骤二：\n        断言errinfo.type is TypeError\n        因为输入中a或者b中包含一些无效的非整数输入，应该抛出TypeError。\n        用异常捕获的方法来判断的异常是否符合预期，对于其他异常将抛出失败。\n        c变量用参数化来传入异常类型。\n        ",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "测试步骤一,尝试进行计算",
+        "time": {
+          "start": 1708153312921,
+          "stop": 1708153312921,
+          "duration": 0
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false,
+        "stepsCount": 0,
+        "hasContent": false
+      }
+    ],
+    "attachments": [],
+    "parameters": [],
+    "attachmentsCount": 0,
+    "shouldDisplayMessage": false,
+    "stepsCount": 1,
+    "hasContent": true
+  },
+  "afterStages": [],
+  "labels": [
+    {
+      "name": "story",
+      "value": "加法异常场景"
+    },
+    {
+      "name": "epic",
+      "value": "计算器需求"
+    },
+    {
+      "name": "feature",
+      "value": "加法功能"
+    },
+    {
+      "name": "severity",
+      "value": "trivial"
+    },
+    {
+      "name": "tag",
+      "value": "advtest"
+    },
+    {
+      "name": "suite",
+      "value": "计算器实战L2"
+    },
+    {
+      "name": "subSuite",
+      "value": "Test"
+    },
+    {
+      "name": "host",
+      "value": "ZJS-E14"
+    },
+    {
+      "name": "thread",
+      "value": "20200-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "计算器实战L2"
+    },
+    {
+      "name": "resultFormat",
+      "value": "allure2"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "0"
+    },
+    {
+      "name": "b",
+      "value": "None"
+    },
+    {
+      "name": "c",
+      "value": "'TypeError'"
+    }
+  ],
+  "links": [],
+  "hidden": false,
+  "retry": false,
+  "extra": {
+    "severity": "trivial",
+    "retries": [],
+    "categories": [],
+    "tags": [
+      "advtest"
+    ]
+  },
+  "source": "4e0695d0a9a6c797.json",
+  "parameterValues": [
+    "0",
+    "None",
+    "'TypeError'"
+  ]
+}
