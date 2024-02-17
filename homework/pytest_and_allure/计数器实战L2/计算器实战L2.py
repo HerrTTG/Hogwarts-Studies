@@ -87,9 +87,9 @@ class Test():
             raise '初始化参数文件失败，输入的文件名不正确'
 
     @pytest.mark.basetest
-    @allure.severity(allure.severity_level.NORMAL)
-    @allure.story('加法一般场景')
     @allure.feature('加法功能')
+    @allure.story('加法一般场景')
+    @allure.severity(allure.severity_level.NORMAL)
     @allure.title("加法测试用例：{a}+{b}")
     @pytest.mark.parametrize("a, b, c", getdate('加法.yaml'))
     def test_add(self, a, b, c):
@@ -114,9 +114,9 @@ class Test():
 
     # 除法用例
     @pytest.mark.basetest
-    @allure.severity(allure.severity_level.NORMAL)
-    @allure.story('除法一般场景')
     @allure.feature('除法功能')
+    @allure.story('除法一般场景')
+    @allure.severity(allure.severity_level.NORMAL)
     @allure.title("除法测试用例：{a}/{b}")
     @pytest.mark.parametrize("a, b, c", getdate('除法.yaml'))
     def test_div(self, a, b, c):
@@ -141,9 +141,9 @@ class Test():
 
     # 加法无效场景
     @pytest.mark.advtest
-    @allure.severity(allure.severity_level.MINOR)
-    @allure.story('加法无效场景')
     @allure.feature('加法功能')
+    @allure.story('加法无效场景')
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.xfail
     @allure.title("加法无效场景：{a}+{b}")
     @pytest.mark.parametrize("a, b, c", getdate('加法e.yaml'))
@@ -165,11 +165,11 @@ class Test():
             assert sum == c
 
     # 除法无效场景
-    @pytest.mark.advtest
-    @allure.severity(allure.severity_level.MINOR)
-    @allure.story('除法无效场景')
-    @allure.feature('除法功能')
     @pytest.mark.xfail
+    @pytest.mark.advtest
+    @allure.feature('除法功能')
+    @allure.story('除法无效场景')
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize("a, b, c", getdate('除法e.yaml'))
     def test_div_error(self, a, b, c):
         """
@@ -193,10 +193,10 @@ class Test():
     # 异常抛出测试
     # 加法异常抛出测试
     @pytest.mark.advtest
-    @allure.severity(allure.severity_level.TRIVIAL)
-    @allure.story('加法异常场景')
     @allure.feature('加法功能')
-    @allure.title("加法异常场景：{a}+{b}")
+    @allure.story('加法异常场景')
+    @allure.severity(allure.severity_level.TRIVIAL)
+    @allure.title("加法异常场景{c}：{a}+{b}")
     @pytest.mark.parametrize("a, b, c", getdate('加法e.yaml'))
     def test_add_raise(self, a, b, c):
         """
@@ -222,9 +222,10 @@ class Test():
 
     # 除法异常抛出测试
     @pytest.mark.advtest
-    @allure.severity(allure.severity_level.TRIVIAL)
-    @allure.story('除法异常场景')
     @allure.feature('除法功能')
+    @allure.story('除法异常场景')
+    @allure.severity(allure.severity_level.TRIVIAL)
+    @allure.title("除法异常场景:")
     @pytest.mark.parametrize("a, b, c", getdate('除法e.yaml'))
     def test_div_raise(self, a, b, c):
         """
@@ -241,7 +242,7 @@ class Test():
         """
         tester = Calculator()
         # 动态更新用例标题，可以参与到用例执行中去增加当前用例的标题名
-        allure.dynamic.title(f"除法异常用例:{a}/{b}")
+        allure.dynamic.title(f"除法异常用例{c}:{a}/{b}")
         try:
             with allure.step('测试步骤一,尝试进行计算'):
                 # 多个异常种类需要用tuple来传递

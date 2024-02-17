@@ -1,0 +1,131 @@
+{
+  "uid": "50c642142d645799",
+  "name": "除法异常用例TypeError:32/hello",
+  "fullName": "计算器实战L2.Test#test_div_raise",
+  "historyId": "2d1e723f77a64dfae81c3436d3e89bde",
+  "time": {
+    "start": 1708157531770,
+    "stop": 1708157531770,
+    "duration": 0
+  },
+  "description": "\n        计算器进阶功能的异常处理用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a/b\n        步骤二：\n        断言errinfo.type is TypeError 或者errinfo.type is ZeroDivisionError。\n        因为输入中a或者b中包含一些无效的非整数输入，应该抛出TypeError。\n        且被除数为0时抛出的异常应该为ZeroDivisionError。\n        用异常捕获的方法来判断的异常是否符合预期，对于其他异常将抛出失败。\n        c变量用参数化来传入异常类型。\n        ",
+  "descriptionHtml": "<pre><code>    计算器进阶功能的异常处理用例。\n    使用数据参数化的方法,调用getdate函数获取用例的参数。\n    步骤一：\n    计算a/b\n    步骤二：\n    断言errinfo.type is TypeError 或者errinfo.type is ZeroDivisionError。\n    因为输入中a或者b中包含一些无效的非整数输入，应该抛出TypeError。\n    且被除数为0时抛出的异常应该为ZeroDivisionError。\n    用异常捕获的方法来判断的异常是否符合预期，对于其他异常将抛出失败。\n    c变量用参数化来传入异常类型。\n</code></pre>\n",
+  "status": "passed",
+  "flaky": false,
+  "newFailed": false,
+  "beforeStages": [],
+  "testStage": {
+    "description": "\n        计算器进阶功能的异常处理用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a/b\n        步骤二：\n        断言errinfo.type is TypeError 或者errinfo.type is ZeroDivisionError。\n        因为输入中a或者b中包含一些无效的非整数输入，应该抛出TypeError。\n        且被除数为0时抛出的异常应该为ZeroDivisionError。\n        用异常捕获的方法来判断的异常是否符合预期，对于其他异常将抛出失败。\n        c变量用参数化来传入异常类型。\n        ",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "测试步骤一,尝试进行计算",
+        "time": {
+          "start": 1708157531770,
+          "stop": 1708157531770,
+          "duration": 0
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "hasContent": false,
+        "stepsCount": 0,
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false
+      }
+    ],
+    "attachments": [],
+    "parameters": [],
+    "hasContent": true,
+    "stepsCount": 1,
+    "attachmentsCount": 0,
+    "shouldDisplayMessage": false
+  },
+  "afterStages": [],
+  "labels": [
+    {
+      "name": "feature",
+      "value": "除法功能"
+    },
+    {
+      "name": "epic",
+      "value": "计算器需求"
+    },
+    {
+      "name": "story",
+      "value": "除法异常场景"
+    },
+    {
+      "name": "severity",
+      "value": "trivial"
+    },
+    {
+      "name": "tag",
+      "value": "advtest"
+    },
+    {
+      "name": "suite",
+      "value": "计算器实战L2"
+    },
+    {
+      "name": "subSuite",
+      "value": "Test"
+    },
+    {
+      "name": "host",
+      "value": "ZJS-E14"
+    },
+    {
+      "name": "thread",
+      "value": "20868-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "计算器实战L2"
+    },
+    {
+      "name": "resultFormat",
+      "value": "allure2"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "32"
+    },
+    {
+      "name": "b",
+      "value": "'hello'"
+    },
+    {
+      "name": "c",
+      "value": "'TypeError'"
+    }
+  ],
+  "links": [],
+  "hidden": false,
+  "retry": false,
+  "extra": {
+    "severity": "trivial",
+    "retries": [],
+    "categories": [],
+    "tags": [
+      "advtest"
+    ]
+  },
+  "source": "50c642142d645799.json",
+  "parameterValues": [
+    "32",
+    "'hello'",
+    "'TypeError'"
+  ]
+}

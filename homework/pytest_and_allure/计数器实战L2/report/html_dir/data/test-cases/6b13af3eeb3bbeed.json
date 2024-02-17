@@ -1,0 +1,147 @@
+{
+  "uid": "6b13af3eeb3bbeed",
+  "name": "加法测试用例：0+-99",
+  "fullName": "计算器实战L2.Test#test_add",
+  "historyId": "ad690221bb44c0c6280083cf0e038e5b",
+  "time": {
+    "start": 1708157530761,
+    "stop": 1708157530762,
+    "duration": 1
+  },
+  "description": "\n        计算器基础功能的加法用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a+b\n        步骤二：\n        断言a+b==c\n        超出范围的无效输入返回 参数大小超出范围\n        参数大小超出范围 亦由参数化带入c变量中\n        ",
+  "descriptionHtml": "<pre><code>    计算器基础功能的加法用例。\n    使用数据参数化的方法,调用getdate函数获取用例的参数。\n    步骤一：\n    计算a+b\n    步骤二：\n    断言a+b==c\n    超出范围的无效输入返回 参数大小超出范围\n    参数大小超出范围 亦由参数化带入c变量中\n</code></pre>\n",
+  "status": "passed",
+  "flaky": false,
+  "newFailed": false,
+  "beforeStages": [],
+  "testStage": {
+    "description": "\n        计算器基础功能的加法用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a+b\n        步骤二：\n        断言a+b==c\n        超出范围的无效输入返回 参数大小超出范围\n        参数大小超出范围 亦由参数化带入c变量中\n        ",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "测试步骤一,计算结果",
+        "time": {
+          "start": 1708157530762,
+          "stop": 1708157530762,
+          "duration": 0
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "hasContent": false,
+        "stepsCount": 0,
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false
+      },
+      {
+        "name": "测试步骤二,比较结果是否符合预期",
+        "time": {
+          "start": 1708157530762,
+          "stop": 1708157530762,
+          "duration": 0
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "hasContent": false,
+        "stepsCount": 0,
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false
+      }
+    ],
+    "attachments": [],
+    "parameters": [],
+    "hasContent": true,
+    "stepsCount": 2,
+    "attachmentsCount": 0,
+    "shouldDisplayMessage": false
+  },
+  "afterStages": [],
+  "labels": [
+    {
+      "name": "feature",
+      "value": "加法功能"
+    },
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "epic",
+      "value": "计算器需求"
+    },
+    {
+      "name": "story",
+      "value": "加法一般场景"
+    },
+    {
+      "name": "tag",
+      "value": "basetest"
+    },
+    {
+      "name": "suite",
+      "value": "计算器实战L2"
+    },
+    {
+      "name": "subSuite",
+      "value": "Test"
+    },
+    {
+      "name": "host",
+      "value": "ZJS-E14"
+    },
+    {
+      "name": "thread",
+      "value": "20868-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "计算器实战L2"
+    },
+    {
+      "name": "resultFormat",
+      "value": "allure2"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "0"
+    },
+    {
+      "name": "b",
+      "value": "-99"
+    },
+    {
+      "name": "c",
+      "value": "-99"
+    }
+  ],
+  "links": [],
+  "hidden": false,
+  "retry": false,
+  "extra": {
+    "severity": "normal",
+    "retries": [],
+    "categories": [],
+    "tags": [
+      "basetest"
+    ]
+  },
+  "source": "6b13af3eeb3bbeed.json",
+  "parameterValues": [
+    "0",
+    "-99",
+    "-99"
+  ]
+}
