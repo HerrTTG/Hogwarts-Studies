@@ -2,6 +2,10 @@
 import allure
 
 
+# @allure.severity(allure.severity_level.CRITICAL)
+# @allure.severity(allure.severity_level.MINOR)
+# @allure.severity(allure.severity_level.NORMAL)
+
 @allure.severity(allure.severity_level.BLOCKER)
 class Testlogin():
     @allure.issue('bug', "bug管理系统")

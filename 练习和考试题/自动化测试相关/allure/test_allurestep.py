@@ -20,8 +20,8 @@ def _step1(step_param1, step_param2=None):
 @allure.step
 def _step2(step_param):
     '''定义一个测试步骤'''
-    assert False
     print(f"步骤2：完成搜索 {step_param} 功能")
+    assert False
 
 
 @allure.title("Test case 1")
@@ -46,7 +46,7 @@ def test_parameterize_with_uneven_value_sets(param1, param2, param3):
 
 
 # 方法二：使用 `with allure.step()` 添加测试步骤
-@allure.title("搜索用例:{searchkey}")
+@allure.title("搜索用例:{searchkey}")  # 参数化用例名
 @pytest.mark.parametrize("searchkey", ["pytest", "allure"])
 def test_step_in_method(searchkey):
     with allure.step("测试步骤一：打开页面"):
