@@ -56,10 +56,17 @@ class Calculator:
         return a / b
 
 
+##用例设计##
+
 @allure.epic('计算器需求')
 class Test():
     @staticmethod
-    def getdate(filename):
+    def getdate(filename) -> list:
+        """
+        静态方法，被class下其他用例调用。
+        输入：文件名
+        输出：根据文件名来获取yaml文件中的参数数据，并返回一个list
+        """
         if filename == '加法.yaml':
             with open('加法.yaml', "r", encoding='utf-8') as file:
                 data1 = yaml.safe_load(file)
@@ -76,11 +83,26 @@ class Test():
             with open("除法e.yaml", "r", encoding='utf-8') as file:
                 data4 = yaml.safe_load(file)
             return data4
+        else:
+            raise '初始化参数文件失败，输入的文件名不正确'
 
+    @pytest.mark.basetest
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.story('加法一般场景')
     @allure.feature('加法功能')
     @allure.title("加法测试用例：{a}+{b}")
     @pytest.mark.parametrize("a, b, c", getdate('加法.yaml'))
     def test_add(self, a, b, c):
+        """
+        计算器基础功能的加法用例。
+        使用数据参数化的方法,调用getdate函数获取用例的参数。
+        步骤一：
+        计算a+b
+        步骤二：
+        断言a+b==c
+        超出范围的无效输入返回 参数大小超出范围
+        参数大小超出范围 亦由参数化带入c变量中
+        """
         tester = Calculator()
         try:
             with allure.step('测试步骤一,计算结果'):
@@ -91,10 +113,23 @@ class Test():
             raise '其他错误'
 
     # 除法用例
+    @pytest.mark.basetest
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.story('除法一般场景')
     @allure.feature('除法功能')
     @allure.title("除法测试用例：{a}/{b}")
     @pytest.mark.parametrize("a, b, c", getdate('除法.yaml'))
     def test_div(self, a, b, c):
+        """
+        计算器基础功能的除法用例。
+        使用数据参数化的方法,调用getdate函数获取用例的参数。
+        步骤一：
+        计算a/b
+        步骤二：
+        断言a/b==c
+        超出范围的无效输入返回 参数大小超出范围
+        参数大小超出范围 亦由参数化带入c变量中
+        """
         tester = Calculator()
         try:
             with allure.step('测试步骤一,计算结果'):
@@ -104,34 +139,119 @@ class Test():
         except:
             raise '其他错误'
 
-    # 加法异常场景
-
-    @allure.story('加法功能异常场景')
+    # 加法无效场景
+    @pytest.mark.advtest
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.story('加法无效场景')
     @allure.feature('加法功能')
     @pytest.mark.xfail
-    @allure.title("加法异常用例：{a}+{b}")
+    @allure.title("加法无效场景：{a}+{b}")
     @pytest.mark.parametrize("a, b, c", getdate('加法e.yaml'))
     def test_add_error(self, a, b, c):
+        """
+        计算器进阶功能的无效用例。
+        使用数据参数化的方法,调用getdate函数获取用例的参数。
+        步骤一：
+        计算a+b
+        步骤二：
+        断言a+b==c
+        因为输入中a或者b中包含一些无效的非整数输入，
+        所以用例将会失败。用xfail进行标记。
+        """
         tester = Calculator()
         with allure.step('测试步骤一,尝试进行计算'):
             sum = tester.add(a, b)
         with allure.step('测试步骤二,用例应该失败，无法进行断言比较'):
             assert sum == c
 
-    # 除法异常场景
-
-    @allure.story('除法功能异常场景')
+    # 除法无效场景
+    @pytest.mark.advtest
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.story('除法无效场景')
     @allure.feature('除法功能')
     @pytest.mark.xfail
     @pytest.mark.parametrize("a, b, c", getdate('除法e.yaml'))
     def test_div_error(self, a, b, c):
+        """
+        计算器进阶功能的无效用例。
+        使用数据参数化的方法,调用getdate函数获取用例的参数。
+        步骤一：
+        计算a/b
+        步骤二：
+        断言a/b==c
+        因为输入中a或者b中包含一些无效的非整数输入，
+        所以用例将会失败。用xfail进行标记。
+        """
         tester = Calculator()
         # 动态更新用例标题，可以参与到用例执行中去增加当前用例的标题名
-        allure.dynamic.title(f"除法异常用例:{a}/{b}")
+        allure.dynamic.title(f"除法无效用例:{a}/{b}")
         with allure.step('测试步骤一,尝试进行计算'):
             sum = tester.div(a, b)
         with allure.step('测试步骤二,用例应该失败，无法进行断言比较'):
             assert sum == c
+
+    # 异常抛出测试
+    # 加法异常抛出测试
+    @pytest.mark.advtest
+    @allure.severity(allure.severity_level.TRIVIAL)
+    @allure.story('加法异常场景')
+    @allure.feature('加法功能')
+    @allure.title("加法异常场景：{a}+{b}")
+    @pytest.mark.parametrize("a, b, c", getdate('加法e.yaml'))
+    def test_add_raise(self, a, b, c):
+        """
+        计算器进阶功能的异常处理用例。
+        使用数据参数化的方法,调用getdate函数获取用例的参数。
+        步骤一：
+        计算a+b
+        步骤二：
+        断言errinfo.type is TypeError
+        因为输入中a或者b中包含一些无效的非整数输入，应该抛出TypeError。
+        用异常捕获的方法来判断的异常是否符合预期，对于其他异常将抛出失败。
+        c变量用参数化来传入异常类型。
+        """
+        tester = Calculator()
+        try:
+            with allure.step('测试步骤一,尝试进行计算'):
+                with pytest.raises(TypeError) as errinfo:
+                    tester.add(a, b)
+                    with allure.step('测试步骤二,判断抛出的异常是否为预知的异常报错'):
+                        assert errinfo.type is c, '其他不符合预期的异常类型'
+        except:
+            assert False, '用例执行过程中失败'
+
+    # 除法异常抛出测试
+    @pytest.mark.advtest
+    @allure.severity(allure.severity_level.TRIVIAL)
+    @allure.story('除法异常场景')
+    @allure.feature('除法功能')
+    @pytest.mark.parametrize("a, b, c", getdate('除法e.yaml'))
+    def test_div_raise(self, a, b, c):
+        """
+        计算器进阶功能的异常处理用例。
+        使用数据参数化的方法,调用getdate函数获取用例的参数。
+        步骤一：
+        计算a/b
+        步骤二：
+        断言errinfo.type is TypeError 或者errinfo.type is ZeroDivisionError。
+        因为输入中a或者b中包含一些无效的非整数输入，应该抛出TypeError。
+        且被除数为0时抛出的异常应该为ZeroDivisionError。
+        用异常捕获的方法来判断的异常是否符合预期，对于其他异常将抛出失败。
+        c变量用参数化来传入异常类型。
+        """
+        tester = Calculator()
+        # 动态更新用例标题，可以参与到用例执行中去增加当前用例的标题名
+        allure.dynamic.title(f"除法异常用例:{a}/{b}")
+        try:
+            with allure.step('测试步骤一,尝试进行计算'):
+                # 多个异常种类需要用tuple来传递
+                with pytest.raises((TypeError, ZeroDivisionError)) as errinfo:
+                    tester.div(a, b)
+                    with allure.step('测试步骤二,判断抛出的异常是否为预知的异常报错'):
+                        assert errinfo is c, '其他不符合预期的异常类型'
+
+        except:
+            assert False, '用例执行过程中失败'
 
 
 # 加法用例
