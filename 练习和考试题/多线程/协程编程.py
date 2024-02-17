@@ -22,6 +22,8 @@ def task1(n, msg):
 # g1 = gevent.spawn(task)
 # g2 = gevent.spawn(task)
 # g3 = gevent.spawn(task)
+
+# join是协程的启动方式而不是等待完成
 # g1.join()
 # g2.join()
 # g3.join()
@@ -32,7 +34,11 @@ def task1(n, msg):
 # gevent.joinall(gs)
 
 
-# 协程异步
+# 协程异步，类似于线程的无序执行。
+# 异步的概念是虽然我只有一个人在执行这么多的任务，但是我可以选择性暂停某个任务，去执行一下其他任务
+# 如我在切菜的同时 可能偶尔操作一下煮米饭的锅。亦可以去洗个筷子。然后在回来继续切菜。
+# 没有多余的人(线程)帮我执行其他任务，都是我一个人，但执行的结果是可以凌乱的。而不是一定非要执行完某个才能开始下一个。
+# 也就是说不是单步向下执行的。
 g1 = gevent.spawn(task1, 5, "Python")
 g2 = gevent.spawn(task1, msg="Hogwarts", n=5)
 g3 = gevent.spawn(task1, n=5, msg="Hello")

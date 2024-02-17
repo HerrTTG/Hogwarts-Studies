@@ -1,5 +1,7 @@
 import json
 
+# 序列化就是将python数据转化为json
+
 # 定义一个Python字典
 data = {
     "code": 200,
