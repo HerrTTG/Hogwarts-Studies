@@ -1,19 +1,15 @@
-'''
-pytest的公共数据和方法模块。
-将此文件和测试用例py文件放入一个文件夹内即可。
-'''
+import logging
 import pytest
 
 
 # hook函数
-# 收集测试用例，收集之后（改编码，改执行顺序）
 def pytest_collection_modifyitems(items: list):
     """
     测试用例收集完成时，将收集到的用例名name和用例标识nodeid的中文信息显示在控制台上
     """
     # item中是一个方法对象，此方法对象就是对应的测试用例了
     # name就是测试用例的名字
-    #_nodeid测试用例的路径
+    # _nodeid测试用例的路径
     for i in items:
         i.name = i.name.encode("utf-8").decode("unicode_escape")
         i._nodeid = i.nodeid.encode("utf-8").decode("unicode_escape")
@@ -30,22 +26,10 @@ def pytest_addoption(parser):
                       )
 
 
-# fixture
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='session', autouse=True)
 def envget(request):
     myenv = request.config.getoption("--env", default='test')
     if myenv == 'test':
-        print('获取并返回环境信息，此条为测试环境')
+        logging.info('获取并返回环境信息，此条为测试环境')
     elif myenv == 'dev':
-        print('获取并返回环境信息，此条为开发环境')
-
-
-# 定义在conftest中的方法是公共的，在用例中写此方法名并且不需要引用。
-@pytest.fixture(scope="module")
-def loing():
-    print("登录完成")
-    token = '12341231'
-    userid = 'kuoka'
-    # yield 相当于return 可以同时带数据返回
-    yield token, userid
-    print('登录结束')
+        logging.info('获取并返回环境信息，此条为开发环境')
