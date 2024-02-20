@@ -1,23 +1,23 @@
 '''
 新增：
-数据驱动
-pytest fixture
-pytest conftest.py 的用法
+第三方插件pytest-ordering  pytest-xdist
+pytest.ini 配置、conftest.py 配置
+掌握分层思想实现用例的分层，实现测试装置，测试数据，测试日志，测试报告等合理的框架构建
+开发一个插件，实现命令行传递参数
 """
 '''
 import allure
+import logging
 import pytest
 import sys
 import time
 import yaml
 
 sys.path.append('../func')
-
 from 计算器 import Calculator
 
 
 ##用例设计##
-
 @allure.epic('计算器需求')
 class Test():
     @staticmethod
@@ -35,6 +35,7 @@ class Test():
             raise 'error'
 
     @pytest.mark.basetest
+    @pytest.mark.run(order=2)
     @allure.feature('加法功能')
     @allure.story('加法一般场景')
     @allure.severity(allure.severity_level.NORMAL)
@@ -54,15 +55,19 @@ class Test():
         tester = Calculator()
         try:
             with allure.step('测试步骤一,计算结果'):
+                logging.info(f'计算结果{a}+{b}')
                 sum = tester.add(a, b)
             with allure.step('测试步骤二,比较结果是否符合预期'):
+                logging.info(f'断言{a}+{b}=={c}')
                 assert sum == c, '测试结果与预期不符'
         except:
+            logging.error(f'发生错误,加法测试用例：{a}+{b}')
             raise '其他错误'
         time.sleep(1)
 
     # 除法用例
     @pytest.mark.basetest
+    @pytest.mark.run(order=2)
     @allure.feature('除法功能')
     @allure.story('除法一般场景')
     @allure.severity(allure.severity_level.NORMAL)
@@ -82,19 +87,23 @@ class Test():
         tester = Calculator()
         try:
             with allure.step('测试步骤一,计算结果'):
+                logging.info(f'计算结果{a}/{b}')
                 sum = tester.div(a, b)
             with allure.step('测试步骤二,比较结果是否符合预期'):
+                logging.info(f'断言{a}/{b}=={c}')
                 assert sum == c, '测试结果与预期不符'
         except:
+            logging.error(f'发生错误,除法测试用例：{a}/{b}')
             raise '其他错误'
         time.sleep(1)
 
     # 加法无效场景
+    @pytest.mark.xfail
     @pytest.mark.advtest
+    @pytest.mark.run(order=1)
     @allure.feature('加法功能')
     @allure.story('加法无效场景')
     @allure.severity(allure.severity_level.MINOR)
-    @pytest.mark.xfail
     @allure.title("加法无效场景：{a}+{b}")
     @pytest.mark.parametrize("a, b, c", getdate('../datas/加法e.yaml'))
     def test_add_error(self, a, b, c):
@@ -110,14 +119,17 @@ class Test():
         """
         tester = Calculator()
         with allure.step('测试步骤一,尝试进行计算'):
+            logging.info(f'计算无效结果{a}+{b}')
             sum = tester.add(a, b)
         with allure.step('测试步骤二,用例应该失败，无法进行断言比较'):
+            logging.error(f'发生错误,无效用例不该被执行到这。加法无效场景：{a}+{b}')
             assert sum == c
         time.sleep(1)
 
     # 除法无效场景
     @pytest.mark.xfail
     @pytest.mark.advtest
+    @pytest.mark.run(order=1)
     @allure.feature('除法功能')
     @allure.story('除法无效场景')
     @allure.severity(allure.severity_level.MINOR)
@@ -137,8 +149,10 @@ class Test():
         # 动态更新用例标题，可以参与到用例执行中去增加当前用例的标题名
         allure.dynamic.title(f"除法无效用例:{a}/{b}")
         with allure.step('测试步骤一,尝试进行计算'):
+            logging.info(f'计算无效结果{a}/{b}')
             sum = tester.div(a, b)
         with allure.step('测试步骤二,用例应该失败，无法进行断言比较'):
+            logging.error(f'发生错误,无效用例不该被执行到这。除法无效用例:{a}/{b}')
             assert sum == c
         time.sleep(1)
 
@@ -165,11 +179,14 @@ class Test():
         tester = Calculator()
         try:
             with allure.step('测试步骤一,尝试进行计算'):
+                logging.info(f'计算异常抛出结果{a}+{b}')
                 with pytest.raises(TypeError) as errinfo:
                     tester.add(a, b)
-                    with allure.step('测试步骤二,判断抛出的异常是否为预知的异常报错'):
-                        assert errinfo.type is c, '其他不符合预期的异常类型'
+            with allure.step('测试步骤二,判断抛出的异常是否为预知的异常报错'):
+                logging.info(f'断言{a}+{b}的异常抛出为{c}')
+                assert errinfo.type is eval(c), '其他不符合预期的异常类型'
         except:
+            logging.error(f'抛出其他异常，加法异常场景{c}：{a}+{b}')
             assert False, '用例执行过程中失败'
         time.sleep(1)
 
@@ -198,17 +215,18 @@ class Test():
         allure.dynamic.title(f"除法异常用例{c}:{a}/{b}")
         try:
             with allure.step('测试步骤一,尝试进行计算'):
+                logging.info(f'计算异常抛出结果{a}/{b}')
                 # 多个异常种类需要用tuple来传递
                 with pytest.raises((TypeError, ZeroDivisionError)) as errinfo:
                     tester.div(a, b)
-                    with allure.step('测试步骤二,判断抛出的异常是否为预知的异常报错'):
-                        assert errinfo is c, '其他不符合预期的异常类型'
+            with allure.step('测试步骤二,判断抛出的异常是否为预知的异常报错'):
+                logging.info(f'断言{a}/{b}的异常抛出为{c}')
+                assert errinfo.type is eval(c), '其他不符合预期的异常类型'
 
         except:
+            logging.error(f'抛出其他异常，加法异常场景{c}：{a}/{b}')
             assert False, '用例执行过程中失败'
         time.sleep(1)
 
-
-# 加法用例
 if __name__ == '__main__':
     pytest.main(['./计算器实战L4.py', '-vs'])

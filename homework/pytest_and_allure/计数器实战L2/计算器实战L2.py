@@ -215,8 +215,8 @@ class Test():
             with allure.step('测试步骤一,尝试进行计算'):
                 with pytest.raises(TypeError) as errinfo:
                     tester.add(a, b)
-                    with allure.step('测试步骤二,判断抛出的异常是否为预知的异常报错'):
-                        assert errinfo.type is c, '其他不符合预期的异常类型'
+            with allure.step('测试步骤二,判断抛出的异常是否为预知的异常报错'):
+                assert errinfo.type is eval(c), '其他不符合预期的异常类型'
         except:
             assert False, '用例执行过程中失败'
 
@@ -248,8 +248,8 @@ class Test():
                 # 多个异常种类需要用tuple来传递
                 with pytest.raises((TypeError, ZeroDivisionError)) as errinfo:
                     tester.div(a, b)
-                    with allure.step('测试步骤二,判断抛出的异常是否为预知的异常报错'):
-                        assert errinfo is c, '其他不符合预期的异常类型'
+            with allure.step('测试步骤二,判断抛出的异常是否为预知的异常报错'):
+                assert errinfo.type is eval(c), '其他不符合预期的异常类型'
 
         except:
             assert False, '用例执行过程中失败'
