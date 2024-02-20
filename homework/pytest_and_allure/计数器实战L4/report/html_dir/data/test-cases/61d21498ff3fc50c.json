@@ -1,0 +1,177 @@
+{
+  "uid": "61d21498ff3fc50c",
+  "name": "除法测试用例：99/1",
+  "fullName": "è®¡ç®å¨å®æL4.Test#test_div",
+  "historyId": "375c9ee9f6d6b4cc907c963cc5436f66",
+  "time": {
+    "start": 1708412211318,
+    "stop": 1708412212320,
+    "duration": 1002
+  },
+  "description": "\n        计算器基础功能的除法用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a/b\n        步骤二：\n        断言a/b==c\n        超出范围的无效输入返回 参数大小超出范围\n        参数大小超出范围 亦由参数化带入c变量中\n        ",
+  "descriptionHtml": "<pre><code>    计算器基础功能的除法用例。\n    使用数据参数化的方法,调用getdate函数获取用例的参数。\n    步骤一：\n    计算a/b\n    步骤二：\n    断言a/b==c\n    超出范围的无效输入返回 参数大小超出范围\n    参数大小超出范围 亦由参数化带入c变量中\n</code></pre>\n",
+  "status": "passed",
+  "flaky": false,
+  "newFailed": false,
+  "beforeStages": [
+    {
+      "name": "envget",
+      "time": {
+        "start": 1708412197831,
+        "stop": 1708412197833,
+        "duration": 2
+      },
+      "status": "passed",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "attachmentsCount": 0,
+      "shouldDisplayMessage": false,
+      "stepsCount": 0,
+      "hasContent": false
+    }
+  ],
+  "testStage": {
+    "description": "\n        计算器基础功能的除法用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a/b\n        步骤二：\n        断言a/b==c\n        超出范围的无效输入返回 参数大小超出范围\n        参数大小超出范围 亦由参数化带入c变量中\n        ",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "测试步骤一,计算结果",
+        "time": {
+          "start": 1708412211318,
+          "stop": 1708412211318,
+          "duration": 0
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false,
+        "stepsCount": 0,
+        "hasContent": false
+      },
+      {
+        "name": "测试步骤二,比较结果是否符合预期",
+        "time": {
+          "start": 1708412211318,
+          "stop": 1708412211318,
+          "duration": 0
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false,
+        "stepsCount": 0,
+        "hasContent": false
+      }
+    ],
+    "attachments": [
+      {
+        "uid": "3f9289908f1a309e",
+        "name": "log",
+        "source": "3f9289908f1a309e.txt",
+        "type": "text/plain",
+        "size": 125
+      }
+    ],
+    "parameters": [],
+    "attachmentsCount": 1,
+    "shouldDisplayMessage": false,
+    "stepsCount": 2,
+    "hasContent": true
+  },
+  "afterStages": [],
+  "labels": [
+    {
+      "name": "story",
+      "value": "除法一般场景"
+    },
+    {
+      "name": "feature",
+      "value": "除法功能"
+    },
+    {
+      "name": "epic",
+      "value": "计算器需求"
+    },
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "tag",
+      "value": "run(order=2)"
+    },
+    {
+      "name": "tag",
+      "value": "basetest"
+    },
+    {
+      "name": "suite",
+      "value": "è®¡ç®å¨å®æL4"
+    },
+    {
+      "name": "subSuite",
+      "value": "Test"
+    },
+    {
+      "name": "host",
+      "value": "ZJS-E14"
+    },
+    {
+      "name": "thread",
+      "value": "21628-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "è®¡ç®å¨å®æL4"
+    },
+    {
+      "name": "resultFormat",
+      "value": "allure2"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "99"
+    },
+    {
+      "name": "b",
+      "value": "1"
+    },
+    {
+      "name": "c",
+      "value": "99"
+    }
+  ],
+  "links": [],
+  "hidden": false,
+  "retry": false,
+  "extra": {
+    "severity": "normal",
+    "retries": [],
+    "categories": [],
+    "tags": [
+      "run(order=2)",
+      "basetest"
+    ]
+  },
+  "source": "61d21498ff3fc50c.json",
+  "parameterValues": [
+    "99",
+    "1",
+    "99"
+  ]
+}

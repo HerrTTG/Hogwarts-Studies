@@ -1,0 +1,38 @@
+{
+  "name": "除法异常用例TypeError:0/$%%^&*",
+  "status": "passed",
+  "description": "\n        计算器进阶功能的异常处理用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a/b\n        步骤二：\n        断言errinfo.type is TypeError 或者errinfo.type is ZeroDivisionError。\n        因为输入中a或者b中包含一些无效的非整数输入，应该抛出TypeError。\n        且被除数为0时抛出的异常应该为ZeroDivisionError。\n        用异常捕获的方法来判断的异常是否符合预期，对于其他异常将抛出失败。\n        c变量用参数化来传入异常类型。\n        ",
+  "steps": [
+    {
+      "name": "测试步骤一,尝试进行计算",
+      "status": "passed",
+      "start": 1708411601104,
+      "stop": 1708411601105
+    },
+    {
+      "name": "测试步骤二,判断抛出的异常是否为预知的异常报错",
+      "status": "passed",
+      "start": 1708411601105,
+      "stop": 1708411601105
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "0"
+    },
+    {
+      "name": "b",
+      "value": "'$%%^&*'"
+    },
+    {
+      "name": "c",
+      "value": "'TypeError'"
+    }
+  ],
+  "start": 1708411601104,
+  "stop": 1708411601781,
+  "uuid": "e64a15fc-a942-441c-8a7a-95d591985269",
+  "testCaseId": "3ba807c684c5fe0efe9640165d32e154",
+  "fullName": "è®¡ç®å¨å®æL4.Test#test_div_raise"
+}

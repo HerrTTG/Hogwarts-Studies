@@ -1,0 +1,172 @@
+{
+  "uid": "387f80c58b50938c",
+  "name": "加法无效场景：中文+0",
+  "fullName": "è®¡ç®å¨å®æL4.Test#test_add_error",
+  "historyId": "d0455cf1d2d03e87a18798f5f7d7b21a",
+  "time": {
+    "start": 1708412197834,
+    "stop": 1708412197836,
+    "duration": 2
+  },
+  "description": "\n        计算器进阶功能的无效用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a+b\n        步骤二：\n        断言a+b==c\n        因为输入中a或者b中包含一些无效的非整数输入，\n        所以用例将会失败。用xfail进行标记。\n        ",
+  "descriptionHtml": "<pre><code>    计算器进阶功能的无效用例。\n    使用数据参数化的方法,调用getdate函数获取用例的参数。\n    步骤一：\n    计算a+b\n    步骤二：\n    断言a+b==c\n    因为输入中a或者b中包含一些无效的非整数输入，\n    所以用例将会失败。用xfail进行标记。\n</code></pre>\n",
+  "status": "skipped",
+  "statusMessage": "XFAIL\n\nTypeError: '>' not supported between instances of 'str' and 'int'",
+  "statusTrace": "self = <homework.pytest_and_allure.计数器实战L4.testcase.计算器实战L4.Test object at 0x03E24D70>\na = '中文', b = 0, c = 'TypeError'\n\n    @pytest.mark.xfail\n    @pytest.mark.advtest\n    @pytest.mark.run(order=1)\n    @allure.feature('加法功能')\n    @allure.story('加法无效场景')\n    @allure.severity(allure.severity_level.MINOR)\n    @allure.title(\"加法无效场景：{a}+{b}\")\n    @pytest.mark.parametrize(\"a, b, c\", getdate('../datas/加法e.yaml'))\n    def test_add_error(self, a, b, c):\n        \"\"\"\n        计算器进阶功能的无效用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a+b\n        步骤二：\n        断言a+b==c\n        因为输入中a或者b中包含一些无效的非整数输入，\n        所以用例将会失败。用xfail进行标记。\n        \"\"\"\n        tester = Calculator()\n        with allure.step('测试步骤一,尝试进行计算'):\n            logging.info(f'计算无效结果{a}+{b}')\n>           sum = tester.add(a, b)\n\n计算器实战L4.py:123: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = <计算器.Calculator object at 0x03E3FE10>, a = '中文', b = 0\n\n    def add(self, a, b):\n>       if a > 99 or a < -99 or b > 99 or b < -99:\nE       TypeError: '>' not supported between instances of 'str' and 'int'\n\n..\\func\\计算器.py:4: TypeError",
+  "flaky": false,
+  "newFailed": false,
+  "beforeStages": [
+    {
+      "name": "envget",
+      "time": {
+        "start": 1708412197831,
+        "stop": 1708412197833,
+        "duration": 2
+      },
+      "status": "passed",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "attachmentsCount": 0,
+      "shouldDisplayMessage": false,
+      "stepsCount": 0,
+      "hasContent": false
+    }
+  ],
+  "testStage": {
+    "description": "\n        计算器进阶功能的无效用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a+b\n        步骤二：\n        断言a+b==c\n        因为输入中a或者b中包含一些无效的非整数输入，\n        所以用例将会失败。用xfail进行标记。\n        ",
+    "status": "skipped",
+    "statusMessage": "XFAIL\n\nTypeError: '>' not supported between instances of 'str' and 'int'",
+    "statusTrace": "self = <homework.pytest_and_allure.计数器实战L4.testcase.计算器实战L4.Test object at 0x03E24D70>\na = '中文', b = 0, c = 'TypeError'\n\n    @pytest.mark.xfail\n    @pytest.mark.advtest\n    @pytest.mark.run(order=1)\n    @allure.feature('加法功能')\n    @allure.story('加法无效场景')\n    @allure.severity(allure.severity_level.MINOR)\n    @allure.title(\"加法无效场景：{a}+{b}\")\n    @pytest.mark.parametrize(\"a, b, c\", getdate('../datas/加法e.yaml'))\n    def test_add_error(self, a, b, c):\n        \"\"\"\n        计算器进阶功能的无效用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a+b\n        步骤二：\n        断言a+b==c\n        因为输入中a或者b中包含一些无效的非整数输入，\n        所以用例将会失败。用xfail进行标记。\n        \"\"\"\n        tester = Calculator()\n        with allure.step('测试步骤一,尝试进行计算'):\n            logging.info(f'计算无效结果{a}+{b}')\n>           sum = tester.add(a, b)\n\n计算器实战L4.py:123: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = <计算器.Calculator object at 0x03E3FE10>, a = '中文', b = 0\n\n    def add(self, a, b):\n>       if a > 99 or a < -99 or b > 99 or b < -99:\nE       TypeError: '>' not supported between instances of 'str' and 'int'\n\n..\\func\\计算器.py:4: TypeError",
+    "steps": [
+      {
+        "name": "测试步骤一,尝试进行计算",
+        "time": {
+          "start": 1708412197834,
+          "stop": 1708412197834,
+          "duration": 0
+        },
+        "status": "broken",
+        "statusMessage": "TypeError: '>' not supported between instances of 'str' and 'int'\n",
+        "statusTrace": "  File \"E:\\霍格沃茨学社\\Hogwarts-Studies\\homework\\pytest_and_allure\\计数器实战L4\\testcase\\计算器实战L4.py\", line 123, in test_add_error\n    sum = tester.add(a, b)\n          ^^^^^^^^^^^^^^^^\n  File \"E:\\霍格沃茨学社\\Hogwarts-Studies\\homework\\pytest_and_allure\\计数器实战L4\\testcase\\../func\\计算器.py\", line 4, in add\n    if a > 99 or a < -99 or b > 99 or b < -99:\n       ^^^^^^\n",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": true,
+        "stepsCount": 0,
+        "hasContent": true
+      }
+    ],
+    "attachments": [
+      {
+        "uid": "369b5afb16e9cca6",
+        "name": "log",
+        "source": "369b5afb16e9cca6.txt",
+        "type": "text/plain",
+        "size": 164
+      }
+    ],
+    "parameters": [],
+    "attachmentsCount": 1,
+    "shouldDisplayMessage": true,
+    "stepsCount": 1,
+    "hasContent": true
+  },
+  "afterStages": [],
+  "labels": [
+    {
+      "name": "story",
+      "value": "加法无效场景"
+    },
+    {
+      "name": "epic",
+      "value": "计算器需求"
+    },
+    {
+      "name": "feature",
+      "value": "加法功能"
+    },
+    {
+      "name": "severity",
+      "value": "minor"
+    },
+    {
+      "name": "tag",
+      "value": "run(order=1)"
+    },
+    {
+      "name": "tag",
+      "value": "advtest"
+    },
+    {
+      "name": "tag",
+      "value": "@pytest.mark.xfail"
+    },
+    {
+      "name": "suite",
+      "value": "è®¡ç®å¨å®æL4"
+    },
+    {
+      "name": "subSuite",
+      "value": "Test"
+    },
+    {
+      "name": "host",
+      "value": "ZJS-E14"
+    },
+    {
+      "name": "thread",
+      "value": "19704-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "è®¡ç®å¨å®æL4"
+    },
+    {
+      "name": "resultFormat",
+      "value": "allure2"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "'中文'"
+    },
+    {
+      "name": "b",
+      "value": "0"
+    },
+    {
+      "name": "c",
+      "value": "'TypeError'"
+    }
+  ],
+  "links": [],
+  "hidden": false,
+  "retry": false,
+  "extra": {
+    "severity": "minor",
+    "retries": [],
+    "categories": [],
+    "tags": [
+      "@pytest.mark.xfail",
+      "advtest",
+      "run(order=1)"
+    ]
+  },
+  "source": "387f80c58b50938c.json",
+  "parameterValues": [
+    "'中文'",
+    "0",
+    "'TypeError'"
+  ]
+}

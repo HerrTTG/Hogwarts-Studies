@@ -1,0 +1,177 @@
+{
+  "uid": "30df92c2c06c7331",
+  "name": "除法测试用例：-98.99/1",
+  "fullName": "è®¡ç®å¨å®æL4.Test#test_div",
+  "historyId": "41625d983c83996fd90b993f034c22ab",
+  "time": {
+    "start": 1708412213390,
+    "stop": 1708412214393,
+    "duration": 1003
+  },
+  "description": "\n        计算器基础功能的除法用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a/b\n        步骤二：\n        断言a/b==c\n        超出范围的无效输入返回 参数大小超出范围\n        参数大小超出范围 亦由参数化带入c变量中\n        ",
+  "descriptionHtml": "<pre><code>    计算器基础功能的除法用例。\n    使用数据参数化的方法,调用getdate函数获取用例的参数。\n    步骤一：\n    计算a/b\n    步骤二：\n    断言a/b==c\n    超出范围的无效输入返回 参数大小超出范围\n    参数大小超出范围 亦由参数化带入c变量中\n</code></pre>\n",
+  "status": "passed",
+  "flaky": false,
+  "newFailed": false,
+  "beforeStages": [
+    {
+      "name": "envget",
+      "time": {
+        "start": 1708412197831,
+        "stop": 1708412197833,
+        "duration": 2
+      },
+      "status": "passed",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "attachmentsCount": 0,
+      "shouldDisplayMessage": false,
+      "stepsCount": 0,
+      "hasContent": false
+    }
+  ],
+  "testStage": {
+    "description": "\n        计算器基础功能的除法用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a/b\n        步骤二：\n        断言a/b==c\n        超出范围的无效输入返回 参数大小超出范围\n        参数大小超出范围 亦由参数化带入c变量中\n        ",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "测试步骤一,计算结果",
+        "time": {
+          "start": 1708412213391,
+          "stop": 1708412213391,
+          "duration": 0
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false,
+        "stepsCount": 0,
+        "hasContent": false
+      },
+      {
+        "name": "测试步骤二,比较结果是否符合预期",
+        "time": {
+          "start": 1708412213391,
+          "stop": 1708412213392,
+          "duration": 1
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false,
+        "stepsCount": 0,
+        "hasContent": false
+      }
+    ],
+    "attachments": [
+      {
+        "uid": "7a958ca4c9cdad2c",
+        "name": "log",
+        "source": "7a958ca4c9cdad2c.txt",
+        "type": "text/plain",
+        "size": 137
+      }
+    ],
+    "parameters": [],
+    "attachmentsCount": 1,
+    "shouldDisplayMessage": false,
+    "stepsCount": 2,
+    "hasContent": true
+  },
+  "afterStages": [],
+  "labels": [
+    {
+      "name": "epic",
+      "value": "计算器需求"
+    },
+    {
+      "name": "story",
+      "value": "除法一般场景"
+    },
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "feature",
+      "value": "除法功能"
+    },
+    {
+      "name": "tag",
+      "value": "run(order=2)"
+    },
+    {
+      "name": "tag",
+      "value": "basetest"
+    },
+    {
+      "name": "suite",
+      "value": "è®¡ç®å¨å®æL4"
+    },
+    {
+      "name": "subSuite",
+      "value": "Test"
+    },
+    {
+      "name": "host",
+      "value": "ZJS-E14"
+    },
+    {
+      "name": "thread",
+      "value": "10564-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "è®¡ç®å¨å®æL4"
+    },
+    {
+      "name": "resultFormat",
+      "value": "allure2"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "-98.99"
+    },
+    {
+      "name": "b",
+      "value": "1"
+    },
+    {
+      "name": "c",
+      "value": "-98.99"
+    }
+  ],
+  "links": [],
+  "hidden": false,
+  "retry": false,
+  "extra": {
+    "severity": "normal",
+    "retries": [],
+    "categories": [],
+    "tags": [
+      "run(order=2)",
+      "basetest"
+    ]
+  },
+  "source": "30df92c2c06c7331.json",
+  "parameterValues": [
+    "-98.99",
+    "1",
+    "-98.99"
+  ]
+}

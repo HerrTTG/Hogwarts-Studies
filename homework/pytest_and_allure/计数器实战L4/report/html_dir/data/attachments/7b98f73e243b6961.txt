@@ -1,0 +1,2 @@
+[32mINFO    [0m root:conftest.py:36 获取并返回环境信息，此条为开发环境
+[32mINFO    [0m root:计算器实战L4.py:152 计算无效结果0/None

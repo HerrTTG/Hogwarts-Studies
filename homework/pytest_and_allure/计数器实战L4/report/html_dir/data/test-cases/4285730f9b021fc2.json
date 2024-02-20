@@ -1,0 +1,177 @@
+{
+  "uid": "4285730f9b021fc2",
+  "name": "加法测试用例：0+99.0",
+  "fullName": "è®¡ç®å¨å®æL4.Test#test_add",
+  "historyId": "4f246183820598057a2bb8437834f8a9",
+  "time": {
+    "start": 1708412204218,
+    "stop": 1708412205220,
+    "duration": 1002
+  },
+  "description": "\n        计算器基础功能的加法用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a+b\n        步骤二：\n        断言a+b==c\n        超出范围的无效输入返回 参数大小超出范围\n        参数大小超出范围 亦由参数化带入c变量中\n        ",
+  "descriptionHtml": "<pre><code>    计算器基础功能的加法用例。\n    使用数据参数化的方法,调用getdate函数获取用例的参数。\n    步骤一：\n    计算a+b\n    步骤二：\n    断言a+b==c\n    超出范围的无效输入返回 参数大小超出范围\n    参数大小超出范围 亦由参数化带入c变量中\n</code></pre>\n",
+  "status": "passed",
+  "flaky": false,
+  "newFailed": false,
+  "beforeStages": [
+    {
+      "name": "envget",
+      "time": {
+        "start": 1708412197831,
+        "stop": 1708412197833,
+        "duration": 2
+      },
+      "status": "passed",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "attachmentsCount": 0,
+      "shouldDisplayMessage": false,
+      "stepsCount": 0,
+      "hasContent": false
+    }
+  ],
+  "testStage": {
+    "description": "\n        计算器基础功能的加法用例。\n        使用数据参数化的方法,调用getdate函数获取用例的参数。\n        步骤一：\n        计算a+b\n        步骤二：\n        断言a+b==c\n        超出范围的无效输入返回 参数大小超出范围\n        参数大小超出范围 亦由参数化带入c变量中\n        ",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "测试步骤一,计算结果",
+        "time": {
+          "start": 1708412204218,
+          "stop": 1708412204219,
+          "duration": 1
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false,
+        "stepsCount": 0,
+        "hasContent": false
+      },
+      {
+        "name": "测试步骤二,比较结果是否符合预期",
+        "time": {
+          "start": 1708412204219,
+          "stop": 1708412204219,
+          "duration": 0
+        },
+        "status": "passed",
+        "steps": [],
+        "attachments": [],
+        "parameters": [],
+        "attachmentsCount": 0,
+        "shouldDisplayMessage": false,
+        "stepsCount": 0,
+        "hasContent": false
+      }
+    ],
+    "attachments": [
+      {
+        "uid": "c8a1f02d6903ed07",
+        "name": "log",
+        "source": "c8a1f02d6903ed07.txt",
+        "type": "text/plain",
+        "size": 131
+      }
+    ],
+    "parameters": [],
+    "attachmentsCount": 1,
+    "shouldDisplayMessage": false,
+    "stepsCount": 2,
+    "hasContent": true
+  },
+  "afterStages": [],
+  "labels": [
+    {
+      "name": "epic",
+      "value": "计算器需求"
+    },
+    {
+      "name": "story",
+      "value": "加法一般场景"
+    },
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "feature",
+      "value": "加法功能"
+    },
+    {
+      "name": "tag",
+      "value": "run(order=2)"
+    },
+    {
+      "name": "tag",
+      "value": "basetest"
+    },
+    {
+      "name": "suite",
+      "value": "è®¡ç®å¨å®æL4"
+    },
+    {
+      "name": "subSuite",
+      "value": "Test"
+    },
+    {
+      "name": "host",
+      "value": "ZJS-E14"
+    },
+    {
+      "name": "thread",
+      "value": "19704-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "è®¡ç®å¨å®æL4"
+    },
+    {
+      "name": "resultFormat",
+      "value": "allure2"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "a",
+      "value": "0"
+    },
+    {
+      "name": "b",
+      "value": "99.0"
+    },
+    {
+      "name": "c",
+      "value": "99.0"
+    }
+  ],
+  "links": [],
+  "hidden": false,
+  "retry": false,
+  "extra": {
+    "severity": "normal",
+    "retries": [],
+    "categories": [],
+    "tags": [
+      "run(order=2)",
+      "basetest"
+    ]
+  },
+  "source": "4285730f9b021fc2.json",
+  "parameterValues": [
+    "0",
+    "99.0",
+    "99.0"
+  ]
+}
