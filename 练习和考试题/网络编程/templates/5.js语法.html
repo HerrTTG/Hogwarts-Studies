@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Document</title>
+
+    <script>
+        var n = 100;
+        let m = 200
+        function alertMsg(){
+            // alert("OK" + (m + n));
+            alert(1 == "1")
+        }
+
+        function printMsg(){
+            console.log("Hello")
+        }
+        function forLoop(){
+            var s = 0;
+            for(var i=0;i<=100;i++){
+                s += i;
+            }
+            console.log(s);
+        }
+        function mystrcat(){
+            // console.log("A" + "B" + "C")
+            // console.log("A" + 100 + 200)
+            console.log(100 + "a")
+        }
+
+        function strfunc(){
+            var s = "HelloHogwarts";
+            console.log(s.length)
+            console.log(s.substring(3, 10))    
+            console.log(s.indexOf("l"))
+            console.log(s.lastIndexOf("l"))
+        }
+
+        function arrayop(){
+            var data = [0,1,2,3,4,5,6,7,8,9];
+            console.log(data)
+            // data.push("A")
+            // data.pop()
+            // data.splice(3,0,"A","B","C");
+            data.splice(3,4,"A")
+            console.log(data)
+
+        }
+        // 开启重复定时器
+        si = setInterval(function(){
+            console.log("Hello");
+        }, 1000)
+
+
+        function closeInterval(){
+            clearInterval(si);
+        }
+    </script>
+
+</head>
+<body>
+<div onclick="alertMsg()">我就是一个按钮</div>
+<div onclick="printMsg()">我就是一个按钮</div>
+<div onclick="forLoop()">for循环</div>
+<div onclick="mystrcat()">mystrcat</div>
+<div onclick="strfunc()">mystrcat</div>
+<div onclick="arrayop()">arrayop</div>
+
+<div onclick="closeInterval()">重复定时器</div>
+
+</body>
+</html>

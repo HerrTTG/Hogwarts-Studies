@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Document</title>
+
+    <script src="static/js/jquery-1.8.3.min.js"></script>
+
+    <script>
+
+        //    $(document).ready(function(){
+        //     var $ele = $("div");
+        //     alert($ele.html());
+        //    })
+
+        $(function(){
+            // var $ele = $("#dd");
+            // alert($ele.html());
+            // alert($ele.text());
+
+            // $("#dd1").text("文本一")
+            // $("#dd2").html("文本二")
+            $("#dd1").text("<a href='http://www.baid.com'>BD</a>")
+            $("#dd2").html("<a href='https://www.baidu.com'>BD1</a>")
+            $("#dd2").append("<a href='https://www.baidu.com'>BD2</a>")
+            $("#dd2").append("<a href='https://www.baidu.com'>BD3</a>")
+            $("#dd2").append("<a href='https://www.baidu.com'>BD4</a>")
+
+            alert($("#dd1").prop("id"))
+            $("#dd1").prop({id:"d1"})
+            alert($("#d1").prop("id"))
+            alert($("input").val())
+            $("input").val("ABCD")
+
+
+        });
+
+    </script>
+
+</head>
+<body>
+<div>BBDDAA</div>
+<div id="dd1">AAAA</div>
+<div id="dd2">BBBB</div>
+<input type="text" value="苛东奔西走">
+
+
+</body>
+</html>
