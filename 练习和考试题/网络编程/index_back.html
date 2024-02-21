@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>巧乐仔美食</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        body{
+          margin:0px;
+          font-size:13px;
+        }
+        ul{
+          list-style-type:none;
+          margin:0px;
+          padding:0px;
+        }
+        .a1{
+          color:#FFB600;
+          text-decoration:none;
+        }
+        .a1:hover{
+          color:#FFB600;
+          text-decoration:underline;
+        }
+        .a2{
+          color:#FFFFFF;
+          text-decoration:none;
+        }
+        .a2:hover{
+          color:#FFFFFF;
+          text-decoration:underline;
+        }
+        .a3{
+          font-size:13px;
+          color:#000000;
+          text-decoration:none;
+        }
+        .a3:hover{
+          font-size:13px;
+          color:#ff0000;
+          text-decoration:underline;
+        }
+        .a4{
+          font-size:13px;
+          color:#CFC4B5;
+          text-decoration:none;
+        }
+        .a4:hover{
+          font-size:13px;
+          color:#FF0000;
+          text-decoration:underline;
+        }
+        .top{
+          width:100%;
+          min-width:1100px;
+          height:50px;
+          background-color:#000000;
+        }
+        .top-inner{
+          width:1100px;
+          margin:0px auto;
+          display:flex;
+        }
+        .top-inner div:nth-of-type(1){
+          color:#FFFFFF;
+          width:50%;
+          line-height:50px;
+        }
+        .top-inner div:nth-of-type(2){
+          width:50%;
+          text-align:right;
+        }
+        header{
+          width:100%;
+          min-width:1100px;
+          height:100px;
+          background-image:url("images/header.jpg");
+          overflow:hidden;
+        }
+        .header-inner{
+          width:1100px;
+          height:100px;
+          margin:0px auto;
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+        }
+        .menu{
+          display:flex;
+        }
+        .menu li{
+          width:105px;
+          line-height:40px;
+          text-align:center;
+          font-size:15px;
+          cursor:pointer;
+          position:relative;
+        }
+        .menu li:nth-of-type(1){
+          background-image:url("images/navbg.png");
+          background-repeat:no-repeat;
+          background-position:center;
+          color:#FFFFFF;
+        }
+        .menu li:hover{
+          background-image:url("images/navbg.png");
+          background-repeat:no-repeat;
+          background-position:center;
+          color:#FFFFFF;
+        }
+        .menu li:hover .menu-inner{
+          display:flex;
+        }
+        .menu-inner{
+          position:absolute;
+          left:5px;
+          width:300px;
+          display:none;
+          justify-content:flex-start;
+        }
+        .menu-inner div{
+          line-height:25px;
+          width:70px;
+        }
+        .banner{
+          width:100%;
+          min-width:1100px;
+          background-image:url("images/bannerbg.jpg");
+          background-repeat:no-repeat;
+        }
+        .banner div{
+          width:1100px;
+          margin:0px auto;
+        }
+        .banner div img{
+          width:1090px;
+        }
+        .note{
+          width:100%;
+          min-width:1100px;
+          background-image:url("images/main.jpg");
+          background-repeat:no-repeat;
+        }
+        .note-view{
+          width:1100px;
+          margin:0px auto;
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          padding-bottom:22px;
+        }
+        .note-title img{
+          width:60px;
+          cursor:pointer;
+          transition:all 0.3s ease;
+        }
+        .note-title img:hover{
+          transform:translateY(-5px);
+        }
+        .note-list{
+          font-size:20px;
+          font-weight:bold;
+          margin-left:50px;
+          line-height:40px;
+        }
+        .note-list div{
+          cursor:pointer;
+          transition:all 0.3s ease;
+        }
+        .note-list div:hover{
+          color:#CF271E;
+          transform:translateY(-5px);
+        }
+        .notecolor{
+          color:#CF271E;
+        }
+        .forms{
+          width:100%;
+          min-width:1100px;
+          background-image:url("images/form-wrap.jpg");
+        }
+        .forms-view{
+          width:1100px;
+          margin:0px auto;
+          display:flex;
+          justify-content:space-between;
+          padding-top:10px;
+          padding-bottom:50px;
+        }
+        .forms-title{
+          color:#FFFFFF;
+          font-size:25px;
+        }
+        .table{
+          border:1px solid #3B322D;
+          color:#CFC4B5;
+          display:flex;
+          margin-top:40px;
+        }
+        .table-l{
+          border-right:1px solid #3B322D;
+        }
+        .table-line{
+          display:flex;
+          border-bottom:1px solid #3B322D;
+        }
+        .table-line div:nth-of-type(1){
+          width:100px;
+          text-align:right;
+          line-height:40px;
+        }
+        .table-line div:nth-of-type(2){
+          width:200px;
+          text-align:left;
+          line-height:40px;
+        }
+        .form-txt{
+          width:150px;
+          height:25px;
+          border-radius:3px;
+          margin-left:5px;
+        }
+        .btn{
+          text-align:right;
+          margin-top:10px;
+        }
+        .btn input{
+          background-color:#FFCC00;
+          color:#000000;
+          border-width:0px;
+          line-height:30px;
+          width:100px;
+          border-radius:3px;
+        }
+        .new-title{
+          color:#FFFFFF;
+          font-size:25px;
+          margin-bottom:30px;
+        }
+        .new-line{
+          display:flex;
+          justify-content:space-between;
+          color:#CFC4B5;
+        }
+        .new-line img{
+          margin-top:20px;
+        }
+        .new-line div{
+          line-height:25px;
+        }
+        .imagelist{
+          width:100%;
+          min-width:1100px;
+          background-image:url("images/food-show.jpg");
+          padding-bottom:85px;
+        }
+        .imageview{
+          width:1100px;
+          margin:0px auto;
+        }
+        .image-title{
+          font-size:30px;
+        }
+        .image-title span{
+          color:#CF271E;
+        }
+        .image-msg{
+          background-color:#CF271E;
+          color:#FFFFFF;
+          line-height:20px;
+          width:360px;
+          text-align:center;
+          margin-top:30px;
+        }
+        .image-move{
+          display:flex;
+          justify-content:space-between;
+          margin-top:30px;
+        }
+        .move1,.move3{
+          line-height:323px;
+          display:flex;
+          align-items:center;
+          cursor:pointer;
+        }
+        .move2{
+          width:980px;
+          height:376px;
+          position:relative;
+          overflow:hidden;
+        }
+        #inner{
+          width:980px;
+          height:376px;
+        }
+        footer{
+          width:100%;
+          min-width:1100px;
+          line-height:30px;
+          text-align:center;
+          background-color:#191411;
+          color:#FFFFFF;
+        }
+    </style>
+</head>
+<body>
+<!--顶部横条-->
+<section class="top">
+    <div class="top-inner">
+        <div>您好！欢迎访问巧乐仔官方网站！ [ <a class="a1" href="#">请登录</a> ] [ <a class="a2" href="#">免费注册</a> ]
+        </div>
+        <div><img src="images/tel.png"/></div>
+    </div>
+</section>
+
+<!--导航菜单-->
+<header>
+    <div class="header-inner">
+        <img src="images/logo.png"/>
+        <ul class="menu">
+            <li>首页</li>
+            <li>
+                认识我们
+                <div class="menu-inner">
+                    <div><a class="a3" href="#">公司简介</a></div>
+                    <div><a class="a3" href="#">特许经宫</a></div>
+                    <div><a class="a3" href="#">企业文化</a></div>
+                    <div><a class="a3" href="#">组织机构</a></div>
+                </div>
+            </li>
+            <li>
+                展示中心
+                <div class="menu-inner">
+                    <div><a class="a3" href="#">新品上市</a></div>
+                    <div><a class="a3" href="#">热销产品</a></div>
+                    <div><a class="a3" href="#">时尚饮品</a></div>
+                    <div><a class="a3" href="#">超值套餐</a></div>
+                </div>
+            </li>
+            <li>
+                汉堡加盟
+                <div class="menu-inner">
+                    <div><a class="a3" href="#">投资分析</a></div>
+                    <div><a class="a3" href="#">加盟优势</a></div>
+                    <div><a class="a3" href="#">加盟条件</a></div>
+                    <div><a class="a3" href="#">加盟流程</a></div>
+                </div>
+            </li>
+            <li>
+                新闻中心
+                <div class="menu-inner">
+                    <div><a class="a3" href="#">最新动态</a></div>
+                    <div><a class="a3" href="#">开业公告</a></div>
+                    <div><a class="a3" href="#">行业动态</a></div>
+                </div>
+            </li>
+            <li>
+                奶茶加盟
+                <div class="menu-inner">
+                    <div><a class="a3" href="#">奶茶介绍</a></div>
+                </div>
+            </li>
+            <li>
+                综合服务
+                <div class="menu-inner">
+                    <div><a class="a3" href="#">设计下载</a></div>
+                    <div><a class="a3" href="#">促销活动</a></div>
+                </div>
+            </li>
+            <li>联系我们</li>
+        </ul>
+    </div>
+</header>
+
+<!--banner-->
+<section class="banner">
+    <div><img src="images/img19.png"/></div>
+</section>
+
+<!--文字-->
+<section class="note">
+    <div class="note-view">
+        <div class="note-title"><img src="images/txt1.png"/></div>
+        <div class="note-list">
+            <div class="notecolor">TASTE</div>
+            <div>全国统一免费咨询热线</div>
+            <div>400-021-0000</div>
+            <div>进货成本低，利润率高达60%</div>
+            <div>产品更新快，爆款层出不穷</div>
+            <div>世界500强供应商联盟</div>
+            <div class="notecolor">BURGER</div>
+            <div>全国分店加盟</div>
+            <div>10大系列300余种单品，随意搭配选择多！</div>
+            <div class="notecolor">JOIN IN</div>
+            <div>成为巧乐仔汉堡加盟商的条件</div>
+        </div>
+        <div class="note-image"><img src="images/img21.png"/></div>
+    </div>
+</section>
+
+<!--表单-->
+<section class="forms">
+    <div class="forms-view">
+        <div class="forms-l">
+            <form action="http://www.baidu.com" method="post" name="frm">
+                <div class="forms-title">我想要开一家汉堡店</div>
+                <div class="table">
+                    <!--左-->
+                    <div class="table-l">
+                        <div class="table-line">
+                            <div>投资预算</div>
+                            <div>
+                                <select class="form-txt">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-line">
+                            <div>开店城市</div>
+                            <div>
+                                <select class="form-txt">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-line">
+                            <div>是否有店铺</div>
+                            <div>
+                                <select class="form-txt">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-line">
+                            <div>店铺面积</div>
+                            <div>
+                                <select class="form-txt">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-line">
+                            <div>店铺位置</div>
+                            <div>
+                                <select class="form-txt">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--右-->
+                    <div class="table-r">
+                        <div class="table-line">
+                            <div>喜欢的风格</div>
+                            <div>
+                                <select class="form-txt">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-line">
+                            <div>是否有经验</div>
+                            <div>
+                                <select class="form-txt">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-line">
+                            <div>接收资料</div>
+                            <div>
+                                <input checked name="accept" type="radio"/>是
+                                <input name="accept" type="radio"/>否
+                            </div>
+                        </div>
+                        <div class="table-line">
+                            <div>接收资料</div>
+                            <div><input class="form-txt" placeholder="QQ" type="text"/></div>
+                        </div>
+                        <div class="table-line">
+                            <div>联系电话</div>
+                            <div><input class="form-txt" placeholder="手机" type="text"/></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn"><input type="submit" value="提交留言"/></div>
+            </form>
+        </div>
+        <!--最新动态-->
+        <div class="forms-r">
+            <div class="new-title">最新动态</div>
+            <div class="new-line">
+                <div><a class="a4" href="#">来自墨西哥的经典美食——塔可塔可</a></div>
+                <div>19-04-23</div>
+            </div>
+            <div class="new-line">
+                <div><a class="a4" href="#">乐咖啡，带来完美亚平宁风情的纯正意3</a></div>
+                <div>19-04-23</div>
+            </div>
+            <div class="new-line">
+                <div><a class="a4" href="#">和牛市一起升！升！升！涨到不停板！</a></div>
+                <div>19-04-23</div>
+            </div>
+            <div class="new-line">
+                <div><a class="a4" href="#">#那一眼的心动#，高阶生活，浪漫又</a></div>
+                <div>19-04-23</div>
+            </div>
+            <div class="new-line">
+                <div><a class="a4" href="#">哈哈哈汉堡2015清明节放假通知！</a></div>
+                <div>19-04-23</div>
+            </div>
+            <div class="new-line">
+                <div><a class="a4" href="#">营业额轻松翻一翻，看哈哈哈汉堡如何做</a></div>
+                <div>19-04-23</div>
+            </div>
+            <div class="new-line">
+                <div><a class="a4" href="#">哈哈哈汉堡华丽转身，逼格直逼西餐厅！</a></div>
+                <div>19-04-23</div>
+            </div>
+            <div class="new-line"><img src="images/img15.jpg"/></div>
+        </div>
+    </div>
+</section>
+
+<!--店铺列表-->
+<section class="imagelist">
+    <div class="imageview">
+        <div class="image-title">店铺展示<span>STORES</span></div>
+        <div class="image-msg">全新设计的店面形象，精致典雅的用餐氛围，让快乐无处不在</div>
+        <div class="image-move">
+            <div class="move1"><img id="prevBtn" src="images/prev.png"/></div>
+            <div class="move2">
+                <div id="inner">
+                    <img src="images/img16.jpg"/>
+                    <img src="images/img17.jpg"/>
+                    <img src="images/img18.jpg"/>
+                </div>
+            </div>
+            <div class="move3"><img id="nextBtn" src="images/next.png"/></div>
+        </div>
+    </div>
+</section>
+
+<!--版权-->
+<footer>
+    Copyright © 2019 www.qlzai.com All Rights Reserved　 版权所有·餐饮管理有限公司<br/>
+    24小时咨询热线：400-021-0000（免费）<br/>
+    地址：上海市普陀区狗蛋路1222号狗蛋大厦103<br/>
+</footer>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
