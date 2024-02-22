@@ -7,10 +7,10 @@ db_connect = pymysql.Connect(host='localhost', port=3306,
 cursor = db_connect.cursor()
 
 # 添加进入数据库的变量
-values = (4, "wangwang")
+values = (1, "wangwang")
 
 # 执行insert
-result = cursor.execute('''insert into students(id,name) values(%s,%s)''', values)
+result = cursor.execute('''insert into students(sid,name) values(%s,%s)''', values)
 print(result)
 
 # 查询结果
