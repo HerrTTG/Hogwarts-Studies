@@ -19,6 +19,35 @@ class MultiTaskTCPServer(object):
         # 最大等待连接数设置为128
         self.server.listen(128)
 
+    # 启动服务器方法，实现多任务接受处理客户端连接请求
+    def run(self):
+        print('服务器启动成功')
+        # 循环等待接收客户端的连接请求
+        while True:
+            # 等待到客户端的连接请求后获取client和ipport
+            # server.accept() 就是监听接收到客户端的请求连接，返回客户端的socket对象和addr
+            client_socket, ip_port = self.server.accept()
+            print("客户端连接成功:", ip_port)
+
+            # 当客户端和服务端建立连接成功以后，创建一个处理客户端请求的子线程，
+            # 不同子线程负责接收和处理不同客户端的请求
+            # 多线程目标handle_client_request这个函数
+            # 传参，客户段请求的client和ipport
+            sub_thread = threading.Thread(target=self.handle_client_request,
+                                          args=(client_socket, ip_port))
+
+            # 设置守护主线程 一旦服务器被已关闭，那么无论子线程执行到何处都会被杀死
+            # 使服务器下线就断开所有在运行的处理线程
+            sub_thread.setDaemon = True
+
+            # 启动子线程
+            sub_thread.start()
+
+            # self.server.close()
+            # tcp服务端套接字可以不需要关闭，因为服务端程序需要一直运行
+            # 直到服务器关闭方法被执行
+
+
     # 处理客户端的请求操作
     def handle_client_request(self, client, ip_port):
         # 接收客户端发送的数据并解码
@@ -37,7 +66,7 @@ class MultiTaskTCPServer(object):
         self.st_db = ManagementDB(user='root', pwd='Kuoka314+',
                                   host='localhost', port=3306, database='hogwarts')
 
-        # 后续操作的操作
+        # 路由分发接口
         # 根据不同的请求来寻找对应的函数进行操作，这个处理函数被称之为服务器的接口，找接口的方法叫做路由方法
         response = self.router(request)
 
@@ -83,11 +112,12 @@ class MultiTaskTCPServer(object):
         request["path"] = path
         return request
 
-    # 解析接口方法，路由方法
+    # 解析path的路由方法，用于分发接口
     def router(self, request):
         # print(request)
         response_body = ''.encode('utf-8')
         path = request.get("path")
+        # 分发接口
         if path == '/add':
             response_body = self.stsadd(request.get('values'))
         elif path == '/change':
@@ -99,62 +129,44 @@ class MultiTaskTCPServer(object):
         else:
             response_body = self.stindex()
 
-        # 拼接返回体
+        # 拼接接口返回的数据为报文体
+        #消息头
         response = '''HTTP/1.1 200 OK\r\nContent-Type: text/html;charset=utf-8\r\nServer: MyWebServe V1.0\r\n'''
         response += '\r\n'
         response = response.encode('utf-8')
+
+        #接口返回数据拼接
         response += response_body
         return response
 
     # 接口函数
+    # 接口的返回都是统一二进制
     def stindex(self):
         # /index
+        # 默认首页
         with open('./index.html', 'rb') as f:
             return f.read()
 
     def stsadd(self, values):
+        # 新增数据接口
         # /add?sid=s09&name=lucy&age=23&gender=male
         return self.st_db.st_add(values)
 
     def stchange(self, values):
+        # 修改接口
         # /change?sid=01&name=kevin&age=23&gender=male
         return self.st_db.st_change(values)
 
     def stquery(self, values):
+        # 查询接口
         # /query?sid=s09
         return self.st_db.st_query(values)
 
     def stdel(self, values):
+        # 删除接口
         ##/del?sid=01
         return self.st_db.st_del(values)
 
-    # 启动服务器方法，实现多任务接受处理客户端连接请求
-    def run(self):
-        print('服务器启动成功')
-        # 循环等待接收客户端的连接请求
-        while True:
-            # 等待到客户端的连接请求后获取client和ipport
-            # server.accept() 就是监听接收到客户端的请求连接，返回客户端的socket对象和addr
-            client_socket, ip_port = self.server.accept()
-            print("客户端连接成功:", ip_port)
-
-            # 当客户端和服务端建立连接成功以后，创建一个处理客户端请求的子线程，
-            # 不同子线程负责接收和处理不同客户端的请求
-            # 多线程目标handle_client_request这个函数
-            # 传参，客户段请求的client和ipport
-            sub_thread = threading.Thread(target=self.handle_client_request,
-                                          args=(client_socket, ip_port))
-
-            # 设置守护主线程 一旦服务器被已关闭，那么无论子线程执行到何处都会被杀死
-            # 使服务器下线就断开所有在运行的处理线程
-            sub_thread.setDaemon = True
-
-            # 启动子线程
-            sub_thread.start()
-
-            # self.server.close()
-            # tcp服务端套接字可以不需要关闭，因为服务端程序需要一直运行
-            # 直到服务器关闭方法被执行
 
 
 if __name__ == '__main__':

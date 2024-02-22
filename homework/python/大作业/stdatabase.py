@@ -1,5 +1,6 @@
 import json
 import pymysql
+from pymysql import err
 
 
 class ManagementDB:
@@ -21,11 +22,15 @@ class ManagementDB:
         age = values.get('age')
         gender = values.get('gender')
         try:
+            # name age gender必须有一个数据不为空 才算合理的新增数据。否则只有sid。
             assert name or age or gender
             self.cursor.execute('''insert into students set sid=%s,name=%s,age=%s,gender=%s'''
                                 , (sid, name, age, gender))
-        except:
-            return 'Data insert failed'.encode()
+        except err.IntegrityError:
+            return f'Data insert failed,Duplicate key sid {sid}.'.encode()
+
+        except AssertionError:
+            return 'Data insert failed,name age or gender not have any content.'.encode()
         else:
             self.cursor.execute('''select * from  students where sid=%s''', sid)
             if self.cursor.fetchall():
@@ -42,13 +47,13 @@ class ManagementDB:
         try:
             self.cursor.execute('''select * from  students where sid=%s''', sid)
             assert self.cursor.fetchall()
-        except:
-            return f'{sid} not exists in database'.encode()
+        except AssertionError:
+            return f'Data update failed,{sid} not exists in database'.encode()
         else:
             try:
                 assert name or age or gender
-            except:
-                return f'name、age、gender not have any content'.encode()
+            except AssertionError:
+                return f'Data update failed,name、age、gender not have any content.'.encode()
             else:
                 if name:
                     self.cursor.execute('''update students set name=%s where sid=%s''',
@@ -60,6 +65,7 @@ class ManagementDB:
                     self.cursor.execute('''update students set gender=%s where sid=%s''',
                                         (gender, sid))
 
+            # 检查数据是否修改正确
             self.cursor.execute('''select * from  students where sid=%s''', sid)
             result = self.cursor.fetchall()
 
@@ -74,8 +80,8 @@ class ManagementDB:
                             assert i[2] == age
                         if gender:
                             assert i[3] == gender
-                    except:
-                        return f'Update failed,data not changed correct'.encode()
+                    except AssertionError:
+                        return f'Update failed,data not changed correct.'.encode()
             else:
                 self.db_connect.commit()
                 return 'Data update success'.encode()
@@ -93,7 +99,7 @@ class ManagementDB:
 
             results = self.cursor.fetchall()
             assert results
-        except:
+        except AssertionError:
             return 'Data not found'.encode()
         else:
             # ((1, 'haizhenyu', '29', 'male'), (2, 'xueqing', '27', 'fmale'))
@@ -114,16 +120,16 @@ class ManagementDB:
             self.cursor.execute('''select * from students where sid=%s;''', sid)
             results = self.cursor.fetchall()
             assert results
-        except:
-            return 'Data not found'.encode()
+        except AssertionError:
+            return 'Delete data failed,Data not found'.encode()
         else:
             try:
                 self.cursor.execute('''delete from students where sid=%s''', sid)
                 self.cursor.execute('''select * from students where sid=%s;''', sid)
                 results = self.cursor.fetchall()
                 assert results == ()
-            except:
-                return 'Data delete failed'.encode()
+            except AssertionError:
+                return 'Data delete failed,data still exits in database.'.encode()
             else:
                 self.db_connect.commit()
                 return 'Data delete success'.encode()
