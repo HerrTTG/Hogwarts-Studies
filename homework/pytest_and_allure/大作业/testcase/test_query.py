@@ -50,10 +50,11 @@ class Test_query():
                     assert results['volume'] == volume
                 except AssertionError:
                     logging.error(f'断言失败,查询结果与插入的数据不符:查询英雄用例，hero_name:{name} voluem:{volume}\n'
-                                  f'发现问题： 查询结果遍历到第一个符合结果就返回true了，由于创建时可以重复输入相同name，所以当前查询功能并没有覆盖全部同名数据的查询，retrun的结果只会是第一个')
+                                  f'发现问题： 查询结果遍历到第一个符合结果就返回true了，由于创建时可以重复输入相同name，所以当前查询功能并没有覆盖全部同名数据的查询，retrun的结果只会是第一个'
+                                  f'导致没有返回正确的结果')
                     raise
 
-    @allure.severity(allure.severity_level.BLOCKER)
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.advtest
     @pytest.mark.run(order=2)
     @allure.feature('查询功能')
