@@ -1,0 +1,496 @@
+#!/bin/bash
+cat <<EOF          
+"*****************************************************************"
+"*Powered By HZY0000111175                                       *"
+"*Version:3.0                                                    *"
+"*Warning: Please obtain permission before executing the script! *"
+"*****************************************************************"
+EOF
+
+#版本说明：3.0版本 重命名authcheck 为 errorcheck。修改normal单检查路径的默认遍历逻辑。修改人机交互输出的一些逻辑，增加部分注释
+#版本说明：2.1版本 增加默认OOTB路径和字段。增加自定义变量支持修改话单的任意字段统计
+#版本说明：2.0版本 支持人机交互模式下输入自定义路径 格式/xx/xx 将话单放入其中即可
+#版本说明：1.7版本 追加支持统计成功入库的正常单，支持检查鉴权失败的错单功能，并且定制了recharge错单的一同检查
+#Waring：生产执行此脚本需谨慎！务必检查对应的变量，并且获得客户审批！
+#根据局点不同请对变量自定义中的参数进行修改！
+#---------------------------------------------------------------------------------------#
+
+##变量清理##
+unset cust_path
+unset normal_field
+unset error_field
+unset rc_field
+unset cdr_path
+unset subPath
+unset dateE
+unset next_step
+unset retryTimes
+unset file_error
+unset file_recharge
+unset file_normal
+unset nflag
+##变量清理END##
+
+
+####变量自定义####
+#/onip/cdr#
+cdr_path=$CBP_CDRPATH
+
+#如需OOTB逻辑此变量请设为空，系统默认检查/onip/cdr/output/normal/backup 或 /onip/cdr/cdr4qimport/bak下
+#如需完全定制路径请在inputpath时输入自定义的话单存储路径
+#定制的normal入库路径。路径为$cdr_path/$cust_path/bak/$date。格式为"ppscdr4qimport"
+cust_path="ppscdr4qimport"
+
+#normal的事件类型字段自定义。格式'13'。如需OOTB逻辑此变量请设为空，系统默认检查字段13位事件类型#
+normal_field="13"
+
+#错单的检查字段自定义。格式'$16,$27'。如需OOTB逻辑请设置为空，系统自动检查第16,27字段统计事件类型和对应的错误#
+error_field='$16,$27'
+
+#所罗门充值错单字段定制。格式'$6,$24'.检查normal单中的充值记录也需此变量不为空#
+rc_field='$6,$24'
+
+####变量自定义END####
+
+
+#函数定义#
+
+help(){
+	      echo "******************************************************************"
+	      echo "*Interactive:cdrCheck.sh                                         *"
+	      echo "*Errorcheck:cdrCheck.sh -b date(yyyymm)                          *"
+	      echo "*Errorcheck:cdrCheck.sh -b date(yyyymmdd)                        *"
+        echo "*Errorcheck:cdrCheck.sh -b 1 date(yyyymm)                        *"
+        echo "*Errorcheck:cdrCheck.sh -b 1 date(yyyymmdd)                      *"
+        echo "*NormalCheck:cdrCheck.sh -b 2 date(yyyymmdd)                     *"
+        echo "******************************************************************"
+        exit 1	
+	}
+
+Interactive(){
+	
+	#人机交互模式的循环函数#
+	next_step=input_path
+  retryTimes=0                 
+  while true
+  do
+	case $next_step in
+	      input_path)
+            input_path
+            sleep 1s
+            ;;
+        check_outpath)
+            check_outpath
+            sleep 1s
+            ;;
+        dateinput)
+            dateinput
+            sleep 1s
+            ;;         
+        selectM)
+            selectM 
+            sleep 1s
+            ;;
+        exit_loop)
+        echo "Quit Main process"
+        break
+            ;;
+        *)
+            break;
+            ;;
+        esac
+        done
+	}
+
+
+input_path(){
+
+echo "Please input the output and cdr path(defualt is CBP_CDRPATH):" 
+
+read subPath
+
+if [ "x$subPath" = "x" ]
+	then 
+	next_step=check_outpath
+	retryTimes=3
+  else 
+  	cdr_path=$subPath
+  	if [ ! -d $subPath  ]
+  		then 
+  			echo "Input path not exist please check!!!"
+  			let retryTimes=retryTimes+1
+  		 if [ $retryTimes -ge 3 ]
+	          then
+            exit 1
+       fi 
+       continue
+  	else		
+  	retryTimes=3
+  	next_step=check_outpath
+    fi
+fi
+	
+	}
+
+check_outpath(){
+	   
+echo "Start check_outpath..."
+if [ ! -d $cdr_path/cdrCheck/output ]
+        then
+  mkdir -p $cdr_path/cdrCheck/output
+  if [ $? -eq 1 ]
+  	then 
+  		echo "Report Out Path Create failed !!! please check!!!"
+  	exit 1
+  else 
+  echo "Output path created..."
+  sleep 1s
+  fi
+fi
+next_step=dateinput
+}
+
+
+dateinput(){
+	
+#判断是否有入参，无则表示为人机模式，读取用户输入变量值#	
+if [ $# -gt 0 ]
+ then 
+ 	dateE=$1
+else 
+ if [ -z $dateE ]
+ 	then 
+  read  -p "Plase input check date:"  dateE
+    #检查date长度是符合格式的#
+   if [ ! ${#dateE} -eq 6 ] && [ ! ${#dateE} -eq 8 ]
+        then 
+        	echo "Wrong date format!!!"
+           echo "Please input correct date!!!YYYYMMDD or YYYYMM "   
+             unset dateE
+           retryTimes=`expr $retryTimes + 1`
+           #此时初始值为3，三次重试机会#
+           if [ $retryTimes -ge 6 ]
+	          then
+            exit 1
+            else continue
+           fi    
+        else 
+          #为后面的重试机会重新赋值#
+          retryTimes=6
+          next_step=selectM   
+   fi
+  #else
+  #read  -p "Plase input check date:"  dateE
+  #normal_check
+  #continue
+ fi
+fi        
+}
+
+
+selectM(){
+
+#打印#
+cat <<EOF
+Available Mode:
+1.Error check
+2.Normal check
+EOF
+
+echo "please select:"
+  read checkM
+        case $checkM in
+        1) errorcheck
+        ;;
+        2) normal_check
+        ;;
+        *) echo "Wrong mode!!!"
+           echo "Please input 1~2 !!!"
+           let retryTimes=retryTimes+1
+           #从6开始，重试机会为3次#
+           if [ $retryTimes -ge 9 ];then
+            exit 1
+            elif [ -z "$retryTimes" ]
+              then
+              exit 1 
+            else continue
+           fi
+        ;;
+esac
+        }
+        
+clear_file(){
+echo "Start clear_file..."
+
+#根据入参判断需要清理的文件类型是什么，防止执行其他mode的同时清理掉其他mode的输出结果文件#
+if [ "x$1" = "x" ] || [ "x$1" = "x1" ]
+	then 
+		if [ -e $cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt ]
+        then
+        rm -f $cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt
+        echo "Clear error cdr report file..."
+        sleep 1s
+    fi
+    if [ -e $cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt ]
+        then
+    rm -f $cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt
+    echo "Clear Rc error report file..."
+    sleep 1s
+    fi
+  elif [ "x$1" = "x2" ]
+    then
+    if [ -e $cdr_path/cdrCheck/output/Normal_check_$dateE.txt ]
+        then
+        rm -f $cdr_path/cdrCheck/output/Normal_check_$dateE.txt
+        echo "Clear Normal report file..."
+        sleep 2s
+    fi
+fi
+}
+
+
+errorcheck(){     
+	
+	      clear_file 1
+	      if [ -z "$subPath" ]
+	      	then 
+	      	file_error=$cdr_path"/output/error/error_*_*_*"$dateE"*.*"
+          file_recharge=$cdr_path"/output/error/errorrecharge_*_*_*_"$dateE"*_*.*"
+	      	else 
+	      	file_error=$subPath"/error_*_*_*"$dateE"*.*"
+	      	file_recharge=$subPath"/errorrecharge_*_*_*_"$dateE"*_*.*"
+	      fi
+	      
+	      
+	      if [ ${#dateE} -eq 8 ] || [ ${#dateE} -eq 6 ]
+                then
+                
+               echo "--------------------------------------------"
+                
+                #判断是否有定制的检查字段，在脚本最初进行定义#
+                if [ -z $error_field ] && [ -z $rc_field ]     
+                 	then 
+                 	#OOTB逻辑#
+                    echo "Error cdr check process start..."  	
+                 	  awk -F"|" '{print $16,$27}' $file_error | sort |uniq -c | sort -t ' ' -rnk 2 >$cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt
+                     
+                  elif [ ! -z $error_field ] && [ -z $rc_field ]  
+                  then 
+                  #定制错单字段检查，无充值错单#
+                    echo "Error cdr check process start..."  	
+                 	  awk -F"|" '{print '$error_field'}' $file_error | sort |uniq -c | sort -t ' ' -rnk 2  >$cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt
+                 	  sleep 1s   
+                 	
+                  #无错单字段定制，局点定制的充值错单字段#   
+                 	elif [ ! -z $rc_field ]   &&  [  -z $error_field ] 
+                 	then 
+                  echo "Error cdr check process start..."  	
+                 	awk -F"|" '{print $16,$27}' $file_error | sort |uniq -c | sort -t ' ' -rnk 2 >$cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt
+                 
+                  echo "Recharge error check process start..."
+                  awk -F"|" '{print '$rc_field' }' $file_recharge | sort | uniq -c | sort -rn >$cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt	
+                 	sleep 1s     
+                 	
+                 	#错单字段定制，充值错单字段定制#
+                 	elif  [ ! -z $error_field ] && [ ! -z $rc_field ]
+                 	then 
+
+                 	echo "Error cdr check process start..."  	
+                 	awk -F"|" '{print '$error_field'}' $file_error | sort |uniq -c | sort -t ' ' -rnk 2  >$cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt	
+
+                  echo "Recharge error check process start..."
+                  awk -F"|" '{print '$rc_field' }' $file_recharge | sort | uniq -c | sort -rn >$cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt        
+                  sleep 1s 
+                 	     
+                 	fi
+                  
+                 echo "--------------------------------------------"
+                 sleep 1s
+                  
+                 #检查输出文件是否不为空# 
+                   if [ -s $cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt ]
+                         then  echo "Error cdr check Excute successed "
+                               echo "Result save in $cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt"  
+                               #如果存在定制充值错单字段变量则继续检查充值错单输出是否不为空#
+                               if [[ ! -z $rc_field ]]
+                               then  
+                                 if  [ -s $cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt ] 
+                                 then  
+                                     echo "Erorr Recharge cdr check Excute successed"
+                                     echo "Result save in $cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt "
+                                     echo "--------------------------------------------"
+                                 else   
+                                     echo "Not have such error recharge file ,Recharge output report is empty!!!"
+                                     echo "Please check if error recharge file is exist on select date!!!" 
+                                     echo "--------------------------------------------"    
+                                     rm -f $cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt 
+                                 fi    
+                               fi     
+                          #非充值错单输出为空，判断是否有定制的充值错单变量#                                        
+                          elif [[ ! -z $rc_field  ]]
+                              then
+                          	   if [ ! -s $cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt ]  &&  [ ! -s $cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt ]   
+                                 then 
+                          	        echo "Both file not exist!!!"
+                                    echo "Excute Wrong !!!"
+                                   rm -f $cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt 
+                                   rm -f $cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt
+                                   exit 1   
+                                 elif [ -s $cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt ] 
+                                   then 
+                                   echo "Not have such error file ,output report is empty!!!"
+                                   echo "please check if error file is exist on select date !!!"
+                                   echo "Erorr Recharge cdr check Excute successed"
+                                   echo "Result save in $cdr_path/cdrCheck/output/ErrorAnaly_rc_$dateE.txt "
+                                   echo "--------------------------------------------"               
+                              fi   
+                          #无充值错单变量#    
+                          else    
+                          echo "Not have such error file ,output report is empty!!!"
+                          echo "please check if error file is exist on select date !!!"
+                          echo "--------------------------------------------"
+                          rm -f $cdr_path/cdrCheck/output/ErrorAnaly_$dateE.txt	  
+                          exit 1                
+                 fi
+                 next_step=exit_loop
+                 
+               else 
+               echo "Excute Wrong !!!"
+                echo "Date in error check must be YYYYMMDD or YYYYMM!!!"
+               exit 1                	
+	                  
+        fi
+}
+
+normal_check(){
+	      clear_file 2
+	      if [ "x$subPath" = "x"  ]
+	      	then 
+	      	#file_normal=$cdr_path"/"$cust_path"/bak/"$dateE"/*.*"
+	      	nflag=1
+	      	else 
+	      	file_normal=$subPath"/*"$dateE"*.*"
+	      fi
+	      
+        #判断时间长度是否为8位#
+        if [ ${#dateE} -ne 8 ]
+                then
+                echo "Excute Wrong !!!"
+                echo "Date in Normal check must be YYYYMMDD!!!"
+                exit 1 
+           else          
+               #判断是否有用户输入路径，判断是否有局点定制路径，遍历可能存在的normal单路径#         
+               if [[ $nflag -eq 1 ]]
+               then 
+              	 if [[ ! -z $cust_path ]] && [ ! -d $cdr_path"/"$cust_path"/bak/"$date ] 
+              		 then 
+              		  echo "Excute Wrong !!!"
+              			echo "$cdr_path"/"$cust_path"/bak/"$date is not exist!!!"
+              			exit 1
+              	   elif [[ -z $cust_path ]] && [ -d $cdr_path"/output/normal/backup" ] 
+              	       then 
+              	       file_normal=`echo $cdr_path"/output/normal/backup/normal*$dateE*.*"`
+              	   elif [[ -z $cust_path ]] && [ -d $cdr_path"/cdr4qimport/bak/"$dateE ] 
+              	       then 
+              	       file_normal=$cdr_path"/cdr4qimport/bak/"$dateE"/*.*"
+              	   elif [[ -z $cust_path ]] &&  [ ! -d $cdr_path"/cdr4qimport/bak/"$dateE ]  && [ ! -d $cdr_path"/output/normal/backup" ]
+              	       then      		
+              	       echo "Excute Wrong !!!"
+              	       echo "$cdr_path/cdr4qimport/bak/$dateE and $cdr_path/output/normal/backup both not exist!!!"
+              	       echo "Please check if have any path save normal file!!!"
+              	       exit 1
+              	   else 
+              		 file_normal=`echo "$cdr_path/$cust_path/bak/$dateE/*.*"`     			                                  
+                fi   
+              fi
+              echo "--------------------------------------------"
+              echo "Normal check start..."
+              
+              #判断是否存在定制的normal检查字段#
+              if [[ ! -z $normal_field ]]
+	               then 
+                 cut -d "|" -f $normal_field $file_normal >> $cdr_path/cdrCheck/output/Normal_check_$dateE_temp.txt          
+                 #所罗门定制内容：判断如果存在充值字段，在对13列中账期格式的数据进行替换，最后统计输出展示为recharge
+                 if [ ! -z  $rc_field ]
+                 	then 
+                  sed -r -i 's#^[0-9]{8}$#recharge#g' $cdr_path/cdrCheck/output/Normal_check_$dateE_temp.txt
+                 fi
+                 cat $cdr_path/cdrCheck/output/Normal_check_$dateE_temp.txt | uniq -c | sort -t ' ' -nrk 1  >>$cdr_path/cdrCheck/output/Normal_check_$dateE.txt
+                 rm -f $cdr_path/cdrCheck/output/Normal_check_$dateE_temp.txt
+                 else 
+                 #OOTB逻辑处理#
+                 cut -d "|" -f 16 $file_normal >> $cdr_path/cdrCheck/output/Normal_check_$dateE_temp.txt
+                 cat $cdr_path/cdrCheck/output/Normal_check_$dateE_temp.txt | uniq -c | sort -t ' ' -nrk 1 >>$cdr_path/cdrCheck/output/Normal_check_$dateE.txt
+                 rm -f $cdr_path/cdrCheck/output/Normal_check_$dateE_temp.txt
+              fi 
+              
+              sleep 1s
+              #判断输出文件是否为空#
+              if [ -s $cdr_path/cdrCheck/output/Normal_check_$dateE.txt ]
+              	then 
+              	echo "Normal check execute successed"
+                echo "Result save in $cdr_path/cdrCheck/output/Normal_check_$dateE.txt"
+                else 
+                echo "Excute Wrong !!!"
+                echo "Not have such Normal file ,Normal output report is empty!!!"
+                rm -f $cdr_path/cdrCheck/output/Normal_check_$dateE.txt
+                exit 1
+              fi     
+             
+             
+   fi
+   echo "--------------------------------------------"
+   next_step=exit_loop
+}
+
+
+#函数定义END#
+
+#--------------------------------------------------------------------------------------------------------#
+
+#######主程序######
+
+echo "Script start..."
+echo "Variable check..."
+echo "-------------------------------------------------------------"
+echo '$cdr_path + $cust_path + $normal_field + $error_field + $rc_field' 
+echo  $cdr_path + $cust_path + $normal_field + $error_field + $rc_field 
+echo "-------------------------------------------------------------"                
+
+##检查调用方式，入参或者人机交互##
+
+if [ $# -gt 0 ];
+	then 
+	   if [ "x$1" = "x-b" ];then
+	     	shift 1
+		    if [ $# -eq 1 ]
+		    	then 
+		      dateinput $1
+		    	check_outpath
+		    	errorcheck 
+			  elif [ "x$1" = "x1" ]
+			    then 
+			    dateinput $2
+			    check_outpath
+			    errorcheck 
+			  elif [ "x$1" = "x2" ]
+			  then
+			  	dateinput $2
+			    check_outpath
+			    normal_check 
+        else 
+          echo "Invalid use of cdrCheck.sh !!!" 
+        	help
+		  	fi 
+		  else 	
+		    echo "Invalid use of cdrCheck.sh !!!"
+		  	help
+		 fi 
+	else 
+  Interactive
+fi 
+
+echo "Quit Script"
+exit 0 
+
+#######主程序END######
