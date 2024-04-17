@@ -50,7 +50,7 @@ class MultiTaskTCPServer(object):
 
     # 处理客户端的请求操作
     def handle_client_request(self, client, ip_port):
-        # 接收客户端发送的数据并解码
+        # 接收客户端发送的数据并解码 反序列化
         # 4096是读取字节一次性读多少字节
         # 原始数据是二进制的，需要decode才能变成字符串
         recv_data = client.recv(4096).decode("utf-8")
@@ -87,7 +87,7 @@ class MultiTaskTCPServer(object):
         request = {
             "method": "",
             "path": "",
-            "values": {}
+            "params": {}
         }
         # 解析字符串默认空格分隔
         recv_data = recv_data.split()
@@ -107,7 +107,7 @@ class MultiTaskTCPServer(object):
             for s in params:
                 # 分解查询参数字符串
                 k, v = s.split("=")
-                request["values"][k] = v
+                request["params"][k] = v
 
         request["path"] = path
         return request
@@ -115,17 +115,16 @@ class MultiTaskTCPServer(object):
     # 解析path的路由方法，用于分发接口
     def router(self, request):
         # print(request)
-        response_body = ''.encode('utf-8')
         path = request.get("path")
         # 分发接口
         if path == '/add':
-            response_body = self.stsadd(request.get('values'))
+            response_body = self.stsadd(request.get('params'))
         elif path == '/change':
-            response_body = self.stchange(request.get('values'))
+            response_body = self.stchange(request.get('params'))
         elif path == '/query':
-            response_body = self.stquery(request.get('values'))
+            response_body = self.stquery(request.get('params'))
         elif path == '/del':
-            response_body = self.stdel(request.get('values'))
+            response_body = self.stdel(request.get('params'))
         else:
             response_body = self.stindex()
 
