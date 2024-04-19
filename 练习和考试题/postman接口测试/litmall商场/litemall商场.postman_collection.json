@@ -1,0 +1,2774 @@
+{
+  "info": {
+    "_postman_id": "c29461b1-2ae1-435c-afa7-fe93f7377708",
+    "name": "litemall商场",
+    "description": "HAR To Postman Generated Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33412434"
+  },
+  "item": [
+    {
+      "name": "基本功能测试",
+      "item": [
+        {
+          "name": "【冒烟】搜索用例",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"抱枕\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"响应list返回的内容不为空\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": ":authority",
+                "value": "litemall.hogwarts.ceshiren.com",
+                "disabled": true
+              },
+              {
+                "key": ":method",
+                "value": "GET",
+                "disabled": true
+              },
+              {
+                "key": ":path",
+                "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                "disabled": true
+              },
+              {
+                "key": ":scheme",
+                "value": "https",
+                "disabled": true
+              },
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-encoding",
+                "value": "gzip, deflate, br, zstd"
+              },
+              {
+                "key": "accept-language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "referer",
+                "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "%E6%8A%B1%E6%9E%95"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "successfully / 200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": ":authority",
+                    "value": "litemall.hogwarts.ceshiren.com",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":method",
+                    "value": "GET",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":path",
+                    "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":scheme",
+                    "value": "https",
+                    "disabled": true
+                  },
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-encoding",
+                    "value": "gzip, deflate, br, zstd"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "zh-CN,zh;q=0.9"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?1"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Android\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+                  },
+                  {
+                    "key": "x-litemall-token",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL1}}/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                  "host": [
+                    "{{baseURL1}}"
+                  ],
+                  "path": [
+                    "wx",
+                    "goods",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "key": "keyword",
+                      "value": "%E6%8A%B1%E6%9E%95"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "content-encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json;charset=UTF-8"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 07 Mar 2024 02:16:25 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "CBS"
+                },
+                {
+                  "key": "vary",
+                  "value": "accept-encoding"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "【流程】输入不存在的商品",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"响应中返回的商品list为空\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.data.list).to.eql([]);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": ":authority",
+                "value": "litemall.hogwarts.ceshiren.com",
+                "disabled": true
+              },
+              {
+                "key": ":method",
+                "value": "GET",
+                "disabled": true
+              },
+              {
+                "key": ":path",
+                "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                "disabled": true
+              },
+              {
+                "key": ":scheme",
+                "value": "https",
+                "disabled": true
+              },
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-encoding",
+                "value": "gzip, deflate, br, zstd"
+              },
+              {
+                "key": "accept-language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "referer",
+                "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+              },
+              {
+                "key": "x-litemall-token",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword=asjdijasijsidij1823787&page=1&limit=10&categoryId=0",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "asjdijasijsidij1823787"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "successfully / 200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": ":authority",
+                    "value": "litemall.hogwarts.ceshiren.com",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":method",
+                    "value": "GET",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":path",
+                    "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":scheme",
+                    "value": "https",
+                    "disabled": true
+                  },
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-encoding",
+                    "value": "gzip, deflate, br, zstd"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "zh-CN,zh;q=0.9"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?1"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Android\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+                  },
+                  {
+                    "key": "x-litemall-token",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL1}}/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                  "host": [
+                    "{{baseURL1}}"
+                  ],
+                  "path": [
+                    "wx",
+                    "goods",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "key": "keyword",
+                      "value": "%E6%8A%B1%E6%9E%95"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "content-encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json;charset=UTF-8"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 07 Mar 2024 02:16:25 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "CBS"
+                },
+                {
+                  "key": "vary",
+                  "value": "accept-encoding"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "【流程】输入不存在的category",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"响应中返回的商品list为空\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.data.list).to.eql([]);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": ":authority",
+                "value": "litemall.hogwarts.ceshiren.com",
+                "disabled": true
+              },
+              {
+                "key": ":method",
+                "value": "GET",
+                "disabled": true
+              },
+              {
+                "key": ":path",
+                "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                "disabled": true
+              },
+              {
+                "key": ":scheme",
+                "value": "https",
+                "disabled": true
+              },
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-encoding",
+                "value": "gzip, deflate, br, zstd"
+              },
+              {
+                "key": "accept-language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "referer",
+                "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+              },
+              {
+                "key": "x-litemall-token",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword=玩具&page=2&limit=20&categoryId=9999999",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "玩具"
+                },
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "9999999"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "successfully / 200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": ":authority",
+                    "value": "litemall.hogwarts.ceshiren.com",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":method",
+                    "value": "GET",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":path",
+                    "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":scheme",
+                    "value": "https",
+                    "disabled": true
+                  },
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-encoding",
+                    "value": "gzip, deflate, br, zstd"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "zh-CN,zh;q=0.9"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?1"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Android\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+                  },
+                  {
+                    "key": "x-litemall-token",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL1}}/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                  "host": [
+                    "{{baseURL1}}"
+                  ],
+                  "path": [
+                    "wx",
+                    "goods",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "key": "keyword",
+                      "value": "%E6%8A%B1%E6%9E%95"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "content-encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json;charset=UTF-8"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 07 Mar 2024 02:16:25 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "CBS"
+                },
+                {
+                  "key": "vary",
+                  "value": "accept-encoding"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "【流程】输入超大页数",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"响应中包含搜索的关键字\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"抱枕\");\r",
+                  "});\r",
+                  "pm.test(\"响应 page 的值为查询结果的最大页数\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.data.page).to.eql(jsonData.data.pages);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"响应list返回的内容不为空\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": ":authority",
+                "value": "litemall.hogwarts.ceshiren.com",
+                "disabled": true
+              },
+              {
+                "key": ":method",
+                "value": "GET",
+                "disabled": true
+              },
+              {
+                "key": ":path",
+                "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                "disabled": true
+              },
+              {
+                "key": ":scheme",
+                "value": "https",
+                "disabled": true
+              },
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-encoding",
+                "value": "gzip, deflate, br, zstd"
+              },
+              {
+                "key": "accept-language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "referer",
+                "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+              },
+              {
+                "key": "x-litemall-token",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=100&limit=10&categoryId=0",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "%E6%8A%B1%E6%9E%95"
+                },
+                {
+                  "key": "page",
+                  "value": "100"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "successfully / 200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": ":authority",
+                    "value": "litemall.hogwarts.ceshiren.com",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":method",
+                    "value": "GET",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":path",
+                    "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":scheme",
+                    "value": "https",
+                    "disabled": true
+                  },
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-encoding",
+                    "value": "gzip, deflate, br, zstd"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "zh-CN,zh;q=0.9"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?1"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Android\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+                  },
+                  {
+                    "key": "x-litemall-token",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL1}}/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                  "host": [
+                    "{{baseURL1}}"
+                  ],
+                  "path": [
+                    "wx",
+                    "goods",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "key": "keyword",
+                      "value": "%E6%8A%B1%E6%9E%95"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "content-encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json;charset=UTF-8"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 07 Mar 2024 02:16:25 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "CBS"
+                },
+                {
+                  "key": "vary",
+                  "value": "accept-encoding"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "【流程】输入超大数量",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"响应中包含搜索的关键字\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"床\");\r",
+                  "});\r",
+                  "pm.test(\"响应 limit 的值为传入的查询数量值\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.data.limit).to.eql(100);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"响应list返回的内容不为空\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": ":authority",
+                "value": "litemall.hogwarts.ceshiren.com",
+                "disabled": true
+              },
+              {
+                "key": ":method",
+                "value": "GET",
+                "disabled": true
+              },
+              {
+                "key": ":path",
+                "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                "disabled": true
+              },
+              {
+                "key": ":scheme",
+                "value": "https",
+                "disabled": true
+              },
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-encoding",
+                "value": "gzip, deflate, br, zstd"
+              },
+              {
+                "key": "accept-language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "referer",
+                "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+              },
+              {
+                "key": "x-litemall-token",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword=床&page=1&limit=100&categoryId=0",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "床"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "successfully / 200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": ":authority",
+                    "value": "litemall.hogwarts.ceshiren.com",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":method",
+                    "value": "GET",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":path",
+                    "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":scheme",
+                    "value": "https",
+                    "disabled": true
+                  },
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-encoding",
+                    "value": "gzip, deflate, br, zstd"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "zh-CN,zh;q=0.9"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?1"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Android\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+                  },
+                  {
+                    "key": "x-litemall-token",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL1}}/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                  "host": [
+                    "{{baseURL1}}"
+                  ],
+                  "path": [
+                    "wx",
+                    "goods",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "key": "keyword",
+                      "value": "%E6%8A%B1%E6%9E%95"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "content-encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json;charset=UTF-8"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 07 Mar 2024 02:16:25 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "CBS"
+                },
+                {
+                  "key": "vary",
+                  "value": "accept-encoding"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ],
+      "description": "litemall.hogwarts.ceshiren.com/vue/index.html",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "输入域测试 数据驱动",
+      "item": [
+        {
+          "name": "数据驱动参数组合",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//console.log 将变量记录到log中\r",
+                  "console.log(data.Myexceptstatus)\r",
+                  "console.log(data.Myexcept)\r",
+                  "\r",
+                  "//data.Myexceptstatus表示获取数据文件的字段\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(data.Myexceptstatus);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(data.Myexcept);\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.collectionVariables.set(\"MyKeyWord\",);\r",
+                  "\r",
+                  "pm.collectionVariables.set(\"MyPage\",);\r",
+                  "\r",
+                  "pm.collectionVariables.set(\"MyLimite\",);\r",
+                  "\r",
+                  "pm.collectionVariables.set(\"MycategoryId\",);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": ":authority",
+                "value": "litemall.hogwarts.ceshiren.com",
+                "disabled": true
+              },
+              {
+                "key": ":method",
+                "value": "GET",
+                "disabled": true
+              },
+              {
+                "key": ":path",
+                "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                "disabled": true
+              },
+              {
+                "key": ":scheme",
+                "value": "https",
+                "disabled": true
+              },
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-encoding",
+                "value": "gzip, deflate, br, zstd"
+              },
+              {
+                "key": "accept-language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "referer",
+                "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+              },
+              {
+                "key": "x-litemall-token",
+                "value": "{{Mytoken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword={{MyKeyWord}}&page={{MyPage}}&limit={{MyLimite}}&categoryId={{MycategoryId}}",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "{{MyKeyWord}}"
+                },
+                {
+                  "key": "page",
+                  "value": "{{MyPage}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "{{MyLimite}}"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "{{MycategoryId}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "successfully / 200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": ":authority",
+                    "value": "litemall.hogwarts.ceshiren.com",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":method",
+                    "value": "GET",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":path",
+                    "value": "/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                    "disabled": true
+                  },
+                  {
+                    "key": ":scheme",
+                    "value": "https",
+                    "disabled": true
+                  },
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-encoding",
+                    "value": "gzip, deflate, br, zstd"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "zh-CN,zh;q=0.9"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://litemall.hogwarts.ceshiren.com/vue/index.html"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not A(Brand\";v=\"99\", \"Google Chrome\";v=\"121\", \"Chromium\";v=\"121\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?1"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Android\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+                  },
+                  {
+                    "key": "x-litemall-token",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL1}}/wx/goods/list?keyword=%E6%8A%B1%E6%9E%95&page=1&limit=10&categoryId=0",
+                  "host": [
+                    "{{baseURL1}}"
+                  ],
+                  "path": [
+                    "wx",
+                    "goods",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "key": "keyword",
+                      "value": "%E6%8A%B1%E6%9E%95"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [
+                {
+                  "key": "content-encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json;charset=UTF-8"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 07 Mar 2024 02:16:25 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "CBS"
+                },
+                {
+                  "key": "vary",
+                  "value": "accept-encoding"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "必选参数校验",
+      "item": [
+        {
+          "name": "不传page",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"响应中包含搜索的关键字\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"单\");",
+                  "});",
+                  "",
+                  "pm.test(\"响应list返回的内容不为空\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);",
+                  "});",
+                  "",
+                  "pm.test(\"响应的默认page 的值为 1\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.page).to.eql(1);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword=单&limit=5&categoryId=0",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "单"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "不传limit",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"响应中包含搜索的关键字\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"茶\");",
+                  "});",
+                  "",
+                  "pm.test(\"响应list返回的内容不为空\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"响应的默认limit 的值为 10\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.limit).to.eql(10);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              },
+              {
+                "key": "X-Litemall-Token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjQ5NTc4NDEzLCJ1c2VySWQiOjEsImlhdCI6MTY0OTU3MTIxM30.yUuD6xqZ4o3bmaoe2kiNBdWfuIkk9imsuRhtvi_1t_Y"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword=茶&page=1&categoryId=0",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "茶"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "不传categoryid",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"响应中包含搜索的关键字\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"茶\");",
+                  "});",
+                  "",
+                  "pm.test(\"响应list返回的内容不为空\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);",
+                  "});",
+                  "",
+                  "pm.test(\"响应的filterCategoryList不为空\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.filterCategoryList.length).to.greaterThan(0);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              },
+              {
+                "key": "X-Litemall-Token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjQ5NTc4NDEzLCJ1c2VySWQiOjEsImlhdCI6MTY0OTU3MTIxM30.yUuD6xqZ4o3bmaoe2kiNBdWfuIkk9imsuRhtvi_1t_Y"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword=茶&page=1&limit=5",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "茶"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "不传keyword",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"响应list返回的内容不为空\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              },
+              {
+                "key": "X-Litemall-Token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjQ5NTc4NDEzLCJ1c2VySWQiOjEsImlhdCI6MTY0OTU3MTIxM30.yUuD6xqZ4o3bmaoe2kiNBdWfuIkk9imsuRhtvi_1t_Y"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?page=1&limit=5&categoryId=1005007",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "1005007"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "不传参数",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"响应list返回的内容不为空\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              },
+              {
+                "key": "X-Litemall-Token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjQ5NTc4NDEzLCJ1c2VySWQiOjEsImlhdCI6MTY0OTU3MTIxM30.yUuD6xqZ4o3bmaoe2kiNBdWfuIkk9imsuRhtvi_1t_Y"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "只传 categoryId",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"响应list返回的内容不为空\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);",
+                  "});",
+                  "",
+                  "pm.test(\"响应 list 字段返回 1005007 类目下商品信息\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.filterCategoryList[0].id).to.eql(1005007);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              },
+              {
+                "key": "X-Litemall-Token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjQ5NTc4NDEzLCJ1c2VySWQiOjEsImlhdCI6MTY0OTU3MTIxM30.yUuD6xqZ4o3bmaoe2kiNBdWfuIkk9imsuRhtvi_1t_Y"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?categoryId=1005007",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "categoryId",
+                  "value": "1005007"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "只传 page",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"响应list返回的内容不为空\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"响应 page 值为 2\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.page).to.eql(2);",
+                  "});",
+                  "",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              },
+              {
+                "key": "X-Litemall-Token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjQ5NTc4NDEzLCJ1c2VySWQiOjEsImlhdCI6MTY0OTU3MTIxM30.yUuD6xqZ4o3bmaoe2kiNBdWfuIkk9imsuRhtvi_1t_Y"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?page=2",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "只传 keyword",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"响应list返回的内容不为空\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"响应  list 字段中返回名称中包含【杯子】\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"杯子\");",
+                  "});",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              },
+              {
+                "key": "X-Litemall-Token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjQ5NTc4NDEzLCJ1c2VySWQiOjEsImlhdCI6MTY0OTU3MTIxM30.yUuD6xqZ4o3bmaoe2kiNBdWfuIkk9imsuRhtvi_1t_Y"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword=杯子",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "杯子"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "只传 limit",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"响应list返回的内容不为空\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.list.length).to.greaterThan(0);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"响应 limit 值为 2\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.limit).to.eql(2);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              },
+              {
+                "key": "X-Litemall-Token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjQ5NTc4NDEzLCJ1c2VySWQiOjEsImlhdCI6MTY0OTU3MTIxM30.yUuD6xqZ4o3bmaoe2kiNBdWfuIkk9imsuRhtvi_1t_Y"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?limit=2",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "异常场景测试",
+      "item": [
+        {
+          "name": "请求方法错误 Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"响应业务错误码为 502\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.errno).to.eql(502);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              },
+              {
+                "key": "X-Litemall-Token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjQ5NTc4NDEzLCJ1c2VySWQiOjEsImlhdCI6MTY0OTU3MTIxM30.yUuD6xqZ4o3bmaoe2kiNBdWfuIkk9imsuRhtvi_1t_Y"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?keyword=抱枕&page=1&limit=10&categoryId=0",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "抱枕"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "传入不合法的参数 Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"响应状态码为 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"响应中包含 list 字段\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"list\");",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "zh-CN,zh;q=0.9"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "no-cache"
+              },
+              {
+                "key": "Host",
+                "value": "litemall.hogwarts.ceshiren.com"
+              },
+              {
+                "key": "Pragma",
+                "value": "no-cache"
+              },
+              {
+                "key": "Proxy-Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Referer",
+                "value": "http://litemall.hogwarts.ceshiren.com/vue/index.html"
+              },
+              {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+              },
+              {
+                "key": "X-Litemall-Token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjQ5NTc4NDEzLCJ1c2VySWQiOjEsImlhdCI6MTY0OTU3MTIxM30.yUuD6xqZ4o3bmaoe2kiNBdWfuIkk9imsuRhtvi_1t_Y"
+              }
+            ],
+            "url": {
+              "raw": "{{baseURL1}}/wx/goods/list?pagesxxxxxx=10",
+              "host": [
+                "{{baseURL1}}"
+              ],
+              "path": [
+                "wx",
+                "goods",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "pagesxxxxxx",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "value",
+        "value": "{{Mytoken}}",
+        "type": "string"
+      },
+      {
+        "key": "key",
+        "value": "X-Litemall-Token",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// 构造登录请求",
+          "const loginRequest = { ",
+          "    url: 'http://litemall.hogwarts.ceshiren.com/wx/auth/login', ",
+          "    method: \"POST\", ",
+          "    header: 'Content-Type: application/json',",
+          "    body: { ",
+          "        mode: 'raw',",
+          "        raw: JSON.stringify({'username': 'user123', \"password\": \"user123\"})",
+          "    } ",
+          "}; ",
+          "",
+          "// 发送请求 ",
+          "pm.sendRequest(loginRequest, function (err, response) {",
+          "    if (err) {",
+          "        console.log(err);",
+          "    } else {",
+          "        console.log(response.json());",
+          "        pm.collectionVariables.set(\"Mytoken\", response.json().data.token);",
+          "    }",
+          "});"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL1",
+      "value": "https://litemall.hogwarts.ceshiren.com",
+      "type": "any"
+    },
+    {
+      "key": "MyKeyWord",
+      "value": ""
+    },
+    {
+      "key": "MyPage",
+      "value": ""
+    },
+    {
+      "key": "MyLimite",
+      "value": ""
+    },
+    {
+      "key": "MycategoryId",
+      "value": ""
+    },
+    {
+      "key": "Myexceptstatus",
+      "value": ""
+    },
+    {
+      "key": "Myexcept",
+      "value": ""
+    },
+    {
+      "key": "Mytoken",
+      "value": ""
+    }
+  ]
+}

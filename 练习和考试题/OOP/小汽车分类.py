@@ -32,4 +32,5 @@ if __name__=='__main__':
 
     t.start()
     s.start()
-
+    t.end()
+    s.end()

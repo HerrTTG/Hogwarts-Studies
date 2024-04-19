@@ -1,0 +1,50 @@
+[
+  {
+    "MyKeyWord": "抱枕",
+    "MyPage": 1,
+    "MyLimite": 10,
+    "MycategoryId": 0,
+    "Myexceptstatus": 200,
+    "Myexcept": "抱枕"
+  },
+  {
+    "MyKeyWord": "床",
+    "MyPage": 1,
+    "MyLimite": 20,
+    "MycategoryId": 0,
+    "Myexceptstatus": 200,
+    "Myexcept": "床"
+  },
+  {
+    "MyKeyWord": "",
+    "MyPage": 1,
+    "MyLimite": 10,
+    "MycategoryId": 0,
+    "Myexceptstatus": 200,
+    "Myexcept": "list"
+  },
+  {
+    "MyKeyWord": " ",
+    "MyPage": 1,
+    "MyLimite": 10,
+    "MycategoryId": 0,
+    "Myexceptstatus": 200,
+    "Myexcept": "list"
+  },
+  {
+    "MyKeyWord": "全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯全棉羽丝绒抱枕芯",
+    "MyPage": 1,
+    "MyLimite": 10,
+    "MycategoryId": 0,
+    "Myexceptstatus": 200,
+    "Myexcept": "系统内部错误"
+  },
+  {
+    "MyKeyWord": "^{}`[]",
+    "MyPage": 1,
+    "MyLimite": 10,
+    "MycategoryId": 0,
+    "Myexceptstatus": 400,
+    "Myexcept": "HTTP Status 400"
+  }
+]
