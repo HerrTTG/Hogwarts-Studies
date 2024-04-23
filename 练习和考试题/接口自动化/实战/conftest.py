@@ -35,6 +35,8 @@ def pytest_addoption(parser):
 def envget(request):
     myenv = request.config.getoption("--env", default='test')
     if myenv == 'test':
+        print('获取并返回环境信息，此条为测试环境')
         return "https://petstore.swagger.io/v2/pet"
     elif myenv == 'dev':
         print('获取并返回环境信息，此条为开发环境')
+        return "https://petstore.swagger.io/v2/pet"

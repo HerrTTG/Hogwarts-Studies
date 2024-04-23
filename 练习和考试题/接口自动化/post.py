@@ -27,5 +27,6 @@ headers = {
 }
 
 response = requests.request("POST", url, headers=headers, data=payload)
+response.raise_for_status()
 
 print(response.json())
