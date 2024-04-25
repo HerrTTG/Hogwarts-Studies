@@ -36,7 +36,60 @@ def envget(request):
     myenv = request.config.getoption("--env", default='test')
     if myenv == 'test':
         print('获取并返回环境信息，此条为测试环境')
-        return "https://petstore.swagger.io/v2/pet"
+        return "https://petstore.swagger.io/v2"
     elif myenv == 'dev':
         print('获取并返回环境信息，此条为开发环境')
-        return "https://petstore.swagger.io/v2/pet"
+        return "https://petstore.swagger.io/v2"
+
+
+@pytest.fixture(scope='session')
+def dataload():
+    pet_id = 9223372000001084222
+    pet_status = "available"
+    add_pet_info = {
+        "id": pet_id,
+        "category": {
+            "id": 1,
+            "name": "cat"
+        },
+        "name": "miao",
+        "photoUrls": [
+            "string"
+        ],
+        "tags": [
+            {
+                "id": 5,
+                "name": "cute"
+            }
+        ],
+        "status": pet_status
+    }
+    update_name = "hzy-hogwarts"
+    update_pet_info = {
+        "id": pet_id,
+        "category": {
+            "id": 1,
+            "name": "cat"
+        },
+        "name": update_name,
+        "photoUrls": [
+            "string"
+        ],
+        "tags": [
+            {
+                "id": 5,
+                "name": "cute"
+            }
+        ],
+        "status": pet_status
+    }
+    search_param = {
+        "status": pet_status
+    }
+
+    proxy = {
+        "http": "http://127.0.0.1:8888",
+        "https": "http://127.0.0.1:8888"
+    }
+
+    return pet_id, pet_status, add_pet_info, update_name, update_pet_info, search_param, proxy
