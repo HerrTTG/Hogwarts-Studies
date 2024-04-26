@@ -4,6 +4,7 @@ from genson import SchemaBuilder
 from jsonschema.validators import validate
 
 
+# 分装jsonschema，将生成和验证封装为4个方法。
 class My_jsonschema():
     @classmethod
     def generate_jsonschema(cls, obj):

@@ -23,7 +23,7 @@ def pytest_collection_modifyitems(items: list):
 
 # 获取token权限
 @pytest.fixture(scope='class')
-def gettoken():
+def precondition():
     params = {'corpid': 'ww7f1ecbb8e23f2091', 'corpsecret': 'A4I9cDIUfaIpJZZIDUdI88vMrC-NkhyFVbIEOnfS5VI'}
     logging.info('测试前准备，获取token')
     r = requests.request("GET", 'https://qyapi.weixin.qq.com/cgi-bin/gettoken', params=params, verify=False)
@@ -32,7 +32,7 @@ def gettoken():
     try:
         assert r.status_code == 200
     except AssertionError:
-        logging.debug(f'获取token请求响应码断言失败,结果为{r.status_code}')
+        logging.debug(f'获取token请求响应码断言失败,结果为{r.status_code == 200}')
         raise '获取token请求响应码断言失败'
     else:
         try:
@@ -54,22 +54,4 @@ def gettoken():
 
             yield token, deparment_info
             # 清理生成的数据
-            logging.info(f'测试数据清理')
-            dr_params = token
-            dr_params['id'] = deparment_info['id']
-            dr = requests.request("GET", 'https://qyapi.weixin.qq.com/cgi-bin/department/delete'
-                                  , params=dr_params, verify=False)
-            logging.info(f'测试数据清理结果{dr.text}')
-
-            try:
-                assert r.status_code == 200
-            except AssertionError:
-                logging.debug(f'测试数据清理结果响应码断言失败,结果为{dr.status_code}')
-            else:
-                try:
-                    assert dr.json() == {'errcode': 0, 'errmsg': 'deleted'}
-                except AssertionError:
-                    logging.debug(f'测试数据清理结果断言失败,结果为{dr.json()}')
-                    raise AssertionError
-                else:
-                    logging.info(f'测试数据清理结束')
+            logging.info(f'test DELETE')
