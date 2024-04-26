@@ -8,6 +8,7 @@ from genson import SchemaBuilder
 from jsonschema.validators import validate
 
 
+# 二次封装jsonshema的方法为类方法
 class My_jsonschema():
     @classmethod
     def generate_jsonschema(cls, obj):
