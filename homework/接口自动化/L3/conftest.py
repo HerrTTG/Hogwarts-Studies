@@ -54,4 +54,22 @@ def precondition():
 
             yield token, deparment_info
             # 清理生成的数据
-            logging.info(f'test DELETE')
+            logging.info(f'测试数据清理')
+            dr_params = token
+            dr_params['id'] = deparment_info['id']
+            dr = requests.request("GET", 'https://qyapi.weixin.qq.com/cgi-bin/department/delete'
+                                  , params=dr_params, verify=False)
+            logging.info(f'测试数据清理结果{dr.text}')
+
+            try:
+                assert r.status_code == 200
+            except AssertionError:
+                logging.debug(f'测试数据清理结果响应码断言失败,结果为{dr.status_code}')
+            else:
+                try:
+                    assert dr.json() == {'errcode': 0, 'errmsg': 'deleted'}
+                except AssertionError:
+                    logging.debug(f'测试数据清理结果断言失败,结果为{dr.json()}')
+                    raise AssertionError
+                else:
+                    logging.info(f'测试数据清理结束')
