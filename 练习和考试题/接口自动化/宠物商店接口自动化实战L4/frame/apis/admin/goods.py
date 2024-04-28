@@ -28,7 +28,7 @@ class Goods:
         r = self.send("get", goods_list_url, params=goods_data, headers={"X-Litemall-Admin-Token": self.token},
                       verify=False)
 
-        return r.json()
+        return r
 
     def detail(self):
         pass

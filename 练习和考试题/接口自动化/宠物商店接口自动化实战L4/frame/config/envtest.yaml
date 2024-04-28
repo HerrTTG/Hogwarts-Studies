@@ -1,1 +1,6 @@
-url: https://litemall.hogwarts.ceshiren.com
+admin:
+  url: https://litemall.hogwarts.ceshiren.com
+  userinfor: { "username": "admin123", "password": "admin123", "code": "" }
+wx:
+  url: https://litemall.hogwarts.ceshiren.com
+  userinfor: { "username": "user123", "password": "user123" }

@@ -40,9 +40,9 @@ def envget(request):
         print('获取并返回环境信息，此条为测试环境')
         with open('../config/envtest.yaml', 'r') as file:
             data = yaml.safe_load(file)
-        return data['url']
+        return data
     elif myenv == 'dev':
         print('获取并返回环境信息，此条为开发环境')
         with open('../config/devtest.yaml', 'r') as file:
             data = yaml.safe_load(file)
-        return data['url']
+        return data
