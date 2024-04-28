@@ -11,18 +11,19 @@ class Test_cart():
 
     def preint(self, url):
         """
-        初始化实例,同时将token传入进去
+        对不同环境获取到的url根据用例需要的获取不同的token
+        对用例的各种请求进行对象创建对象
         """
-        self.url = url
-        # 创建登录对象传入需要登录的path和路径
-        r = Loginrequest('admin', self.url)
-        # 调用gettoken方法，将获取到的token传入到api接口中
-        self.token = r.get_token()
-        # 创建API接口的调用对象
-        self.goods = Goods(self.token)
-        self.cart = Cart(self.token)
 
-    def test_case(self, envget):
+        # 创建登录对象传入需要登录的path和路径
+        ra = Loginrequest('admin', url)
+        rc = Loginrequest('wx', url)
+
+        # 创建API接口的调用对象
+        self.goods = Goods(url, ra.get_token())
+        self.cart = Cart(url, rc.get_token())
+
+    def test_case1(self, envget):
         """
         描述测试步骤
         购物车测试
@@ -36,7 +37,7 @@ class Test_cart():
 
         # 用例执行,传入url和接口需要的各类参数
         # self.goods.create(self.url,goods_name='test',order="desc", sort="add_time")
-        res = self.goods.list(self.url, goods_name='test', order="desc", sort="add_time")
+        res = self.goods.list(goods_name='test', order="desc", sort="add_time")
         # self.goods.detail(self.url)
         # self.cart.add(self.url)
         print(res)

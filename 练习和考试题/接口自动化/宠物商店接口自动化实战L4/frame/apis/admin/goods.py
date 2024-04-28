@@ -7,18 +7,20 @@ import requests
 
 class Goods:
 
-    def __init__(self, token):
+    def __init__(self, url, token):
         self.send = requests.request
+        self.url = url
         self.token = token
+
 
     def create(self):
         pass
 
-    def list(self, url, goods_name, order="desc", sort="add_time"):
+    def list(self, goods_name, order="desc", sort="add_time"):
         """
         封装接口调用的动作
         """
-        goods_list_url = url + "/admin/goods/list"
+        goods_list_url = self.url + "/admin/goods/list"
         goods_data = {
             "name": goods_name,
             "order": order,
