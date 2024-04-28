@@ -8,10 +8,9 @@ import requests
 class Goods:
 
     def __init__(self, url, token):
-        self.send = requests.request
         self.url = url
         self.token = token
-
+        self.send = requests.request
 
     def create(self):
         pass
