@@ -11,8 +11,11 @@ class Goods(BaseAPI):
     此类为good路径下所有API接口的具体实现描述
     """
 
-    def create(self):
-        pass
+    def create(self, goods_data):
+        goods_create_url = self.url + "/admin/goods/create"
+        r = self.send("POST", goods_create_url, json=goods_data, verify=False)
+        return r
+
 
     def list(self, goods_name, order="desc", sort="add_time"):
         """
@@ -31,5 +34,12 @@ class Goods(BaseAPI):
 
         return r
 
-    def detail(self):
-        pass
+    def detail(self, goods_id):
+        goods_detail_url = self.url + "/admin/goods/detail"
+        r = self.send("GET", goods_detail_url, params={"id": goods_id}, verify=False)
+        return r
+
+    def delete(self, goods_id):
+        goods_delete_url = self.url + "/admin/goods/delete"
+        r = self.send("POST", goods_delete_url, json={"id": goods_id}, verify=False)
+        return r

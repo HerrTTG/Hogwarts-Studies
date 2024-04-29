@@ -42,7 +42,7 @@ class BaseAPI():
         """
         final_kwargs = self._get_token(kwargs)
         r = requests.request(method, url, **final_kwargs)
-        logging.info(f"{url}接口的响应为{json.dumps(r.json(), indent=2, ensure_ascii=False)}")
+        logging.debug(f"{url}接口的响应为{json.dumps(r.json(), indent=2, ensure_ascii=False)}")
         return r
 
     def _get_token(self, request_params):
@@ -50,11 +50,15 @@ class BaseAPI():
         根据不同的role 调用role_login方法进行登录操作。
         将返回的token封装进header中
         """
-        if self.role == 'admin':
+        if self.role == 'admin' and hasattr(self, 'final_token') is False:
             self.token = self.auth.role_login(self.url + "/admin/auth/login", 'admin', self.envinfo)
             self.final_token = {"X-Litemall-Admin-Token": self.token}
-        elif self.role == 'wx':
+        elif self.role == 'wx' and hasattr(self, 'final_token') is False:
             self.token = self.auth.role_login(self.url + "/wx/auth/login", 'wx', self.envinfo)
+            self.final_token = {"X-Litemall-Token": self.token}
+        elif self.role == 'admin' and hasattr(self, 'final_token') is True:
+            self.final_token = {"X-Litemall-Admin-Token": self.token}
+        elif self.role == 'wx' and hasattr(self, 'final_token') is True:
             self.final_token = {"X-Litemall-Token": self.token}
 
         # 判断是否有headers信息，如果有，将token更新进去。如果没有，则赋值headers为token信息
