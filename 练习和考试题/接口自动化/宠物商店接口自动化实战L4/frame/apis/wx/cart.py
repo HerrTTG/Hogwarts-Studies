@@ -1,12 +1,6 @@
-import requests
+from frame.apis.BaseAPI import BaseAPI
 
 
-class Cart:
-    def __init__(self, url, token):
-        self.url = url
-        self.token = token
-        self.send = requests.request
-
-
+class Cart(BaseAPI):
     def add(self):
         pass

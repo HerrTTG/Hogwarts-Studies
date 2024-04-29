@@ -1,19 +1,23 @@
+import logging
 import requests
 
+
 class Loginrequest():
-    def __init__(self, authname, envinfo):
+    def __init__(self):
         self.r = requests.request
-        self.authname = authname
-        self.envinfo = envinfo
-        self.url = envinfo['url']
-
     def login(self, url, userdate):
-        return self.r('POST', url, json=userdate, verify=False)
+        res = self.r('POST', url, json=userdate, verify=False)
+        logging.info(f'登录接口返回信息：{res.text}')
+        try:
+            assert res.status_code == 200
+            assert res.json()["data"]["token"]
+        except AssertionError:
+            logging.debug(f'登录失败')
+            raise AssertionError
+        else:
+            return res.json()
 
-    def get_token(self):
-        if self.authname == 'admin':
-            res = self.login(self.url + "/admin/auth/login", self.envinfo['admin']['userinfor'])
-            return self.url, res.json()["data"]["token"]
-        elif self.authname == 'wx':
-            res = self.login(self.url + "/wx/auth/login", self.envinfo['wx']['userinfor'])
-            return self.url, res.json()["data"]["token"]
+    def role_login(self, url, role, envinfo):
+
+        res = self.login(url, envinfo[role]['userinfor'])
+        return res["data"]["token"]
