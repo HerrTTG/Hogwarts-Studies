@@ -3,9 +3,10 @@ api定义
 admin/goods 下的具体接口
 """
 from frame.apis.BaseAPI import BaseAPI
+from frame.domins.goods_domin import GoodsDomain
 
 
-class Goods(BaseAPI):
+class Goods(BaseAPI, GoodsDomain):
     """
     继承父类的构造函数和send方法
     此类为good路径下所有API接口的具体实现描述

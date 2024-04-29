@@ -6,7 +6,7 @@ class Loginrequest():
     def __init__(self):
         self.r = requests.request
 
-    def _login(self, url, userdate):
+    def __login(self, url, userdate):
         res = self.r('POST', url, json=userdate, verify=False)
         logging.debug(f'登录接口返回信息：{res.text}')
         try:
@@ -18,6 +18,6 @@ class Loginrequest():
         else:
             return res.json()["data"]["token"]
 
-    def role_login(self, url, role, envinfo):
-        res = self._login(url, envinfo[role]['userinfor'])
+    def role_login(self, url, user):
+        res = self.__login(url, user)
         return res

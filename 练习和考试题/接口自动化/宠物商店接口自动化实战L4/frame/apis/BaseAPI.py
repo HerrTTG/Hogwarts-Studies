@@ -36,7 +36,9 @@ class BaseAPI():
     def send(self, method, url, **kwargs):
         """
         API的发送请求方法
-        kwargs为子类调用send方法时传入的所有所需参数，带入获取token方法中，最后一起封装为**kwargs传入request请求。
+        kwargs为子类调用send方法时传入的所有所需的打包参数，带入获取__get_token方法中，
+        最后一起封装为final_kwargs打包传入request请求中进行解包。
+        解包为params,json,headers等
         """
         final_kwargs = self.__get_token(kwargs)
         r = requests.request(method, url, **final_kwargs)
@@ -66,11 +68,12 @@ class BaseAPI():
         # 判断self.final_token是否已经在，如果存在就不发送登录请求。直接根据角色的不同拼装不同的token
         # 如果不存在就先发送登录请求.
         # 这样admin 和wx只在他们各自首次调用api时，会去做登录操作获取token。后续同role的接口直接使用前面获取的token
+        # 登录操作传递登录的URL，以及不同的role从环境信息中获取的不同登录信息
         if self.role == 'admin' and hasattr(self, 'final_token') is False:
-            self.token = self.auth.role_login(self.url + "/admin/auth/login", 'admin', self.envinfo)
+            self.token = self.auth.role_login(self.url + "/admin/auth/login", self.envinfo[self.role]['userinfor'])
             self.final_token = {"X-Litemall-Admin-Token": self.token}
         elif self.role == 'wx' and hasattr(self, 'final_token') is False:
-            self.token = self.auth.role_login(self.url + "/wx/auth/login", 'wx', self.envinfo)
+            self.token = self.auth.role_login(self.url + "/wx/auth/login", self.envinfo[self.role]['userinfor'])
             self.final_token = {"X-Litemall-Token": self.token}
         elif self.role == 'admin' and hasattr(self, 'final_token') is True:
             self.final_token = {"X-Litemall-Admin-Token": self.token}
@@ -79,6 +82,7 @@ class BaseAPI():
 
         # 判断是否有headers信息，如果有，将token更新进去。如果没有，则赋值headers为token信息
         if request_params.get("headers"):
+            # update方法更新内容到headers中去
             request_params["headers"].update(self.final_token)
         else:
             request_params["headers"] = self.final_token

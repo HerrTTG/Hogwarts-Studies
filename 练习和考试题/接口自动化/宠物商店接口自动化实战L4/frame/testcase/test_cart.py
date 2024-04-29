@@ -63,7 +63,11 @@ class Test_cart():
             r4 = self.cart.add(self.goods_id, self.product_id)
             assert jsonpath.jsonpath(r4.json(), '$..errmsg')[0] == "成功"
 
-        self.goods.delete(self.goods_id)
+        # 子类删除方法
+        # self.goods.delete(self.goods_id)
+
+        # domin测试
+        self.goods.delete_by_name(goods_name)
 
     def test_other(self):
         pass
