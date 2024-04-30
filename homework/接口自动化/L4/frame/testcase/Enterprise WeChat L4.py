@@ -4,7 +4,7 @@ import logging
 import pytest
 import sys
 
-sys.path.append('E:\霍格沃茨学社\Hogwarts-Studies\homework\接口自动化\L4')
+sys.path.append('..\\..\\..\\L4')
 
 from frame.apis.Address_book.department import Department
 from frame.untils.JsonShema import My_jsonschema
@@ -62,7 +62,7 @@ class Testcase():
         4. 获取子部门ID列表，响应结果使用jsonschame进行断言验证。
         5. 生成对应的allure报告，显示log日志打印输出获取的access_token值。
         """
-        logging.info(f'测试用例1')
+        logging.info(f'测试用例:企业微信添加部门接口测试')
 
         # 根据命令行获取，从不同的配置文件中获取环境信息
         self.envmount(envget)
