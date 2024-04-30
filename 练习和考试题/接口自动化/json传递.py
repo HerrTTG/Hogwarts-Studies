@@ -5,6 +5,6 @@ params = {
     "post_key": "post_value"
 }
 # 发出 POST 请求，r 接收接口响应
-r = requests.post(url, json=params)
+r = requests.post(url, json=params, verify=False)
 
 print(r.text)
