@@ -15,7 +15,7 @@ class My_jsonschema():
         cls.schema = builder.to_schema()
 
     @classmethod
-    def generate_jsonschema_file(cls, obj, filepath='./jsonchema.json'):
+    def generate_jsonschema_file(cls, obj, filepath='../config/jsonchema.json'):
         # 实例化SchemaBuilder类
         builder = SchemaBuilder()
         # 调用add_object方法将json数据传入
@@ -33,7 +33,7 @@ class My_jsonschema():
             return False
 
     @classmethod
-    def jsonschema_valida_file(cls, instobj, filepath='./jsonchema.json'):
+    def jsonschema_valida_file(cls, instobj, filepath='../config/jsonchema.json'):
         with open(filepath, "r") as f:
             schema = json.load(f)
         try:

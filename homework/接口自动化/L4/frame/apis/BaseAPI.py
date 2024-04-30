@@ -19,9 +19,18 @@ class BaseAPI(LoginAuth):
 
     def __login_auth(self, be, request_kwargs):
         if hasattr(self, 'final_token') is False:
+            logging.info('获取登录请求的鉴权信息.......')
             params = {'corpid': self.envinfo[be]['corpid'], 'corpsecret': self.envinfo[be]['SECRET']}
             r = self.login(self.request, 'GET', self.baseurl + '/cgi-bin/gettoken', params)
-            self.final_token = {'access_token': r.json()['access_token']}
+            try:
+                assert r.json()['access_token']
+            except AssertionError:
+                logging.error('获取登录请求的鉴权信息失败')
+                raise AssertionError
+            else:
+                self.final_token = {'access_token': r.json()['access_token']}
+                logging.debug(f'请求的鉴权信息:{self.final_token}')
+
 
         if request_kwargs.get("params"):
             request_kwargs['params'].update(self.final_token)
