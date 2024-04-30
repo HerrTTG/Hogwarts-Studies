@@ -18,13 +18,29 @@ class BaseAPI(LoginAuth):
     def send(self, be, method, url, **kwargs):
         """
         接口发送请求
+        发送前调用登录鉴权方法,获取鉴权信息。
+        返回拼装鉴权信息后的**final_kwargs
+        be:接口的类型名称 如department、customermegement
+        method：请求方法
+        url:请求地址
+        **kwargs:不定长参数。包括request方法url后所有关键字参数
         """
+        # 打包后的kwargs传入__login_auth方法
         final_kwargs = self.__login_auth(be, kwargs)
+
+        #解包final_kwargs传入request方法
         r = self.request(method, url, **final_kwargs)
         logging.debug(f"{url}接口的响应为{json.dumps(r.json(), indent=2, ensure_ascii=False)}")
         return r
 
     def __login_auth(self, be, request_kwargs):
+        """
+        登录鉴权方法
+        根据环境信息选择登录的url和登录信息
+        将登陆鉴权信息更新进request_kwargs中返回
+        be:接口的类型名称 如department、customermegement
+        request_kwargs:不定长参数的打包（字典形式）。包括request方法url后所有关键字参数。
+        """
         if hasattr(self, 'final_token') is False:
             logging.info('获取登录请求的鉴权信息.......')
             params = {'corpid': self.envinfo[be]['corpid'], 'corpsecret': self.envinfo[be]['SECRET']}

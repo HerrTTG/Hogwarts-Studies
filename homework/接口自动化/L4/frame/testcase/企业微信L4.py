@@ -35,6 +35,7 @@ class Testcase():
         logging.info(f'测试数据清理')
 
         departid = {'id': self.departdata['id']}
+
         r3 = self.tester.delete(departid)
         # My_jsonschema().generate_jsonschema_file(r3.json(),filepath='../config/delete.json')
         try:
