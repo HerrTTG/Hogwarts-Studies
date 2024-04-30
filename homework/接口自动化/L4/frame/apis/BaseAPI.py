@@ -7,11 +7,18 @@ from frame.apis.loginauth import LoginAuth
 
 class BaseAPI(LoginAuth):
     def __init__(self, envinfo):
+        """
+        实例化环境信息，从环境信息中获取baseurl
+        生成request方法的对象
+        """
         self.envinfo = envinfo
         self.baseurl = self.envinfo['url']
         self.request = requests.request
 
     def send(self, be, method, url, **kwargs):
+        """
+        接口发送请求
+        """
         final_kwargs = self.__login_auth(be, kwargs)
         r = self.request(method, url, **final_kwargs)
         logging.debug(f"{url}接口的响应为{json.dumps(r.json(), indent=2, ensure_ascii=False)}")
