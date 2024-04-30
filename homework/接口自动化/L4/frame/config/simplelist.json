@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "errcode": {
+      "type": "integer"
+    },
+    "errmsg": {
+      "type": "string"
+    },
+    "department_id": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "parentid": {
+            "type": "integer"
+          },
+          "order": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "order",
+          "parentid"
+        ]
+      }
+    }
+  },
+  "required": [
+    "department_id",
+    "errcode",
+    "errmsg"
+  ]
+}
