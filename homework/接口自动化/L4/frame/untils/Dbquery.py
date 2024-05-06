@@ -12,8 +12,7 @@ class Dblink():
         'password': 'Kuoka314+','database': 'hogwarts','charset': 'utf8' }
         解包传入，创建数据库链接对象
         """
-        self.dbinfo = envinfo['dbinfo']
-        self.conn = pymysql.Connect(**self.dbinfo)
+        self.conn = pymysql.Connect(**envinfo['dbinfo'])
 
 
 
