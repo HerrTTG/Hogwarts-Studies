@@ -34,7 +34,7 @@ def pytest_addoption(parser):
 # fixture
 # 根据输入的环境命令参数切换不同的测试环境
 @pytest.fixture(scope='session')
-def envget(request):
+def envget(request) -> dict:
     myenv = request.config.getoption("--env", default='test')
     if myenv == 'test':
         print('获取并返回环境信息，此条为测试环境')
