@@ -1,4 +1,4 @@
-class LoginAuth():
+class Login():
     def login(self, request, method, url, params):
         """
         登录接口的实现
