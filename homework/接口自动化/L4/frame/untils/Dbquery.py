@@ -7,31 +7,21 @@ class Dblink():
 
     def __init__(self, envinfo):
         """
-        实例化环境信息，从环境信息中获取baseurl
-        生成request方法的对象
+        实例化环境信息，从环境信息中获取数据库连接需要的信息
+        dbinfo: { 'host': 'localhost','port': 3306,'user': 'root','password': 'Kuoka314+','database': 'hogwarts','charset': 'utf8' }
+        解包传入，创建数据库链接对象
         """
-        self.envinfo = envinfo
-        self.baseurl = self.envinfo['url']
-        self.dbinfo = self.envinfo['dbinfo']
+        self.dbinfo = envinfo['dbinfo']
+        self.conn = pymysql.Connect(**self.dbinfo)
 
-    # 封装建立连接的对象
 
-    def get_conn(self):
-        # conn = pymysql.connect(
-        # host="litemall.hogwarts.ceshiren.com",
-        # port=13306,
-        # user="test",
-        # password="test123456",
-        # database="litemall",
-        # charset="utf8mb4"
-        # )
-        conn = pymysql.Connect(**self.dbinfo)
-        return conn
 
     # 执行sql语句
     def execute_sql(self, sql):
-        connect = self.get_conn()
-        cursor = connect.cursor()
+        """
+        sql执行方法，先创建游标。在执行具体sql。
+        """
+        cursor = self.conn.cursor()
         cursor.execute(sql)  # 执行SQL
         record = cursor.fetchall()  # 查询记录
         return record
