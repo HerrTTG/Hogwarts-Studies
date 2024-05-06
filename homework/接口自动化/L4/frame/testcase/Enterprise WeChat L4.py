@@ -8,12 +8,15 @@ sys.path.append('..\\..\\..\\L4')
 
 from frame.apis.Address_book.department import Department
 from frame.untils.JsonShema import My_jsonschema
+from frame.untils.Dbquery import Dblink
+
 
 
 class Testcase():
     def envmount(self, envinfo):
         """实例化接口对象，传入环境信息"""
         self.tester = Department(envinfo)
+        self.dblink = Dblink(envinfo)
 
     def setup_class(self):
         """
@@ -95,3 +98,6 @@ class Testcase():
                     f"测试步骤一断言失败,jsonschema结果为{My_jsonschema().jsonschema_valida_file(r2.json(), filepath='../config/simplelist.json')}")
                 logging.error(f"id:{jsonpath.jsonpath(r2.json(), '$..id')}")
                 raise AssertionError
+        with allure.step('测试步骤三:测试数据库'):
+            res = self.dblink.execute_sql("select * from students;")
+            print(res)
