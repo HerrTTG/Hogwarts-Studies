@@ -1,5 +1,5 @@
 class Login():
-    def login(self, request, method, url, params):
+    def login(self, request, method, url, params) -> object:
         """
         登录接口的实现
         request为request方法的对象

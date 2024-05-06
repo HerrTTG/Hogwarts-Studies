@@ -14,7 +14,7 @@ class BaseAPI():
         self.baseurl = self.envinfo['url']
         self.request = requests.request
 
-    def send(self, method, url, kwargs: dict):
+    def send(self, method, url, kwargs: dict) -> object:
         """
         接口发送请求
         final_kwargs->kwargs

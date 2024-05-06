@@ -8,7 +8,7 @@ class Department(Department_domin, LoginAuth, BaseAPI):
     部门管理接口的方法实现
     """
 
-    def create(self, departdata):
+    def create(self, departdata) -> object:
         """
         departdata：{
             "name": "广州研发中心",
@@ -22,11 +22,10 @@ class Department(Department_domin, LoginAuth, BaseAPI):
         r = self.send('department', 'POST', url, json=departdata, verify=False)
         return r
 
-
-    def update(self):
+    def update(self) -> object:
         pass
 
-    def delete(self, params):
+    def delete(self, params) -> object:
         """
         params={'id': 2}
         要删除的目标部门id
@@ -35,7 +34,7 @@ class Department(Department_domin, LoginAuth, BaseAPI):
         r = self.send('department', 'GET', url, params=params, verify=False)
         return r
 
-    def simplelist(self, params):
+    def simplelist(self, params) -> object:
         """
         params={'id': 2}
         要查询的目标部门id

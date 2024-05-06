@@ -65,15 +65,19 @@ class Testcase():
         4. 获取子部门ID列表，响应结果使用jsonschame进行断言验证。
         5. 生成对应的allure报告，显示log日志打印输出获取的access_token值。
         """
-        logging.info(f'测试用例:企业微信添加部门接口测试')
 
+        logging.info(f'测试用例:企业微信添加部门接口测试')
         # 根据命令行获取，从不同的配置文件中获取环境信息
         self.envmount(envget)
         logging.debug(f'用例执行环境信息为:{envget}')
 
         with allure.step('测试步骤一:增加子部门'):
+            # 发送请求
             r1 = self.tester.create(self.departdata)
+            # 生成jsonchema
             # My_jsonschema().generate_jsonschema_file(r1.json(),filepath='../config/create.json')
+
+            #开始断言
             try:
                 assert My_jsonschema().jsonschema_valida_file(r1.json(), filepath='../config/create.json') is True
                 assert jsonpath.jsonpath(r1.json(), '$..errcode')[0] == 0
@@ -88,8 +92,12 @@ class Testcase():
                 raise AssertionError
 
         with allure.step('测试步骤二:查询子部门'):
+            # 发送请求
             r2 = self.tester.simplelist({'id': self.departdata['id']})
+            # 生成jsonchema
             # My_jsonschema().generate_jsonschema_file(r2.json(),filepath='../config/simplelist.json')
+
+            #开始断言
             try:
                 assert My_jsonschema().jsonschema_valida_file(r2.json(), filepath='../config/simplelist.json') is True
                 assert jsonpath.jsonpath(r2.json(), '$..id')[0] == self.departdata['id']
@@ -98,6 +106,10 @@ class Testcase():
                     f"测试步骤一断言失败,jsonschema结果为{My_jsonschema().jsonschema_valida_file(r2.json(), filepath='../config/simplelist.json')}")
                 logging.error(f"id:{jsonpath.jsonpath(r2.json(), '$..id')}")
                 raise AssertionError
+
         with allure.step('测试步骤三:测试数据库'):
+            # 执行sql
             res = self.dblink.execute_sql("select * from students;")
-            print(res)
+
+            # 检查结果
+            print(res.fetchall())

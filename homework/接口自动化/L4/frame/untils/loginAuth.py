@@ -7,7 +7,7 @@ class LoginAuth(Login):
     登录鉴权类，继承login接口的login方法。
     """
 
-    def send(self, be, method, url, **kwargs):
+    def send(self, be, method, url, **kwargs) -> object:
         """
         Mix-in BaseAPI 的send方法。
         因为LoginAuth在接口类继承时在BaseAPI的左边，所以接口调用send方法实际执行的是loginAuth的send方法。
@@ -28,7 +28,7 @@ class LoginAuth(Login):
         r = super().send(method, url, final_kwargs)
         return r
 
-    def __login_auth(self, be, request_kwargs):
+    def __login_auth(self, be, request_kwargs: dict) -> dict:
         """
         登录鉴权方法
         根据环境信息选择登录的url和登录信息
@@ -53,7 +53,7 @@ class LoginAuth(Login):
                 logging.debug(f'请求的鉴权信息:{self.final_token}')
 
         # 拼装参数，由于token需要带入到URL参数中去，所以先判断是否存在params。
-        #如果不存在，则直接赋值，否则更新
+        # 如果不存在，则直接赋值，否则更新
         if request_kwargs.get("params"):
             request_kwargs['params'].update(self.final_token)
         else:
