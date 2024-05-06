@@ -3,7 +3,7 @@ from frame.domin.Address_book.department_domin import Department_domin
 from frame.untils.loginAuth import LoginAuth
 
 
-class Department(LoginAuth, BaseAPI, Department_domin):
+class Department(Department_domin, LoginAuth, BaseAPI):
     """
     部门管理接口的方法实现
     """
