@@ -18,7 +18,7 @@ class Department(Department_domin, LoginAuth, BaseAPI):
             "id": 2}
         创建部门的具体信息
         """
-        url = self.baseurl + '/cgi-bin/department/create'
+        url = self.baseurl + 'department/create'
         r = self.send('department', 'POST', url, json=departdata, verify=False)
         return r
 
@@ -30,7 +30,7 @@ class Department(Department_domin, LoginAuth, BaseAPI):
         params={'id': 2}
         要删除的目标部门id
         """
-        url = self.baseurl + '/cgi-bin/department/delete'
+        url = self.baseurl + 'department/delete'
         r = self.send('department', 'GET', url, params=params, verify=False)
         return r
 
@@ -39,6 +39,6 @@ class Department(Department_domin, LoginAuth, BaseAPI):
         params={'id': 2}
         要查询的目标部门id
         """
-        url = self.baseurl + '/cgi-bin/department/simplelist'
+        url = self.baseurl + 'department/simplelist'
         r = self.send('department', 'GET', url, params=params, verify=False)
         return r

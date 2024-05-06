@@ -42,7 +42,7 @@ class LoginAuth(Login):
             logging.info('获取登录请求的鉴权信息.......')
             params = {'corpid': self.envinfo[be]['corpid'], 'corpsecret': self.envinfo[be]['SECRET']}
             #login方法继承自Login类，属于基础登录接口。
-            r = self.login(self.request, 'GET', self.baseurl + '/cgi-bin/gettoken', params)
+            r = self.login(self.request, 'GET', self.baseurl + 'gettoken', params)
             try:
                 assert r.json()['access_token']
             except AssertionError:

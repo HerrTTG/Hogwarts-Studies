@@ -1,3 +1,3 @@
-url: https://qyapi.weixin.qq.com
+url: https://qyapi.weixin.qq.com/cgi-bin/
 dbinfo: { 'host': 'localhost','port': 3306,'user': 'root','password': 'Kuoka314+','database': 'hogwarts','charset': 'utf8' }
 department: { 'corpid': 'ww7f1ecbb8e23f2091','SECRET': 'A4I9cDIUfaIpJZZIDUdI88vMrC-NkhyFVbIEOnfS5VI' }
