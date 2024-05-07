@@ -25,7 +25,7 @@ class My_jsonschema():
         cls.schema = builder.to_schema()
 
     @classmethod
-    def generate_jsonschema_file(cls, obj, filepath=f'{Untils.get_path()}\\frame\\config\\jsonchema.json'):
+    def generate_jsonschema_file(cls, obj, filepath=f'{Untils.get_path()}\\frame\\datas\\jsonchema.json'):
         """
             根据传入的obj，生成shema格式数据。
             保存为文件。
@@ -53,7 +53,7 @@ class My_jsonschema():
             return False
 
     @classmethod
-    def jsonschema_valida_file(cls, instobj, filepath=f'{Untils.get_path()}\\frame\\config\\jsonchema.json'):
+    def jsonschema_valida_file(cls, instobj, filepath=f'{Untils.get_path()}\\frame\\datas\\jsonchema.json'):
         """
             根据传入的obj,和读取文件中的schema格式数据，进行断言判断。
             返回bool值。

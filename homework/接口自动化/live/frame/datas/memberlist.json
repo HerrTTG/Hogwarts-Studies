@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "errcode": {
+      "type": "integer"
+    },
+    "errmsg": {
+      "type": "string"
+    },
+    "dept_user": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "userid": {
+            "type": "string"
+          },
+          "department": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "department",
+          "userid"
+        ]
+      }
+    }
+  },
+  "required": [
+    "dept_user",
+    "errcode",
+    "errmsg"
+  ]
+}

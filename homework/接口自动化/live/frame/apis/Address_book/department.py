@@ -19,7 +19,7 @@ class Department(Department_domin, LoginAuth, BaseAPI):
         创建部门的具体信息
         """
         url = self.baseurl + 'department/create'
-        r = self.send('department', 'POST', url, json=departdata, verify=False)
+        r = self.send('address_book', 'POST', url, json=departdata, verify=False)
         return r
 
     def update(self) -> object:
@@ -31,7 +31,7 @@ class Department(Department_domin, LoginAuth, BaseAPI):
         要删除的目标部门id
         """
         url = self.baseurl + 'department/delete'
-        r = self.send('department', 'GET', url, params=params, verify=False)
+        r = self.send('address_book', 'GET', url, params=params, verify=False)
         return r
 
     def simplelist(self, params) -> object:
@@ -40,5 +40,5 @@ class Department(Department_domin, LoginAuth, BaseAPI):
         要查询的目标部门id
         """
         url = self.baseurl + 'department/simplelist'
-        r = self.send('department', 'GET', url, params=params, verify=False)
+        r = self.send('address_book', 'GET', url, params=params, verify=False)
         return r
