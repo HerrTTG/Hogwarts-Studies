@@ -40,9 +40,9 @@ class LoginAuth(Login):
         # 减少重复获取token的不必要操作
         if hasattr(self, 'final_token') is False:
             logging.info('获取登录请求的鉴权信息.......')
-            params = {'corpid': self.envinfo[be]['corpid'], 'corpsecret': self.envinfo[be]['SECRET']}
+            params = {'params': {'corpid': self.envinfo[be]['corpid'], 'corpsecret': self.envinfo[be]['SECRET']}}
             # login方法继承自Login类，属于基础登录接口。
-            r = self.login(self.request, 'GET', self.baseurl + 'gettoken', params)
+            r = self.login('GET', self.baseurl + 'gettoken', params)
             try:
                 assert r.json()['access_token']
             except AssertionError:
