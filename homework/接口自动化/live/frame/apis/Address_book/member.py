@@ -9,16 +9,26 @@ class Memebr(Member_domin, LoginAuth, BaseAPI):
     """
 
     def create(self, memberdata) -> object:
+        """
+        memberdata:字典格式，来自于testdata_memberinfo.yaml文件中提取
+        """
+
         url = self.baseurl + 'user/create'
         r = self.send('address_book', 'POST', url, json=memberdata, verify=False)
         return r
 
     def delete(self, memberdata) -> object:
+        """
+        memberdata:{'userid': self.memberdata['userid']}
+        """
         url = self.baseurl + 'user/delete'
         r = self.send('address_book', 'GET', url, params=memberdata, verify=False)
         return r
 
     def list(self, requestbody) -> object:
+        """
+        requestbody:{"limit": 10000}
+        """
         url = self.baseurl + 'user/list_id'
         r = self.send('address_book', 'POST', url, json=requestbody, verify=False)
         return r
