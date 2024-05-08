@@ -1,5 +1,5 @@
 class Login():
-    def login(self, method, url, kwargs) -> object:
+    def login(self, method, url, kwargs: dict) -> object:
         """
         登录接口的实现。
         只负责描述此接口所做的事。
