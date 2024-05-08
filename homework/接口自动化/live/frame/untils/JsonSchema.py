@@ -12,7 +12,7 @@ class My_jsonschema():
     @classmethod
     def generate_jsonschema(cls, obj):
         """
-        根据传入的obj，生成shema格式数据。
+        根据传入的obj，生成schema格式数据。
         保存在类属性cls.schema中
         """
 
