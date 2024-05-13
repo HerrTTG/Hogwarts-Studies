@@ -1,0 +1,45 @@
+[root@localhost test]# cat docker-compose.yml
+services:
+  mariadb:
+    image: 'bitnami/mariadb'
+    environment:
+      - MARIADB_ROOT_PASSWORD=testlink
+      - MARIADB_USER=testlink
+      - MARIADB_PASSWORD=testlink
+      - MARIADB_DATABASE=testlink
+  testlink:
+    image: 'bitnami/testlink-archived'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - TESTLINK_DATABASE_USER=testlink
+      - TESTLINK_DATABASE_PASSWORD=testlink
+      - TESTLINK_DATABASE_NAME=testlink
+    ports:
+      - '5003:8080'
+      - '443:443'
+    depends_on:
+      - mariadb
+[root@localhost test]# docker-compose -f /home/test/docker-compose.yml up -d
+[+] Running 3/3
+ ✔ Network test_default       Created                                                                                                           0.3s
+ ✔ Container test-mariadb-1   Started                                                                                                           0.5s
+ ✔ Container test-testlink-1  Started                                                                                                           1.0s
+[root@localhost test]# docker ps
+CONTAINER ID   IMAGE                                                 COMMAND                  CREATED         STATUS         PORTS                                                                                                                             NAMES
+0eae11490899   bitnami/testlink-archived                             "/opt/bitnami/script…"   3 seconds ago   Up 2 seconds   0.0.0.0:443->443/tcp, :::443->443/tcp, 8443/tcp, 0.0.0.0:5003->8080/tcp, :::5003->8080/tcp                                        test-testlink-1
+99082e6dfee6   bitnami/mariadb                                       "/opt/bitnami/script…"   3 seconds ago   Up 3 seconds   3306/tcp                                                                                                                          test-mariadb-1
+22c2ffc61bb4   selenium/node-chrome:4.0.0-rc-2-prerelease-20210923   "/opt/bin/entry_poin…"   4 hours ago     Up 4 hours     0.0.0.0:5902->5900/tcp, :::5902->5900/tcp                                                                                         web_node
+c1ab7a3364f3   selenium/hub:4.0.0-rc-2-prerelease-20210923           "/opt/bin/entry_poin…"   4 hours ago     Up 4 hours     0.0.0.0:5442->4442/tcp, :::5442->4442/tcp, 0.0.0.0:5443->4443/tcp, :::5443->4443/tcp, 0.0.0.0:5444->4444/tcp, :::5444->4444/tcp   web_hub
+[root@localhost test]# docker-compose ls
+NAME                STATUS              CONFIG FILES
+test                running(2)          /home/test/docker-compose.yml
+[root@localhost test]# docker-compose ps
+NAME              IMAGE                       COMMAND                  SERVICE    CREATED          STATUS          PORTS
+test-mariadb-1    bitnami/mariadb             "/opt/bitnami/script…"   mariadb    27 seconds ago   Up 26 seconds   3306/tcp
+test-testlink-1   bitnami/testlink-archived   "/opt/bitnami/script…"   testlink   27 seconds ago   Up 26 seconds   0.0.0.0:443->443/tcp, :::443->443/tcp, 8443/tcp, 0.0.0.0:5003->8080/tcp, :::5003->8080/tcp
+[root@localhost test]# ll
+total 4
+-rw-r--r--. 1 root root 539 May 13 03:12 docker-compose.yml
+drwxr-xr-x. 2 root root   6 May 13 03:05 mysql
+[root@localhost test]#

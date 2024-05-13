@@ -1,0 +1,21 @@
+services:
+  mariadb:
+    image: 'bitnami/mariadb'
+    environment:
+      - MARIADB_ROOT_PASSWORD=testlink
+      - MARIADB_USER=testlink
+      - MARIADB_PASSWORD=testlink
+      - MARIADB_DATABASE=testlink
+  testlink:
+    image: 'bitnami/testlink-archived'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - TESTLINK_DATABASE_USER=testlink
+      - TESTLINK_DATABASE_PASSWORD=testlink
+      - TESTLINK_DATABASE_NAME=testlink
+    ports:
+      - '5003:8080'
+      - '443:443'
+    depends_on:
+      - mariadb
