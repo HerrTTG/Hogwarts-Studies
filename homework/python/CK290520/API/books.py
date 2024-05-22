@@ -54,9 +54,6 @@ class Books(BaseAPI):
             print('删除成功')
 
 
-
-
-
     def queryBookByID(self, sid):
         for i in self.data:
             if int(i['编号（sid)']) == sid:
