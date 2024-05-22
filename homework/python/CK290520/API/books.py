@@ -33,25 +33,27 @@ class Books(BaseAPI):
             if int(self.data[i]['编号（sid)']) == sid:
                 try:
                     self.data.pop(i)
-                    break
                 except:
                     print('删除失败')
                 else:
                     print('删除成功')
+                    break
 
     def deleteBookByName(self, name):
         _tmp = []
         for i in self.data:
-            if i['书名（name)'] != name:
+            if i['书名（name)'] == name:
                 _tmp.append(i)
+        try:
+            assert _tmp != []
+        except:
+            print('删除失败')
         else:
-            try:
-                assert _tmp != []
-            except:
-                print('删除失败')
-            else:
-                self.data = _tmp
-                print('删除成功')
+            for j in _tmp:
+                self.data.remove(j)
+            print('删除成功')
+
+
 
 
 
