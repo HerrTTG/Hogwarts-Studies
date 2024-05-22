@@ -33,6 +33,7 @@ class Books(BaseAPI):
             if int(self.data[i]['编号（sid)']) == sid:
                 try:
                     self.data.pop(i)
+                    break
                 except:
                     print('删除失败')
                 else:
@@ -44,8 +45,15 @@ class Books(BaseAPI):
             if i['书名（name)'] != name:
                 _tmp.append(i)
         else:
-            print('删除成功')
-            self.data = _tmp
+            try:
+                assert _tmp != []
+            except:
+                print('删除失败')
+            else:
+                self.data = _tmp
+                print('删除成功')
+
+
 
     def queryBookByID(self, sid):
         for i in self.data:
