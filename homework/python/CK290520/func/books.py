@@ -1,7 +1,7 @@
-from CK290520.API.BaseAPI import BaseAPI
+from CK290520.func.Basefunc import Basefunc
 
 
-class Books(BaseAPI):
+class Books(Basefunc):
 
     def addBook(self, sid, name, price, summary):
         try:

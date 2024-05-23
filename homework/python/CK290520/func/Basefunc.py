@@ -2,7 +2,7 @@ import csv
 import pyinputplus
 
 
-class BaseAPI():
+class Basefunc():
     def __init__(self, path):
         print("*****************************")
         print("*      图书管理系统           *")
