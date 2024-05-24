@@ -1,6 +1,6 @@
 import jieba
 
-fo=open("D:\\Python\\练习和考试题\\文本处理\\沉默的羔羊.txt","r",encoding='utf-8')
+fo = open("E:\霍格沃茨学社\Hogwarts-Studies\练习和考试题\文本处理\沉默的羔羊.txt", "r", encoding='utf-8')
 txt=fo.read()
 for ch in "!\"#$%&()*+-,./:;<=>?@[\\]^_{|}'`~":
         txt = txt.replace(ch, "")

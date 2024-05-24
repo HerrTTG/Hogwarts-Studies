@@ -1,8 +1,8 @@
-# pytest 123.py --allure-epics=case1
-# pytest 123.py --allure-features=func1
-# pytest 123.py --allure-features=func2
-# pytest 123.py --allure-stories=success
-# pytest 123.py --allure-stories=faild
+# pytest 测试driver.py --allure-epics=case1
+# pytest 测试driver.py --allure-features=func1
+# pytest 测试driver.py --allure-features=func2
+# pytest 测试driver.py --allure-stories=success
+# pytest 测试driver.py --allure-stories=faild
 import allure
 
 
