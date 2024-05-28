@@ -9,7 +9,6 @@ def right_to_left(message):
         if i != '':
             _tmp.append(i)
 
-
     return ' '.join(_tmp)
 
 
