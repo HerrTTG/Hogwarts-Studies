@@ -59,12 +59,26 @@ class Test_web():
         try:
             WebDriverWait(self.driver, 5, 1).until(
                 expected_conditions.visibility_of_element_located((By.XPATH, "//*[text()='创建成功']")))
-        except:
-            raise AssertionError
-        else:
             timestamp = self.until()
             file = f"./report/images/screenshot_{timestamp}.png"
             self.driver.save_screenshot(file)
             allure.attach.file(file, name="pic1",
                                attachment_type=allure.attachment_type.PNG)
-            time.sleep(5)
+
+            self.driver.find_element(By.CSS_SELECTOR, "input[placeholder=请输入商品名称]").send_keys(name)
+            self.driver.find_element(By.CSS_SELECTOR, "div.filter-container >button").click()
+            assert (self.driver.find_element(By.CSS_SELECTOR,
+                                             "tbody > tr:nth-child(1) > td:nth-child(3) > div"). \
+                    get_attribute('innerText')) == name
+        except:
+            timestamp = self.until()
+            file = f"./report/images/screenshot_{timestamp}.png"
+            self.driver.save_screenshot(file)
+            allure.attach.file(file, name="pic1",
+                               attachment_type=allure.attachment_type.PNG)
+            raise AssertionError
+        else:
+            time.sleep(3)
+            # 删除测试数据
+            self.driver.find_element(By.CSS_SELECTOR, "button.el-button.el-button--danger.el-button--mini").click()
+            time.sleep(3)
