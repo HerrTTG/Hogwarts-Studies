@@ -1,7 +1,9 @@
 #! python3
 # Prints the current weather for a location from the command line.
 
-import json, requests, sys
+import json
+import requests
+import sys
 
 APPID = '08a9624b494cac70d6407b4231aa762d'
 
@@ -11,12 +13,12 @@ if len(sys.argv) < 2:
     sys.exit()
 location = ' '.join(sys.argv[1:])
 
-# Download the JSON data from openweathermap.org's API
+# Download the JSON datas from openweathermap.org's API
 url ='http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&cnt=3&APPID=%s' % (location, APPID)
 response = requests.get(url)
 response.raise_for_status()
 
-# Load JSON data into Python variable.
+# Load JSON datas into Python variable.
 weatherData = json.loads(response.text)
 
 # Uncomment to see the raw JSON text:

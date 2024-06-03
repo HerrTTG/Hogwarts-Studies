@@ -9,7 +9,7 @@ year=2023
 
 path='/onip/cdr/ppscdr4qimport/bak/'
 file1='rec*.unl'
-file2='data*.unl'
+file2='datas*.unl'
 file3='sms*.unl'
 file4='vou*.unl'
 
@@ -29,25 +29,25 @@ do
   
   echo "Begin to mv" /$year$month$startday/$file1
   echo "start move $year$month$startday/$file1" >> mvfile.log
-  scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file1  /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+  scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file1  /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
   echo "*************************************************************"  >> mvfile.log
   echo $?	
   
   echo "Begin to mv" /$year$month$startday/$file2
   echo "start move $year$month$startday/$file2" >> mvfile.log
-  scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file2 /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+  scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file2 /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
   echo "*************************************************************" >> mvfile.log
   echo $?	
   
   echo "Begin to mv" /$year$month$startday/$file3
   echo "start move $year$month$startday/$file3" >> mvfile.log
-  scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file3  /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+  scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file3  /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
   echo "*************************************************************" >> mvfile.log
   echo $?	
   
   echo "Begin to mv" /$year$month$startday/$file4
   echo "start move $year$month$startday/$file4" >> mvfile.log
-  scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file4  /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+  scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file4  /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
   echo "*************************************************************" >> mvfile.log
   echo $?	
   

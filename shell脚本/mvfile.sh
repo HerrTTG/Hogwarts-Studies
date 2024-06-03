@@ -7,22 +7,22 @@ cat <<EOF
 "*****************************************************************"
 EOF
 
-#Waring£ºÉú²úÖ´ÐÐ´Ë½Å±¾Ðè½÷É÷£¡Îñ±Ø¼ì²é¶ÔÓ¦µÄ±äÁ¿£¬²¢ÇÒ»ñµÃ¿Í»§ÉóÅú£¡²¢ÇÒ×Ô¶¯»¯Ö´ÐÐ´Ë½Å±¾ÓÈÆäÕë¶ÔÒ»¶ÎÊ±¼äÎÄ¼þ½øÐÐÒÆ¶¯£¬ÐèÒªÅäÖÃSCPÃâÃÜÔ¿¡£
-#°æ±¾ËµÃ÷£º2.0°æ±¾ÐÞ¸ÄÁË²¿·ÖÕ¹Ê¾Âß¼­¡£Ôö¼ÓÈÕÖ¾´æ´¢¡£ 
-#¹¦ÄÜËµÃ÷£º´Ë½Å±¾ÓÃÀ´´ÓA IPÑ¡ÔñÒ»Ìì»òÕßÒ»¶ÎÊ±¼äµÄ»°µ¥ÎÄ¼þ½øÐÐ¿½±´ÒÆ¶¯µ½B IP¡£
-#TIP:SCPµÄËùÓÐÊäÈëÊä³öÂ·¾¶Ðè¸ù¾ÝÊµ¼ÊÇé¿öÅäÖÃ
+#Waringï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð´Ë½Å±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½Ó¦ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Ã¿Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½Ö´ï¿½Ð´Ë½Å±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½SCPï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½
+#ï¿½æ±¾Ëµï¿½ï¿½ï¿½ï¿½2.0ï¿½æ±¾ï¿½Þ¸ï¿½ï¿½Ë²ï¿½ï¿½ï¿½Õ¹Ê¾ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½æ´¢ï¿½ï¿½ 
+#ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Ë½Å±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½A IPÑ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½B IPï¿½ï¿½
+#TIP:SCPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
-#ÒÔÏÂ±äÁ¿Ö»Õë¶ÔÅúÁ¿µÄ¶ÔÒ»¶ÎÊ±¼äÎÄ¼þ½øÐÐÒÆ¶¯Ê±¸ù¾ÝÊµ¼ÊÇé¿ö½øÐÐÐÞ¸Ä
+#ï¿½ï¿½ï¿½Â±ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
 maxtimes=15
 startday=01
 month=03
 year=2023
 
-#¸ù¾Ý¾ÖµãÊµ¼ÊÇé¿öÅäÖÃ
+#ï¿½ï¿½ï¿½Ý¾Öµï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 path='/onip/cdr/ppscdr4qimport/bak/'
 file1='rec*.unl'
-file2='data*.unl'
+file2='datas*.unl'
 file3='sms*.unl'
 file4='vou*.unl'
 
@@ -37,7 +37,7 @@ times=1
 if [ $# -gt 0 ];
 	then 
 	
-	#ÊÖ¶¯Ö´ÐÐÖ¸¶¨µÄÒ»Ìì£¬$1Îª½Å±¾ÍâÊäÈëµÄµÚÒ»¸öÈë²Î ¸ñÊ½:sh mvfile.sh YYYYMMDD	
+	#ï¿½Ö¶ï¿½Ö´ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ì£¬$1Îªï¿½Å±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ê½:sh mvfile.sh YYYYMMDD	
   echo "Manully exeuct" $1
   echo "Please confirm(yes or no):"
   read flag
@@ -45,22 +45,22 @@ if [ $# -gt 0 ];
   if [[ $flag = "yes" ]]
 	 then 
    echo "Begin to mv" $file1
-   scp -r -v cbpapp@192.168.51.47:$path/$1/$file1  /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+   scp -r -v cbpapp@192.168.51.47:$path/$1/$file1  /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
    echo $?
    echo "*************************************************************"  >> mvfile.log
   
    echo "Begin to mv" $file2
-     scp -r -v cbpapp@192.168.51.47:$path/$1/$file2  /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+     scp -r -v cbpapp@192.168.51.47:$path/$1/$file2  /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
      echo $?
      echo "*************************************************************"  >> mvfile.log
 
    echo "Begin to mv" $file3
-     scp -r -v  cbpapp@192.168.51.47:$path/$1/$file3  /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+     scp -r -v  cbpapp@192.168.51.47:$path/$1/$file3  /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
      echo $?
      echo "*************************************************************"  >> mvfile.log
 
   echo "Begin to mv" $file4
-     scp -r -v  cbpapp@192.168.51.47:$path/$1/$file4  /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+     scp -r -v  cbpapp@192.168.51.47:$path/$1/$file4  /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
      echo $?
      echo "*************************************************************"  >> mvfile.log
      
@@ -106,28 +106,28 @@ else
      
      echo "Begin to mv" /$year$month$startday/$file1
      echo "start move $year$month$startday/$file1" >> mvfile.log
-     scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file1  /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+     scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file1  /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
      echo $?
      echo "*************************************************************"  >> mvfile.log
      
      
      echo "Begin to mv" /$year$month$startday/$file2
      echo "start move $year$month$startday/$file2" >> mvfile.log
-     scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file2 /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+     scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file2 /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
      echo $?	
      echo "*************************************************************" >> mvfile.log
      
      
      echo "Begin to mv" /$year$month$startday/$file3
      echo "start move $year$month$startday/$file3" >> mvfile.log
-     scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file3  /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+     scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file3  /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
      echo $?
      echo "*************************************************************" >> mvfile.log
 
      
      echo "Begin to mv" /$year$month$startday/$file4
      echo "start move $year$month$startday/$file4" >> mvfile.log
-     scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file4  /data/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
+     scp -r -v cbpapp@192.168.51.47:$path/$year$month$startday/$file4  /datas/bdi/datastore/invcdr/pps/normal |& grep -v ^debug >> mvfile.log
      echo $?
      echo "*************************************************************" >> mvfile.log
      

@@ -51,12 +51,12 @@ class Test_cart():
 
         with allure.step(f'测试步骤二：根据商品名{goods_name}查询list接口'):
             r2 = self.goods.list(goods_name=goods_name, order="desc", sort="add_time")
-            self.goods_id = r2.json()["data"]["list"][0]["id"]
+            self.goods_id = r2.json()["datas"]["list"][0]["id"]
             logging.info(f'list 接口获取到的goods_id为{self.goods_id}')
 
         with allure.step(f'测试步骤三，根据商品id:{self.goods_id}查询详情'):
             r3 = self.goods.detail(self.goods_id)
-            self.product_id = r3.json()["data"]["products"][0]["id"]
+            self.product_id = r3.json()["datas"]["products"][0]["id"]
             logging.info(f'detail 接口获取到的product_id为{self.product_id}')
 
         with allure.step(f'测试步骤四：根据商品id:{self.goods_id}和产品id:{self.product_id}将产品添加购物车'):

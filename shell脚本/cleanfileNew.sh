@@ -10,11 +10,11 @@
 #�汾˵����2.1�汾ִ�н����־��Ϊÿ��������һ�Σ���������ִ�н������õ�������
 #����˵�����˽ű�����ɾ��MED��cbpapp�ƶ���BDI�Ķ��໰����������4��BDI��Ҫ�Ļ�����
 
-path='/data/bdi/datastore/invcdr/pps/normal'
+path='/datas/bdi/datastore/invcdr/pps/normal'
 
 #delete the MED mv in path file ,except file1~file4#
 file1='rec.*.unl'
-file2='data.*.unl'
+file2='datas.*.unl'
 file3='sms.*.unl'
 file4='vou.*.unl'
 
@@ -25,29 +25,29 @@ Dday=DATE=10#$(date +%d)
 if [[ $Dday -eq 01 ]]
 	then
 	#echo $Dday 
-	rm -f /data/bdi/datastore/data_clean/log/cleanfile.log
+	rm -f /datas/bdi/datastore/data_clean/log/cleanfile.log
 	fi 
 
 delist=`ls $path/*.unl | egrep -wv "$path/$file1|$path/$file2|$path/$file3|$path/$file4"`
 decount=`ls $path/*.unl | egrep -wv "$path/$file1|$path/$file2|$path/$file3|$path/$file4" | wc -l`
 
 
-echo "Excute delete..." `date` >> /data/bdi/datastore/data_clean/log/cleanfile.log
-echo 'Delete list save in /data/bdi/datastore/data_clean/log/cleanlist.log' >> /data/bdi/datastore/data_clean/log/cleanfile.log
-echo "Delete list count:"$decount >> /data/bdi/datastore/data_clean/log/cleanfile.log
+echo "Excute delete..." `date` >> /datas/bdi/datastore/data_clean/log/cleanfile.log
+echo 'Delete list save in /datas/bdi/datastore/data_clean/log/cleanlist.log' >> /datas/bdi/datastore/data_clean/log/cleanfile.log
+echo "Delete list count:"$decount >> /datas/bdi/datastore/data_clean/log/cleanfile.log
 
 
-echo `date` 'Delete list follow:' > /data/bdi/datastore/data_clean/log/cleanlist.log
-echo $delist >> /data/bdi/datastore/data_clean/log/cleanlist.log
+echo `date` 'Delete list follow:' > /datas/bdi/datastore/data_clean/log/cleanlist.log
+echo $delist >> /datas/bdi/datastore/data_clean/log/cleanlist.log
 rm -f $delist
 
 if [[ $? -eq 0 ]]
 then
-        echo "Excute successed" >> /data/bdi/datastore/data_clean/log/cleanfile.log
+        echo "Excute successed" >> /datas/bdi/datastore/data_clean/log/cleanfile.log
 else
-        echo "Excute failed" >> /data/bdi/datastore/data_clean/log/cleanfile.log
+        echo "Excute failed" >> /datas/bdi/datastore/data_clean/log/cleanfile.log
 fi
 
-echo "*************************************************************" >> /data/bdi/datastore/data_clean/log/cleanfile.log
+echo "*************************************************************" >> /datas/bdi/datastore/data_clean/log/cleanfile.log
 
 

@@ -27,5 +27,5 @@ class GoodsDomain:
         # 新增一个delete_by_name方法。并描述他的实现逻辑
         # 此时子类api也就拥有了这个方法
         goods_list_r = self.list(name)
-        goods_id = goods_list_r.json()["data"]["list"][0]["id"]
+        goods_id = goods_list_r.json()["datas"]["list"][0]["id"]
         self.delete(goods_id)

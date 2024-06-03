@@ -81,7 +81,7 @@ class ManagementDB:
                         if gender:
                             assert i[3] == gender
                     except AssertionError:
-                        return f'Update failed,data not changed correct.'.encode()
+                        return f'Update failed,datas not changed correct.'.encode()
             else:
                 self.db_connect.commit()
                 return 'Data update success'.encode()
@@ -121,7 +121,7 @@ class ManagementDB:
             results = self.cursor.fetchall()
             assert results
         except AssertionError:
-            return 'Delete data failed,Data not found'.encode()
+            return 'Delete datas failed,Data not found'.encode()
         else:
             try:
                 self.cursor.execute('''delete from students where sid=%s''', sid)
@@ -129,7 +129,7 @@ class ManagementDB:
                 results = self.cursor.fetchall()
                 assert results == ()
             except AssertionError:
-                return 'Data delete failed,data still exits in database.'.encode()
+                return 'Data delete failed,datas still exits in database.'.encode()
             else:
                 self.db_connect.commit()
                 return 'Data delete success'.encode()

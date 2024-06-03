@@ -6,7 +6,7 @@ import json
 data = {
     "code": 200,
     "msg": "success",
-    "data": [
+    "datas": [
         {
             "goods_id": "g0001",
             "goods_name": "iPhone12",
