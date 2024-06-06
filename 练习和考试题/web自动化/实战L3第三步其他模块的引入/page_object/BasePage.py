@@ -1,3 +1,4 @@
+import logging
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -16,6 +17,7 @@ def ui_exception_record(func):
             driver = args[0].driver
             Untils.save_screenshot(driver, f'异常截图，方法:{func}')
             Untils.save_page_soure(driver, f'异常源码，方法:{func}')
+            logging.info(f"异常方法为{func},参数{args},{kwargs}")
         raise Exception
 
     return inner
