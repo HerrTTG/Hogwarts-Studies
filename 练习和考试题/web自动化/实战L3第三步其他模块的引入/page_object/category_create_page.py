@@ -13,7 +13,7 @@ class CategoryCreatePage(BasePage):
     def create_goods(self, sn, name, price):
         # 添加商品表单：添加商品
         # 对表单进行输入
-        # 测试车次测吃啥
+        # 测试车次测吃啥上厕所
         self.do_send(sn, CategoryCreatePage.__goodsnumber)
         self.do_send(name, CategoryCreatePage.__goodsname)
         self.do_send(price, CategoryCreatePage.__goodsprice)
