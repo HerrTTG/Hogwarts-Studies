@@ -18,7 +18,8 @@ class Untils():
     @classmethod
     def envfileload(cls, env):
         """
-        根据命令行获取，从不同的配置文件中获取环境信息
+        env根据命令行获取，
+        根据env的不同从不同的配置文件中获取环境信息
         """
         myenv = env
         if myenv == 'test':
