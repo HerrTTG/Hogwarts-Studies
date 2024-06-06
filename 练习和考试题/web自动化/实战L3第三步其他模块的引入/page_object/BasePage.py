@@ -1,6 +1,7 @@
 import logging
 import time
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions
@@ -87,6 +88,10 @@ class BasePage():
     def wait_element_until_visible(self, locator: tuple[str, str]):
         return WebDriverWait(self.driver, 5, 1).until(
             expected_conditions.visibility_of_element_located(locator))
+
+    @ui_exception_record
+    def scroll_to_element_click(self, driver, ele):
+        ActionChains(driver).scroll_to_element(ele).click(ele).perform()
 
     def do_quit(self):
         self.driver.quit()

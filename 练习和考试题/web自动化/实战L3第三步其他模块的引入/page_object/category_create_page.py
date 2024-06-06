@@ -1,4 +1,3 @@
-from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 from page_object.BasePage import BasePage
@@ -21,4 +20,4 @@ class CategoryCreatePage(BasePage):
         Untils.save_screenshot(self.driver, '对表单输入')
         # 滑动页面并点击添加
         ele1 = self.do_find(CategoryCreatePage.__addbutton)
-        ActionChains(self.driver).scroll_to_element(ele1).click(ele1).perform()
+        self.scroll_to_element_click(self.driver, ele1)
