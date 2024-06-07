@@ -1,6 +1,7 @@
 import logging
 import time
 from selenium import webdriver
+from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
@@ -95,3 +96,18 @@ class BasePage():
 
     def do_quit(self):
         self.driver.quit()
+
+    def login_check(self, timeout, locator: tuple[str, str], cookie=False, message=''):
+        try:
+            if WebDriverWait(self.driver, timeout, 1).until(
+                    expected_conditions.visibility_of_element_located(locator)) and cookie is True:
+                cookie = self.driver.get_cookies()
+                Untils.save_cookie(cookie)
+                return True
+        except TimeoutException:
+            ##设置弹窗提醒
+            self.driver.execute_script(f"window.alert('{message}')")
+            time.sleep(3)
+            self.driver.switch_to.alert.accept()
+            self.driver.refresh()
+            return False

@@ -1,18 +1,26 @@
 import time
-from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 
 from page_object.BasePage import BasePage
 from untils.untils import Untils
 
 
 class LoginPage(BasePage):
-    __homeflag = (By.CSS_SELECTOR, "#menu_index")
-    __time_limit = 360
+    __homeflag = (By.XPATH, "//*[text()='首页']")
+    __time_limit_max = 360
+    __time_limit = 20
 
     def login(self, envinfo):
+        """
+        # 初始化后判断是否存在cookie文件
+        # 存在=>读取cookie文件
+        # 将cookie文件信息导入driver
+        # 直接尝试访问首页
+        # 设置最大等待时间和元素等待时间
+        # 判断首页元素是否展示
+        # =>存在 保存cookie信息，退出循环。
+        # =>不存在 等待下一次循环直到最大等待时间结束还未找到首页元素则抛出异常
+        """
         cookie = Untils.load_cookie()
 
         if cookie:
@@ -22,19 +30,16 @@ class LoginPage(BasePage):
             for c in cookie:
                 self.driver.add_cookie(c)
 
-        endtime = time.time() + LoginPage.__time_limit
+        endtime = time.time() + LoginPage.__time_limit_max
 
+        self.driver.get(envinfo['homeurl'])
         while endtime - time.time() > 0:
-            self.driver.get(envinfo['homeurl'])
-            try:
-                if WebDriverWait(self.driver, 20, 1).until(
-                        expected_conditions.visibility_of_element_located(LoginPage.__homeflag)):
-                    cookie = self.driver.get_cookies()
-                    Untils.save_cookie(cookie)
-                    break
-            except TimeoutException:
-                pass
+            if self.login_check(LoginPage.__time_limit, LoginPage.__homeflag,
+                                cookie=True, message="请扫码登录"):
+                break
         else:
+            self.driver.execute_script("window.alert('登录超时')")
+            time.sleep(3)
             raise '登录超时'
 
         from page_object.HomePage import HomePage
@@ -42,6 +47,19 @@ class LoginPage(BasePage):
 
     def go_home(self, envinfo):
         self.driver.get(envinfo['homeurl'])
+        if self.login_check(5, LoginPage.__homeflag,
+                            cookie=False, message="请重新登录"):
+
+            from page_object.HomePage import HomePage
+            return HomePage(self.driver)
+        else:
+            self.login(envinfo)
+
+
+
+
+
+
 
     def goto_addressbook(self):
         from page_object.AddressBook import AddressBook
