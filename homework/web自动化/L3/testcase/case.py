@@ -1,5 +1,6 @@
 import logging
 import pytest
+import time
 
 from page_object import *
 from untils.untils import Untils
@@ -31,13 +32,16 @@ class Test_web():
         """
         self.home.go_home(envinfo)
 
-    def testcase1(self):
-        result = self.home.login(envinfo).click_add().addmember()
+    @pytest.mark.parametrize('name,id,phone,email', [['hzyetest', '6126361', '18114027157', "123test@123.com"]])
+    def testcase1(self, name, id, phone, email):
+        result = self.home.login(envinfo).click_addmember().addmember(name, id, phone, email)
         assert result.get_operation_result("add")
-        assert result.ckeck_record("testhzy")
+        time.sleep(5)
+        assert result.ckeck_record(name, phone, email)
 
-    def testcase2(self):
+    @pytest.mark.parametrize('name,id,phone,email', [['hzyetest', '6126361', '18114027157', "123test@123.com"]])
+    def testcase2(self, name, id, phone, email):
         addressbook = self.home.goto_addressbook()
-        ele = addressbook.ckeck_record("testhzy")
+        ele = addressbook.ckeck_record(name, phone, email)
         addressbook.deletemember(ele)
         assert addressbook.get_operation_result('delete')

@@ -19,7 +19,7 @@ def ui_exception_record(func):
             driver = args[0].driver
             Untils.save_screenshot(driver, f'异常截图')
             Untils.save_page_soure(driver, f'异常源码')
-            logging.info(f"异常方法为{func},参数{args},{kwargs}")
+            logging.info(f"异常方法,参数{args},{kwargs}")
         raise Exception
 
     return inner
@@ -56,6 +56,8 @@ class BasePage():
     def do_finds(self, by=By.ID, locator=None):
         if locator:
             if isinstance(by, WebElement):
+                # 判断By对象是属于元素类的
+                # 返回By元素搜索其下的locator
                 return by.find_elements(*locator)
             else:
                 return self.driver.find_elements(by, locator)
@@ -78,6 +80,7 @@ class BasePage():
     def do_click(self, by=By.ID, locator=None):
         if locator:
             if isinstance(by, WebElement):
+                # 判断By对象是属于元素类的
                 self.do_find(by, locator).click()
             else:
                 self.wait_element_until_visible((by, locator)).click()

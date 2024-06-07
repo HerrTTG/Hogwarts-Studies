@@ -7,6 +7,7 @@ from untils.untils import Untils
 
 class LoginPage(BasePage):
     __homeflag = (By.XPATH, "//*[text()='首页']")
+    __addressflag = (By.XPATH, "//*[text()='通讯录']")
     __time_limit_max = 360
     __time_limit = 20
 
@@ -56,11 +57,8 @@ class LoginPage(BasePage):
             self.login(envinfo)
 
 
-
-
-
-
-
     def goto_addressbook(self):
+
+        self.do_click(LoginPage.__addressflag)
         from page_object.AddressBook import AddressBook
         return AddressBook(self.driver)
