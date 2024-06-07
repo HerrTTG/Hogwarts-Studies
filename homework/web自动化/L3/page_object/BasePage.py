@@ -85,8 +85,8 @@ class BasePage():
         time.sleep(1)
 
     @ui_exception_record
-    def wait_element_until_visible(self, locator: tuple[str, str]):
-        return WebDriverWait(self.driver, 5, 1).until(
+    def wait_element_until_visible(self, locator: tuple[str, str], timeout=5):
+        return WebDriverWait(self.driver, timeout, 1).until(
             expected_conditions.visibility_of_element_located(locator))
 
     @ui_exception_record

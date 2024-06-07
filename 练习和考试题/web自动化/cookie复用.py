@@ -35,6 +35,9 @@ class TestCookieLogin:
         cookie = yaml.safe_load(open("cookie.yaml"))
 
         # 3. 植入cookie 因为cookie读取出来为列表，需要循环一个一个加入
+        # 另外需要格外注意
+        # 加cookie必须先到要加的cookie域名下
+        # 所以先访问域名再加
         for c in cookie:
             self.drvier.add_cookie(c)
 
