@@ -8,6 +8,7 @@ class AddressBook(BasePage):
     __deletesuccessmessage = (By.XPATH, "//*[text()='删除成功']")
     __tr = (By.CSS_SELECTOR, "#member_list > tr")
     __deletebutton = (By.CSS_SELECTOR, ".qui_btn.ww_btn.js_delete")
+    __deleteconfirm = (By.CSS_SELECTOR, "div.qui_dialog_foot.ww_dialog_foot > a.qui_btn.ww_btn.ww_btn_Blue")
 
 
 
@@ -24,11 +25,6 @@ class AddressBook(BasePage):
         ##tr下的第6个td的title是email
         eles = self.do_finds(AddressBook.__tr)
         for i in eles:
-            # if self.do_find(i,AddressBook.__tr_td2).get_attribute("title")==name and \
-            # self.do_find(i,AddressBook.__tr_td5).get_attribute("title") ==phone and \
-            # self.do_find(i,AddressBook.__tr_td6).get_attribute("title")== email :
-            #     ele=i
-            #     break
             list = self.do_finds(i, (By.CSS_SELECTOR, "td"))
             if (list[1].get_attribute("title") == name and
                     list[4].get_attribute("title") == phone):
@@ -37,8 +33,8 @@ class AddressBook(BasePage):
 
 
     def deletemember(self, ele):
-        # tr下第一个td是打钩
-        # 删除还没做好
-        list = self.do_finds(ele, (By.CSS_SELECTOR, "td"))
-        list[0].click()
+        # ele进来已经是匹配到要删除目标的tr元素了
+        # 直接匹配ele下的第一个td内的input
+        self.do_click(ele, (By.CSS_SELECTOR, "tr > td:nth-child(1) > input"))
         self.do_click(AddressBook.__deletebutton)
+        self.do_click(AddressBook.__deleteconfirm)
