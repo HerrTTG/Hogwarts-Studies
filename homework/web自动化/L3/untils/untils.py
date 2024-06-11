@@ -51,7 +51,7 @@ class Untils():
 
     @classmethod
     def save_page_soure(cls, driver, message='NA'):
-        file = f'{Untils.get_path()}\\datas\\{message}_{time.strftime("%Y-%m-%d %H-%M-%S", time.gmtime())}.html'
+        file = f'{Untils.get_path()}\\datas\\pagesouces\\{message}_{time.strftime("%Y-%m-%d %H-%M-%S", time.gmtime())}.html'
         with open(file, 'w', encoding='utf-8') as f:
             f.write(driver.page_source)
         allure.attach.file(file, name=message, attachment_type=allure.attachment_type.TEXT)
