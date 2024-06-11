@@ -25,5 +25,11 @@ def pytest_addoption(parser):
     mygroup.addoption("--env",  # 注册一个命令行选项
                       default='test',  # 参数的默认值
                       dest='env',  # 存储的变量，为属性命令，可以使用Option对象访问到这个值，暂用不到
-                      help='set your run env'  # 帮助提示 参数的描述信息
+                      help='选择环境'  # 帮助提示 参数的描述信息
+                      )
+
+    mygroup.addoption("--browser",  # 注册一个命令行选项
+                      default='Chrome',  # 参数的默认值
+                      dest='browser',  # 存储的变量，为属性命令，可以使用Option对象访问到这个值，暂用不到
+                      help='选择浏览器'  # 帮助提示 参数的描述信息
                       )

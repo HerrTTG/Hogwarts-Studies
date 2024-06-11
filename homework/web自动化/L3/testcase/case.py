@@ -14,9 +14,10 @@ def get_env(request):
     并调用工具中的读取环境信息配置文件方法，将获取到的环境信息结果赋予全局变量envinfo
     """
     myenv = request.config.getoption("--env", default='test')
-    global envinfo
+    global envinfo, browser
     envinfo = Untils.envfileload(env=myenv)
-    logging.info(f'用例执行环境信息为:{envinfo}')
+    browser = request.config.getoption("--brower", default='Chrome')
+    logging.info(f'用例执行环境信息为:{envinfo},执行浏览器{browser}')
 
 
 global testdata
@@ -24,7 +25,7 @@ testdata = Untils.get_testdata()
 
 class Test_web():
     def setup_class(self):
-        self.home = LoginPage.LoginPage()
+        self.home = LoginPage.LoginPage(browser=browser)
 
     def teardown_class(self):
         self.home.do_quit()

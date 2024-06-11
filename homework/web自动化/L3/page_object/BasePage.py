@@ -26,17 +26,21 @@ def ui_exception_record(func):
 
 
 class BasePage():
-    def __init__(self, base_driver=None):
+    def __init__(self, base_driver=None, browser='Chrome'):
         """
         driver初始化
         判断是否传入driver
+        判断环境变量指定的浏览器类型
         """
         if base_driver:
             self.driver = base_driver
-        else:
+        elif browser == 'Chrome':
             self.driver = webdriver.Chrome()
-            self.driver.maximize_window()
-            self.driver.implicitly_wait(3)
+        elif browser == 'Firefox':
+            self.driver = webdriver.Firefox()
+
+        self.driver.maximize_window()
+        self.driver.implicitly_wait(3)
 
     ## selenium API方法封装
 
