@@ -44,6 +44,9 @@ class Untils():
 
     @classmethod
     def save_screenshot(cls, driver, message='NA'):
+        if os.path.exists(f'{Untils.get_path()}\\datas\\images\\') is False:
+            os.mkdir(f'{Untils.get_path()}\\datas\\images\\')
+
         file = f'{Untils.get_path()}\\datas\\images\\screenshot_{message}_{time.strftime("%Y-%m-%d %H-%M-%S", time.gmtime())}.png'
         driver.save_screenshot(file)
         allure.attach.file(file, name=message,
@@ -51,6 +54,9 @@ class Untils():
 
     @classmethod
     def save_page_soure(cls, driver, message='NA'):
+        if os.path.exists(f'{Untils.get_path()}\\datas\\pagesouces\\') is False:
+            os.mkdir(f'{Untils.get_path()}\\datas\\pagesouces\\')
+
         file = f'{Untils.get_path()}\\datas\\pagesouces\\{message}_{time.strftime("%Y-%m-%d %H-%M-%S", time.gmtime())}.html'
         with open(file, 'w', encoding='utf-8') as f:
             f.write(driver.page_source)
