@@ -11,7 +11,7 @@ class LoginPage(BasePage):
     __time_limit_max = 360
     __time_limit = 20
 
-    def login(self, envinfo):
+    def login(self, envinfo, noretry=True):
         """
         # 初始化后判断是否存在cookie文件
         # 存在=>读取cookie文件
@@ -24,23 +24,26 @@ class LoginPage(BasePage):
         """
         cookie = Untils.load_cookie()
 
-        if cookie:
+        if cookie and noretry is True:
+            ## noretry 来判断是否为下一个用例跳转。
+            # 下一个用例跳转如果直接访问失败，说明cookie失效，所以不直接使用cookie
+            self.driver.get(envinfo['homeurl'])
             # 加cookie必须先到要加的cookie域名下
             # 所以先访问域名再加
-            self.driver.get(envinfo['homeurl'])
             for c in cookie:
                 self.driver.add_cookie(c)
 
         endtime = time.time() + LoginPage.__time_limit_max
 
         self.driver.get(envinfo['homeurl'])
+
+        # 设置最大等待时间，进入循环判断页面跳转成功与否
         while endtime - time.time() > 0:
             if self.login_check(LoginPage.__time_limit, LoginPage.__homeflag,
                                 cookie=True, message="请扫码登录"):
                 break
         else:
-            self.driver.execute_script("window.alert('登录超时')")
-            time.sleep(3)
+            self.show_alert(message="window.alert('登录超时')")
             raise '登录超时'
 
         from page_object.HomePage import HomePage
@@ -54,7 +57,7 @@ class LoginPage(BasePage):
             from page_object.HomePage import HomePage
             return HomePage(self.driver)
         else:
-            self.login(envinfo)
+            self.login(envinfo, noretry=False)
 
 
     def goto_addressbook(self):
