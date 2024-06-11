@@ -42,6 +42,9 @@ class BasePage():
 
     @ui_exception_record
     def do_find(self, by=By.ID, locator=None):
+        # 如果locator为空，则by必定为元组类型的元素表达式
+        # 不为空则有两种可能，第一是BY+表达式解包传入
+        # 第二是BY本身为元素，locator为元组表达式。需要基于元素的再次搜索。
         if locator:
             if isinstance(by, WebElement):
                 return by.find_element(*locator)
@@ -54,6 +57,9 @@ class BasePage():
 
     @ui_exception_record
     def do_finds(self, by=By.ID, locator=None):
+        # 如果locator为空，则by必定为元组类型的元素表达式
+        # 不为空则有两种可能，第一是BY+表达式解包传入
+        # 第二是BY本身为元素，locator为元组表达式。需要基于元素的再次搜索。
         if locator:
             if isinstance(by, WebElement):
                 # 判断By对象是属于元素类的
@@ -67,8 +73,16 @@ class BasePage():
 
     @ui_exception_record
     def do_send(self, vaule, by=By.ID, locator=None):
+        # 如果locator为空，则by必定为元组类型的元素表达式
+        # 不为空则有两种可能，第一是BY+表达式解包传入
+        # 第二是BY本身为元素，locator为元组表达式。需要基于元素的再次搜索。
         if locator:
-            ele = self.do_find(by, locator)
+            if isinstance(by, WebElement):
+                # 判断By对象是属于元素类的
+                # 返回By元素搜索其下的locator
+                ele = self.do_find(by, locator)
+            else:
+                ele = self.do_find((by, locator))
         else:
             ele = self.do_find(*by)
 
@@ -78,6 +92,9 @@ class BasePage():
 
     @ui_exception_record
     def do_click(self, by=By.ID, locator=None):
+        # 如果locator为空，则by必定为元组类型的元素表达式
+        # 不为空则有两种可能，第一是BY+表达式解包传入
+        # 第二是BY本身为元素，locator为元组表达式。需要基于元素的再次搜索。
         if locator:
             if isinstance(by, WebElement):
                 # 判断By对象是属于元素类的
@@ -101,16 +118,27 @@ class BasePage():
         self.driver.quit()
 
     def login_check(self, timeout, locator: tuple[str, str], cookie=False, message=''):
+        ##登录检查
+        # 页面跳转后，检查指定元素locator来判断是否跳转成功
+        ##分为无需保存cookie和需要保存cookie的
+        #等待失败后弹提醒
+
         try:
             if WebDriverWait(self.driver, timeout, 1).until(
                     expected_conditions.visibility_of_element_located(locator)) and cookie is True:
                 cookie = self.driver.get_cookies()
                 Untils.save_cookie(cookie)
                 return True
+            elif WebDriverWait(self.driver, timeout, 1).until(
+                    expected_conditions.visibility_of_element_located(locator)):
+                return True
         except TimeoutException:
-            ##设置弹窗提醒
-            self.driver.execute_script(f"window.alert('{message}')")
-            time.sleep(3)
-            self.driver.switch_to.alert.accept()
-            self.driver.refresh()
+            self.show_alert(message)
             return False
+
+    def show_alert(self, message):
+        ##设置弹窗提醒
+        self.driver.execute_script(f"window.alert('{message}')")
+        time.sleep(3)
+        self.driver.switch_to.alert.accept()
+        self.driver.refresh()
