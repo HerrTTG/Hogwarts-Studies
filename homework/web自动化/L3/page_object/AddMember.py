@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from page_object.BasePage import BasePage
+from untils.untils import Untils
 
 
 class AddMember(BasePage):
@@ -17,6 +18,7 @@ class AddMember(BasePage):
         self.do_send(phone, AddMember.__inputphone)
         self.do_send(email, AddMember.__inputemail)
 
+        Untils.save_screenshot(self.driver, message="成员信息添加")
         self.do_click(AddMember.__savebutton)
 
         from page_object.AddressBook import AddressBook

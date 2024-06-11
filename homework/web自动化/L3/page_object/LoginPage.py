@@ -46,6 +46,7 @@ class LoginPage(BasePage):
             self.show_alert(message="window.alert('登录超时')")
             raise '登录超时'
 
+        Untils.save_screenshot(self.driver, message="登录成功")
         from page_object.HomePage import HomePage
         return HomePage(self.driver)
 
@@ -54,6 +55,7 @@ class LoginPage(BasePage):
         if self.login_check(5, LoginPage.__homeflag,
                             cookie=False, message="请重新登录"):
 
+            Untils.save_screenshot(self.driver, message="返回主页成功")
             from page_object.HomePage import HomePage
             return HomePage(self.driver)
         else:
@@ -63,5 +65,6 @@ class LoginPage(BasePage):
     def goto_addressbook(self):
 
         self.do_click(LoginPage.__addressflag)
+        Untils.save_screenshot(self.driver, message="进入通讯录")
         from page_object.AddressBook import AddressBook
         return AddressBook(self.driver)

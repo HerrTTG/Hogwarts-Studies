@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from page_object.BasePage import BasePage
+from untils.untils import Untils
 
 
 class AddressBook(BasePage):
@@ -14,9 +15,20 @@ class AddressBook(BasePage):
 
     def get_operation_result(self, op):
         if op == 'add':
-            return self.wait_element_until_visible(AddressBook.__addsuccessmessage)
+            if self.wait_element_until_visible(AddressBook.__addsuccessmessage):
+                Untils.save_screenshot(self.driver, message="添加成功截图")
+                Untils.save_page_soure(self.driver, message="添加成功源码")
+                return True
+            else:
+                return False
         elif op == 'delete':
-            return self.wait_element_until_visible(AddressBook.__deletesuccessmessage)
+            if self.wait_element_until_visible(AddressBook.__deletesuccessmessage):
+                Untils.save_screenshot(self.driver, message="删除成功截图")
+                Untils.save_page_soure(self.driver, message="删除成功源码")
+                return True
+            else:
+                return False
+
 
     def ckeck_record(self, name, phone, email):
         ##搜索所有的tr
@@ -28,6 +40,8 @@ class AddressBook(BasePage):
             list = self.do_finds(i, (By.CSS_SELECTOR, "td"))
             if (list[1].get_attribute("title") == name and
                     list[4].get_attribute("title") == phone):
+                Untils.save_screenshot(self.driver, message="查询结果截图")
+                Untils.save_page_soure(self.driver, message="查询结果源码")
                 return i
         return False
 
@@ -36,5 +50,6 @@ class AddressBook(BasePage):
         # ele进来已经是匹配到要删除目标的tr元素了
         # 直接匹配ele下的第一个td内的input
         self.do_click(ele, (By.CSS_SELECTOR, "tr > td:nth-child(1) > input"))
+        Untils.save_screenshot(self.driver, message="选定的删除对象截图")
         self.do_click(AddressBook.__deletebutton)
         self.do_click(AddressBook.__deleteconfirm)
