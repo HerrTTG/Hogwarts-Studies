@@ -2,6 +2,8 @@ import allure
 import os
 import time
 import yaml
+from datetime import  datetime
+
 
 
 class Untils():
@@ -18,8 +20,7 @@ class Untils():
     @classmethod
     def envfileload(cls, env):
         """
-        env根据命令行获取，
-        根据env的不同从不同的配置文件中获取环境信息
+        根据命令行获取，从不同的配置文件中获取环境信息
         """
         myenv = env
         if myenv == 'test':
@@ -43,15 +44,21 @@ class Untils():
         return testdata
 
     @classmethod
-    def save_screenshot(cls, driver, message='NA'):
-        file = f'{Untils.get_path()}\\datas\\images\\screenshot_{message}_{time.strftime("%Y-%m-%d %H-%M-%S", time.gmtime())}.png'
+    def save_screenshot(cls, driver, id=0, message='NA'):
+        if os.path.exists(f'{Untils.get_path()}\\datas\\images\\') is False:
+            os.mkdir(f'{Untils.get_path()}\\datas\\images\\')
+
+        file = f'{Untils.get_path()}\\datas\\images\\screenshot_{message}_{id}_{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}.png'
         driver.save_screenshot(file)
         allure.attach.file(file, name=message,
                            attachment_type=allure.attachment_type.PNG)
 
     @classmethod
-    def save_page_soure(cls, driver, message='NA'):
-        file = f'{Untils.get_path()}\\datas\\{message}_{time.strftime("%Y-%m-%d %H-%M-%S", time.gmtime())}.html'
+    def save_page_soure(cls, driver, id=0, message='NA'):
+        if os.path.exists(f'{Untils.get_path()}\\datas\\pagesouces\\') is False:
+            os.mkdir(f'{Untils.get_path()}\\datas\\pagesouces\\')
+
+        file = f'{Untils.get_path()}\\datas\\pagesouces\\{message}_{id}_{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}.html'
         with open(file, 'w', encoding='utf-8') as f:
-            f.write(driver.page_source())
+            f.write(driver.page_source)
         allure.attach.file(file, name=message, attachment_type=allure.attachment_type.TEXT)
