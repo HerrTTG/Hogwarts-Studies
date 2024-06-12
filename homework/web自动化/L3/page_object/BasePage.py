@@ -35,9 +35,13 @@ class BasePage():
         if base_driver:
             self.driver = base_driver
         elif browser == 'Chrome':
-            self.driver = webdriver.Chrome()
+            options = webdriver.ChromeOptions()
+            options.add_argument('--headless')
+            self.driver = webdriver.Chrome(options)
         elif browser == 'Firefox':
-            self.driver = webdriver.Firefox()
+            options = webdriver.FirefoxOptions()
+            options.add_argument('--headless')
+            self.driver = webdriver.Firefox(options)
 
         self.driver.maximize_window()
         self.driver.implicitly_wait(3)
