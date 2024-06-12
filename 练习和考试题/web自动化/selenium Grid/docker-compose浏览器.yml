@@ -1,0 +1,23 @@
+services:
+  selenium-hub:
+    image: 'selenium/hub:4.0.0-rc-2-prerelease-20210923'
+    ports:
+      - '5442:4442'
+      - '5443:4443'
+      - '5444:4444'
+    restart: unless-stopped
+  selenium-node:
+    image: 'selenium/node-chrome:4.0.0-rc-2-prerelease-20210923'
+    environment:
+      - SE_EVENT_BUS_HOST=10.88.50.240
+      - SE_NODE_MAX_SESSIONS=20
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_EVENT_BUS_PUBLISH_PORT=5442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=5443
+    ports:
+      - '5902:5900'
+    volumes:
+      - /dev/shm:/dev/shm
+    restart: unless-stopped
+    depends_on:
+      - selenium-hub
