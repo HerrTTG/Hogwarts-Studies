@@ -6,7 +6,8 @@ from ddt_framework.yaml_item import YamlItem
 class YamlFile(pytest.File):
     def collect(self):
         # pytest会调用collect，获得每个文件的测试用例
-        # We need a yaml parser, e.g. PyYAML.
+        # YamlFile通过继承pytest.File 并复写collect来改写pytest收集测试用例的过程。
+        # 返回是一个对象，则pytest会认为是一个可执行测试集
         import yaml
 
         # 先读取文件的结构 生成为dict

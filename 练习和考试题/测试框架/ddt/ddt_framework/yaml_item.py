@@ -4,6 +4,8 @@ from ddt_framework.yaml_exception import YamlException
 
 
 class YamlItem(pytest.Item):
+    ## YamlItem 继承pytest.Item 并复写runtest 和repr_failure以及reportinfo 来实现定制化pytest用例的执行过程
+    ## 首先定制化runtest。使yaml文件的数据变成真正的测试步骤
     def __init__(self, *, spec, **kwargs):
         """
         测试用例的定义，需要有测试用例的名字和内容
