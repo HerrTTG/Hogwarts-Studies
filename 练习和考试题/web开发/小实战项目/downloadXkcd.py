@@ -1,7 +1,9 @@
 #! python3
 # downloadXkcd.py - Downloads every single XKCD comic.
 
-import requests, os, bs4
+import bs4
+import os
+import requests
 
 url = 'https://xkcd.com' # starting url
 os.makedirs('D:\\Python\\练习和考试题\\web开发\\小实战项目\\'+'xkcd', exist_ok=True) # store comics in ./xkcd
@@ -19,7 +21,7 @@ while not url.endswith('#'):
     if comicElem == []:
         print('Could not find comic image.')
     else:
-        comicUrl = 'https:' + comicElem[0].get('src')
+        comicUrl = 'https:' + comicElem[0].get('ddt')
         #图片的地址保存在src属性的值里
         # Download the image.
         print('Downloading image %s...' % (comicUrl))
