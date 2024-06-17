@@ -27,7 +27,7 @@ class TestCase(BaseModel):
 
     def run(self):
         """
-        testcase的执行，对given when then进行分化。调用steprun单步执行。
+        testcase的执行，对given when then teardown进行分化。调用__run_step单步执行。
         """
         log.info('run testcase')
         log.info(self)
