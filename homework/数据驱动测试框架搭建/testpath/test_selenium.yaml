@@ -1,0 +1,14 @@
+seach1:
+  give:
+    - testdata:
+  when:
+    - 打开浏览器: Chrome
+    - 访问: https://ceshiren.com  # => driver.get("xxx")
+    - 点击: [ id, search-button ] #=> click
+    - 输入: [ id, search-term, "selenium" ] #=> send_keys(locator, xxxx)
+  then:
+    - 断言: "'selenium' in '结果列表的标题里包含selenium'"
+  teardown:
+    - 关闭浏览器:
+
+

@@ -1,5 +1,7 @@
 import pytest
 
+from ddt_framework.testcase import TestCase
+from ddt_framework.utils import log
 from ddt_framework.yaml_exception import YamlException
 
 
@@ -17,15 +19,15 @@ class YamlItem(pytest.Item):
         super().__init__(**kwargs)
         # 用例步骤初始化
         self.spec = spec
+        log.debug(f"测试步骤{self.spec}")
+
+        # 类型化测试用例
+        self.testcase: TestCase = TestCase(**spec)
+        log.debug(f"测试用例实例{self.testcase}")
 
     def runtest(self):
-        # 简单的用例执行
-        # 获取用例步骤中的kv。即key为期望值，value为实际值
-        # 做的简单测试就是对比是否一致。
-        for name, value in sorted(self.spec.items()):
-            # Some custom test execution (dumb example follows).
-            if name != value:
-                raise YamlException(self, name, value)
+        # 直接交给testcase自己去执行用例
+        self.testcase.run()
 
     def repr_failure(self, excinfo):
         ##异常捕获。
@@ -38,6 +40,9 @@ class YamlItem(pytest.Item):
                     "   no further details known at this point.",
                 ]
             )
+        else:
+            log.info(excinfo.value)
+            raise excinfo.value
 
     def reportinfo(self):
         return self.path, 0, f"usecase: {self.name}"

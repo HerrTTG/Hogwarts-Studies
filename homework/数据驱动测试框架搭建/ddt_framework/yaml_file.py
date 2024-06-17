@@ -11,7 +11,7 @@ class YamlFile(pytest.File):
         import yaml
 
         # 先读取文件的结构 生成为dict
-        raw = yaml.safe_load(self.path.open())
+        raw = yaml.safe_load(self.path.open('r', encoding='utf-8'))
         if raw:
             for name, spec in sorted(raw.items()):
                 # 对每个kv结构生成Item对象

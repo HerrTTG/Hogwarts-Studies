@@ -1,0 +1,7 @@
+case1:
+  when:
+    - get:
+        url: https://spring-petclinic-rest.k8s.hogwarts.ceshiren.com/petclinic/api/owners?lastName=black
+        params: { }
+  then:
+    - assert: " 'Jeff' in self.result"
