@@ -1,4 +1,4 @@
-fo=open("/练习和考试题/文本处理/写入1.csv", "w", encoding='utf-8')
+fo = open("D:\\Python\\练习和考试题\\文本处理\\写入1.csv", "w", encoding='utf-8')
 
 ls=["北京",'101.5','120.7','121,4']
 
