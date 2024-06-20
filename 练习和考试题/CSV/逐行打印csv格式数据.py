@@ -1,4 +1,4 @@
-fo=open("/练习和考试题/文本处理/test.csv", "r")
+fo = open("D:\\Python\\练习和考试题\\文本处理\\test.csv", "r")
 
 ls=[]
 

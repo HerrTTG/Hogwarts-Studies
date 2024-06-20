@@ -1,6 +1,6 @@
 
 def dataread():
-    fr = open("/练习和考试题/文本处理/price2016.csv", "r", encoding='utf-8')
+    fr = open("D:\\Python\\练习和考试题\\文本处理\\price2016.csv", "r", encoding='utf-8')
     ls = []
     for line in fr:
         line = line.replace("\n","")
@@ -20,7 +20,7 @@ def fill_data(locls):
 def main():
     ls=[]
     ls=dataread()
-    fw = open("/练习和考试题/文本处理/price2016.html", "w")
+    fw = open("D:\\Python\\练习和考试题\\文本处理\\price2016.html", "w")
     fw.write(seg1)
 
     fw.write('<th width="25%">{}</th>\n<th width="25%">\
