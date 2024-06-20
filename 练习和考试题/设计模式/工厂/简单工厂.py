@@ -80,5 +80,4 @@ if __name__ == "__main__":
             parse = super().create_parse(rule)
             return parse
 
-
     Demo().load("json").parse()
