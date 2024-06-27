@@ -1,8 +1,7 @@
 import json
+from frame.untils.until import Untils
 from genson import SchemaBuilder
 from jsonschema.validators import validate
-
-from frame.untils.tools import Untils
 
 
 class My_jsonschema():

@@ -10,7 +10,7 @@ from frame.apis.Address_book.department import Department
 from frame.apis.Address_book.member import Memebr
 from frame.untils.JsonSchema import My_jsonschema
 from frame.untils.Dbquery import Dblink
-from frame.untils.tools import Untils
+from frame.untils.until import Untils
 
 
 class Testcase():
