@@ -3,10 +3,10 @@ case1:
     - auth:
         token: True
         url: https://qyapi.weixin.qq.com/cgi-bin/gettoken
-        params: { 'corpid': 'ww7f1ecbb8e23f2091','SECRET': 'A4I9cDIUfaIpJZZIDUdI88vMrC-NkhyFVbIEOnfS5VI' }
+        params: { 'corpid': 'ww7f1ecbb8e23f2091','corpsecret': 'A4I9cDIUfaIpJZZIDUdI88vMrC-NkhyFVbIEOnfS5VI' }
   when:
     - get:
-        url: https://spring-petclinic-rest.k8s.hogwarts.ceshiren.com/petclinic/api/owners?lastName=black
-        params: { }
+        url: https://qyapi.weixin.qq.com/cgi-bin/department/create
+        json: { "name": "广州研发中心","name_en": "RDGZ","parentid": 1,"order": 1,"id": 2 }
   then:
-    - assert: "True"
+    - assert: "assert result[0].json()['errcode'] == 0 "

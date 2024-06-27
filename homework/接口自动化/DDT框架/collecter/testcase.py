@@ -22,8 +22,9 @@ class TestCase(BaseModel):
     def __init__(self, **data: Any) -> None:
         ## 利用pydantic来做数据类型校验
         # 将传入data解包后，生成data对应selfname的对象变量
-        global service
+        global service, result
         service = None
+        result = []
         super().__init__(**data)
 
     def run(self):
@@ -65,9 +66,10 @@ class TestCase(BaseModel):
         global service
         if service is None:
             service = Service()
+            print(service)
 
         """
-        {'auth': {'SECRET': 'A4I9cDIUfaIpJZZIDUdI88vMrC-NkhyFVbIEOnfS5VI', 'corpid': 'ww7f1ecbb8e23f2091', 'token': True}}
+        {'auth': {'params': {'SECRET': 'A4I9cDIUfaIpJZZIDUdI88vMrC-NkhyFVbIEOnfS5VI', 'corpid': 'ww7f1ecbb8e23f2091'}, 'token': True, 'url': 'https://qyapi.weixin.qq.com/cgi-bin/gettoken'}}
         {'get': {'params': {}, 'url': 'https://spring-petclinic-rest.k8s.hogwarts.ceshiren.com/petclinic/api/owners?lastName=black'}}
         {'assert': " 'Jeff' in self.result"}
         """
@@ -77,4 +79,5 @@ class TestCase(BaseModel):
         elif 'assert' in step and step['assert']:
             assert eval(step['assert'])
         else:
-            service.run_step(step)
+            for mothod, request_kwargs in sorted(step.items()):
+                result.append(service.request_analysis(mothod, request_kwargs))
