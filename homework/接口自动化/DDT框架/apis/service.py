@@ -55,6 +55,6 @@ class Service():
         """
         """
         # 解包kwargs传入request方法发送请求
-        r = self.request(method, url, **kwargs)
+        r = self.request(method, url, **kwargs, verify=False)
         logger.debug(f"{url}接口的响应为{json.dumps(r.json(), indent=2, ensure_ascii=False)}")
         return r
