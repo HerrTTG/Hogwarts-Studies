@@ -49,6 +49,7 @@ class Service():
             else:
                 self.final_token = {'access_token': r.json()['access_token']}
                 logger.debug(f'请求的鉴权信息:{self.final_token}')
+                return True
 
 
     def send(self, method, url, kwargs: dict) -> object:

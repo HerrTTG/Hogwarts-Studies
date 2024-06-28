@@ -9,7 +9,7 @@ case1:
         url: https://qyapi.weixin.qq.com/cgi-bin/department/create
         json: { "name": "testhzy","name_en": "RDGZ","parentid": 1,"order": 1,"id": 2 }
   then:
-    - assert: "assert result[0].json()['errcode'] == 0 "
+    - assert: "result[0].json()['errcode'] == 0 "
   teardown:
     - get:
         url: https://qyapi.weixin.qq.com/cgi-bin/department/delete
