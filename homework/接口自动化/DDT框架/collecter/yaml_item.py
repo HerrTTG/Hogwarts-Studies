@@ -22,12 +22,15 @@ class YamlItem(pytest.Item):
         logger.debug(f"测试步骤{self.spec}")
 
         # 类型化测试用例
+        # 并将测试步骤spec解包给TestCase实例化
         self.testcase: TestCase = TestCase(**spec)
         logger.debug(f"测试用例实例{self.testcase}")
 
     def runtest(self):
+        # 复写pytest的用例执行方法
+
         # 直接交给testcase自己去执行用例
-        self.testcase.run()
+        self.testcase.run(self.name)
 
     def repr_failure(self, excinfo):
         ##异常捕获。
