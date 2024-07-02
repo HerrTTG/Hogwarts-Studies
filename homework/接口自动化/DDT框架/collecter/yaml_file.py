@@ -18,5 +18,7 @@ class YamlFile(pytest.File):
                 """
                 取出
                 case1(name):...(spec)
+                case2(name):...(spec)
+
                 """
                 yield YamlItem.from_parent(self, name=name, spec=spec)
