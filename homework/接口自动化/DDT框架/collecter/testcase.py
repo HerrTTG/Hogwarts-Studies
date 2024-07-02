@@ -20,57 +20,38 @@ class TestCase(BaseModel):
     # 后置处理
     teardown: list[dict] = []
 
-    def __init__(self, **data: Any) -> None:
+    def __init__(self, **spec: Any) -> None:
         ## 利用pydantic来做数据类型校验
         # 将传入data解包后，生成data对应selfname的对象变量
         # 定义接口对象为全局变量，并增加一个结果变量为空列表
         global service, result
         service = None
         result = []
-        super().__init__(**data)
+        super().__init__(**spec)
 
-
-    def run(self):
+    def run(self, name):
         """
         testcase的执行，对given when then teardown进行分化。调用__run_step单步执行。
         """
-        allure.dynamic.title(f'run testcase {self.name}')
-        logger.info(f'run testcase {self.name}')
-        logger.info(self)
+        allure.dynamic.title(f'run testcase {name}')
+        logger.info(f'run testcase {name}')
+        logger.info(f"run object {self}")
 
-        # 按照given when then的先后顺序执行
-        logger.info('run testcase given')
-        logger.info(self.given)
+        # 按照given when then teardown的先后顺序执行
+        ls = [self.given, self.when, self.then, self.teardown]
+        for i in ls:
+            for step in i:
+                with allure.step(f"run step{step.keys()}"):
+                    assert self.__run_step(step)
 
-        with allure.step("set up"):
-            # step 在这里就是given的value
-            for step in self.given:
-                assert self.__run_step(step)
 
-        logger.info('run testcase when')
-        logger.info(self.when)
-        with allure.step("test step"):
-            for step in self.when:
-                assert self.__run_step(step)
-
-        logger.info('run testcase then')
-        logger.info(self.then)
-        with allure.step("test assert"):
-            for step in self.then:
-                assert self.__run_step(step)
-
-        logger.info('run testcase teardown')
-        logger.info(self.teardown)
-        with allure.step("test teardown"):
-            for step in self.teardown:
-                assert self.__run_step(step)
 
     def __run_step(self, step: dict):
         """
         单步执行
         """
-        logger.info('run step')
-        logger.info(step)
+        logger.info(f"run step{step.keys()}")
+        logger.info(f"run step object {step}")
 
         global service
         if service is None:
