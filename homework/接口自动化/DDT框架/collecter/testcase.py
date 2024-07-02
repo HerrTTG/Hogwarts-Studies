@@ -23,6 +23,7 @@ class TestCase(BaseModel):
     def __init__(self, **data: Any) -> None:
         ## 利用pydantic来做数据类型校验
         # 将传入data解包后，生成data对应selfname的对象变量
+        # 定义接口对象为全局变量，并增加一个结果变量为空列表
         global service, result
         service = None
         result = []
