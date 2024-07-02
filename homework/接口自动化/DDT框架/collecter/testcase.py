@@ -43,9 +43,9 @@ class TestCase(BaseModel):
         logger.info(self.given)
 
         with allure.step("set up"):
-        # step 在这里就是given的value
-        for step in self.given:
-            assert self.__run_step(step)
+            # step 在这里就是given的value
+            for step in self.given:
+                assert self.__run_step(step)
 
         logger.info('run testcase when')
         logger.info(self.when)
