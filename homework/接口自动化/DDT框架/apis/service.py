@@ -1,5 +1,6 @@
 import json
 import requests
+from requests import Response
 
 from until.log import logger
 
@@ -8,6 +9,27 @@ class Service():
 
     def __init__(self):
         self.request = requests.request
+
+    def login_auth(self, step: dict):
+        """
+        获取登录鉴权，并赋予赋值给final_token
+        """
+        if hasattr(self, 'final_token') is False:
+            logger.info('获取登录请求的鉴权信息.......')
+            kwargs = {'params': step['auth']['params']}
+            # login方法继承自Login类，属于基础登录接口。
+            r: Response = self.send('GET', step['auth']['url'], kwargs)
+            try:
+                assert r.json()['access_token']
+            except AssertionError:
+                logger.error('获取登录请求的鉴权信息失败')
+                raise AssertionError
+            else:
+                self.final_token = {'access_token': r.json()['access_token']}
+                logger.debug(f'请求的鉴权信息:{self.final_token}')
+                return True
+
+
 
     def request_analysis(self, mothod: str, request_kwargs: dict):
         """
@@ -29,33 +51,13 @@ class Service():
         elif hasattr(self, 'final_token'):
             finnaly_kwargs['params'] = self.final_token
 
+        logger.info(mothod, send_url, finnaly_kwargs)
         return self.send(mothod, send_url, finnaly_kwargs)
 
-
-    def login_auth(self, step: dict):
-        """
-        获取登录鉴权，并赋予赋值给final_token
-        """
-        if hasattr(self, 'final_token') is False:
-            logger.info('获取登录请求的鉴权信息.......')
-            kwargs = {'params': step['auth']['params']}
-            # login方法继承自Login类，属于基础登录接口。
-            r = self.send('GET', step['auth']['url'], kwargs)
-            try:
-                assert r.json()['access_token']
-            except AssertionError:
-                logger.error('获取登录请求的鉴权信息失败')
-                raise AssertionError
-            else:
-                self.final_token = {'access_token': r.json()['access_token']}
-                logger.debug(f'请求的鉴权信息:{self.final_token}')
-                return True
-
-
-    def send(self, method, url, kwargs: dict) -> object:
+    def send(self, method, url, kwargs: dict) -> Response:
         """
         """
         # 解包kwargs传入request方法发送请求
-        r = self.request(method, url, **kwargs, verify=False)
+        r: Response = self.request(method, url, **kwargs, verify=False)
         logger.debug(f"{url}接口的响应为{json.dumps(r.json(), indent=2, ensure_ascii=False)}")
         return r
