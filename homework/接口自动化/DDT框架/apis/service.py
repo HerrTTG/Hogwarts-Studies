@@ -51,7 +51,7 @@ class Service():
         elif hasattr(self, 'final_token'):
             finnaly_kwargs['params'] = self.final_token
 
-        logger.info(mothod, send_url, finnaly_kwargs)
+        logger.info(f"{mothod},{send_url},{finnaly_kwargs}")
         return self.send(mothod, send_url, finnaly_kwargs)
 
     def send(self, method, url, kwargs: dict) -> Response:

@@ -5,7 +5,7 @@ case1:
         url: https://qyapi.weixin.qq.com/cgi-bin/gettoken
         params: { 'corpid': 'ww7f1ecbb8e23f2091','corpsecret': 'A4I9cDIUfaIpJZZIDUdI88vMrC-NkhyFVbIEOnfS5VI' }
   when:
-    - get:
+    - post:
         url: https://qyapi.weixin.qq.com/cgi-bin/department/create
         json: { "name": "testhzy","name_en": "RDGZ","parentid": 1,"order": 1,"id": 2 }
   then:
