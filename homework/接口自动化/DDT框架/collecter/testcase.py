@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from typing import Any
 
 from apis.service import Service
+from collecter.yaml_exception import AssertException
 from until.log import logger
 
 
@@ -42,9 +43,10 @@ class TestCase(BaseModel):
         for i in ls:
             for step in i:
                 with allure.step(f"run step{step.keys()}"):
-                    assert self.__run_step(step)
-
-
+                    try:
+                        assert self.__run_step(step)
+                    except AssertionError:
+                        raise AssertException(name, step)
 
     def __run_step(self, step: dict):
         """
