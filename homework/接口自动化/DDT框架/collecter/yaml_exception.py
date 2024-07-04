@@ -3,3 +3,4 @@ class AssertException(Exception):
 
     def __init__(self, name, step):
         print(f"Assert failed,testcase{name},step:{step} ")
+        super().__init__()
