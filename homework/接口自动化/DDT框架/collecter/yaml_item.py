@@ -1,7 +1,7 @@
 import pytest
 
 from collecter.testcase import TestCase
-from collecter.yaml_exception import YamlException
+from collecter.yaml_exception import AssertException
 from until.log import logger
 
 
@@ -35,7 +35,7 @@ class YamlItem(pytest.Item):
     def repr_failure(self, excinfo):
         ##异常捕获。
         """Called when self.runtest() raises an exception."""
-        if isinstance(excinfo.value, YamlException):
+        if isinstance(excinfo.value, AssertException):
             return "\n".join(
                 [
                     "usecase execution failed",
