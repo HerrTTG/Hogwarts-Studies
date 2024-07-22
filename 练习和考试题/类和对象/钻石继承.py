@@ -19,5 +19,3 @@ class C(B1,B2):
         print('构造C')
 
 c=C()
-
-c
