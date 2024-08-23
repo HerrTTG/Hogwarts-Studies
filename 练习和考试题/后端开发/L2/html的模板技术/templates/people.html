@@ -1,0 +1,26 @@
+<!-- people.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Title</title>
+</head>
+<body>
+{% for p in people %}
+<p>
+    Hello,
+    {% if p.gender == "male" %}
+    Mr. {{ p.name }}
+    {% else %}
+    Ms. {{ p.name }}<br/>
+    {% endif %}
+    Your age is {{ p.age }}<br/>
+    Your gender is {{ p.gender }}<br/>
+</p>
+{% endfor %}
+</body>
+</html>
+<script type="text/javascript"></script>

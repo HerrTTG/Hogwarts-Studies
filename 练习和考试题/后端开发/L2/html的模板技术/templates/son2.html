@@ -1,0 +1,15 @@
+<!-- son.html -->
+
+{% extends "father.html" %}
+
+{% block title %}Son Page{% endblock %}
+
+{% include ['footer.html','bottom.html','end.html','top.html'] ignore missing %}
+
+
+{% block content %}
+
+<h1>子模版</h1>
+<button>按钮</button>
+
+{% endblock %}

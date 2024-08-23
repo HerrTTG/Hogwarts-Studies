@@ -1,0 +1,19 @@
+<!-- layout.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<div id="content">{% block content %}{% endblock %}</div>
+<div id="footer">
+    {% block footer %} &copy; Copyright 2023 by
+    <a href="https://ceshiren.com">测试人社区</a>. {% endblock %}
+</div>
+</body>
+</html>
+<script type="text/javascript"></script>
