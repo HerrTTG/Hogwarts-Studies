@@ -1,0 +1,18 @@
+body {
+  margin: auto;
+  max-width: 800px;
+  font-size: 14px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/* 霍格沃兹学院 */
+.hogwarts {
+  display: auto;
+  margin: 0 auto;
+  height: 300px;
+}
+
+/* 小图片 */
+.pic {
+  width: 100px;
+}
