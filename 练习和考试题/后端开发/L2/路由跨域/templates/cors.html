@@ -1,0 +1,30 @@
+<!-- 前端代码 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>跨域问题</title>
+</head>
+<body>
+<div>
+    <button class="button" id="hello">click me</button>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    var btnHello = document.querySelector("button#hello");
+    btnHello.onclick = () => {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          alert(xhr.responseText);
+        }
+      };
+      xhr.withCredentials = true;
+      xhr.open("get", "http://localhost:5055/hello", true);
+      xhr.setRequestHeader("Content-Type", "text");
+      xhr.send();
+    };
+</script>
