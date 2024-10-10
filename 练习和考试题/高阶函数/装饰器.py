@@ -1,14 +1,15 @@
-import time
 import functools
+import time
 
 
 def caltime(func):
     @functools.wraps(func)
     #装饰装饰器的装饰器用于解决func.__name__会被污染的问题
-    def callfunc():
+    # 同时可以让func的参数可被调用时携带
+    def callfunc(*args, **kwargs):
         print('函数开始执行')
         starttime = time.time()
-        func()
+        func(*args, **kwargs)
         #内层函数可以直接继承闭包的局部域的参数即func
         endtime=time.time()
         print('函数结束执行')
@@ -24,12 +25,12 @@ def caltime(func):
 #@functools.wraps的作用是一个高阶函数 用来装饰装饰器,否则main.__name__将返回callfunc 而不是main
 
 @caltime
-def myfunc():
-    time.sleep(2)
+def myfunc(second):
+    time.sleep(second)
     print('我是需要执行的函数')
 
 
-myfunc()
+myfunc(second=2)
 print(myfunc.__name__)
 
 

@@ -1,23 +1,16 @@
-# tag::TAG_FUNC[]
-def tag(name, *content, class_=None, **attrs):
-    """Generate one or more HTML tags"""
-    if class_ is not None:
-        attrs['class'] = class_
-    attr_pairs = (f' {attr}="{value}"' for attr, value
-                  in sorted(attrs.items()))
-    attr_str = ''.join(attr_pairs)
-    if content:
-        elements = (f'<{name}{attr_str}>{c}</{name}>'
-                    for c in content)
-        return '\n'.join(elements)
-    else:
-        return f'<{name}{attr_str} />'
+def out(func):
+    def inner(*args, **kwargs):
+        print("123")
+        func(*args, **kwargs)
+        print("end")
+
+    return inner
 
 
-# end::TAG_FUNC[]
+def ppa(number):
+    print(f"i am func {number}")
 
 
-print(tag('p', 'hello', 'word', class_='sidebar', id=33, link='www.baidu.com'))
-
-my_tag = {'title': 'Subset', 'src': 'sunset.jpg', 'class': 'framed'}
-print(tag('img', 'hello', 'world', **my_tag))
+ppa = out(ppa)
+ppa(number=2)
+print(ppa.__name__)
