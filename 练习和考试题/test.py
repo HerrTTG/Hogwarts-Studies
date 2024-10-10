@@ -1,12 +1,23 @@
-def func(record: dict) -> list:
-    match record:
-        case {"type": 'book', "api": 2, "authors": [*name]}:
-            return name  # 解析类型出满足type api 且author 映射为一个序列。返回满足条件的所有序列。
-        case {"type": 'book', "api": 1, "authors": name}:
-            return [name]  # author 映射为任意对象，且返回由这些对象组成的序列
-        case {"type": 'book'}:
-            raise ValueError(f"所有type book均无效，则抛出异常")
-        case {"type": 'movie', "director": name}:
-            return [name]
-        case _:
-            raise ValueError(f"均无匹配，抛出异常{record!r}")
+# tag::TAG_FUNC[]
+def tag(name, *content, class_=None, **attrs):
+    """Generate one or more HTML tags"""
+    if class_ is not None:
+        attrs['class'] = class_
+    attr_pairs = (f' {attr}="{value}"' for attr, value
+                  in sorted(attrs.items()))
+    attr_str = ''.join(attr_pairs)
+    if content:
+        elements = (f'<{name}{attr_str}>{c}</{name}>'
+                    for c in content)
+        return '\n'.join(elements)
+    else:
+        return f'<{name}{attr_str} />'
+
+
+# end::TAG_FUNC[]
+
+
+print(tag('p', 'hello', 'word', class_='sidebar', id=33, link='www.baidu.com'))
+
+my_tag = {'title': 'Subset', 'src': 'sunset.jpg', 'class': 'framed'}
+print(tag('img', 'hello', 'world', **my_tag))
