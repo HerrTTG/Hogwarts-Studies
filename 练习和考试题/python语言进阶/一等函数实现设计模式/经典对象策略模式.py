@@ -27,12 +27,15 @@ class LineItem(NamedTuple):
     price: Decimal
 
     def Itemtotal(self):
+        """
+        计算购买的Item总价格
+        """
         return self.price * self.quantity
 
 
 class Order(NamedTuple):
     """
-    上下文数据模型类，使用具名元组进行定义。
+    订单数据模型类，使用具名元组进行定义。
     customer:客户实例属性，指向Customer类的实例化对象
     catr:客户的购物车实例属性，指向一个序列，里面的项由客户购买的商品类LineItem的实例化对象们组成
     policy:客户所对应的折扣方法，可为空且默认为空。指向Policy类的实例化对象。
@@ -46,9 +49,19 @@ class Order(NamedTuple):
         获取客户的总购物消费值
         """
         totals = (item.Itemtotal() for item in self.cart)  # 从客户的购物车实例属性序列中取出每一个项，调用项的Itemtotal方法
-        return sum(totals, start=Decimal(0))  # 为什么这么写
+        return sum(totals, start=Decimal(0))  # start=Decimal 应该约等于
+        # amt=Decimal(0)
+        # for i in totals:
+        #     amt+=i
+        # 目的是确保累加的第一个空值的类型也为Decimal
 
     def due(self):
+        """
+        处理客户订单的优惠方法总接口。
+        判断折扣策略是否指定，无指定则折扣金额为0。
+        否则调用对应的折扣子方法。
+        返回折扣后的金额
+        """
         if self.policy is None:
             discount = Decimal(0)
         else:
@@ -56,7 +69,11 @@ class Order(NamedTuple):
         return self.totla() - discount
 
     def __str__(self):
-        return f"<Order total:{self.totla():.2f} due:{self.due():.2f}>"
+        """
+        订单打印方法，客制化打印信息。
+        返回折扣前和折扣后的金额
+        """
+        return f"<Order total:{self.totla():.2f} after due:{self.due():.2f}>"
 
 
 class Policy(ABC):
