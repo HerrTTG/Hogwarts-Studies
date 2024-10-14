@@ -52,7 +52,7 @@ class Order(NamedTuple):
         if self.policy is None:
             discount = Decimal(0)
         else:
-            discount = self.policy.discount(self)  # 如果有对应的策略，则将Order自身的实例化对象传入。
+            discount = self.policy.sub_discount(self)  # 如果有对应的策略，则将Order自身的实例化对象传入。
         return self.totla() - discount
 
     def __str__(self):
@@ -65,12 +65,12 @@ class Policy(ABC):
     """
 
     @abstractmethod
-    def discount(self, order: Order) -> Decimal:
+    def sub_discount(self, order: Order) -> Decimal:
         pass
 
 
 class PointsPolicy(Policy):
-    def discount(self, order: Order) -> Decimal:
+    def sub_discount(self, order: Order) -> Decimal:
         """
         积分折扣策略，返回折扣额度
         """
@@ -82,7 +82,7 @@ class PointsPolicy(Policy):
 
 
 class ItemPolicy(Policy):
-    def discount(self, order: Order) -> Decimal:
+    def sub_discount(self, order: Order) -> Decimal:
         """
         商品数量折扣策略，返回折扣额度
         """
@@ -94,7 +94,7 @@ class ItemPolicy(Policy):
 
 
 class CartPolicy(Policy):
-    def discount(self, order: Order) -> Decimal:
+    def sub_discount(self, order: Order) -> Decimal:
         """
         购物车折扣策略，返回折扣额度
         """
@@ -109,11 +109,11 @@ class CartPolicy(Policy):
 if __name__ == "__main__":
     """测试代码"""
     xueqin = Customer("xueqin", 0)
+    haizhenyu = Customer("haizhenyu", 1000)
+
     cart = (LineItem("banana", 4, Decimal('.5')),
             LineItem("Apple", 20, Decimal('1.5')),
             LineItem("watermelon", 5, Decimal(5)))
 
     print(Order(xueqin, cart=cart, policy=ItemPolicy()))
-
-    haizhenyu = Customer("haizhenyu", 1000)
     print(Order(haizhenyu, cart=cart, policy=PointsPolicy()))
