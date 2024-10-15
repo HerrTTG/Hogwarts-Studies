@@ -71,7 +71,35 @@ class Order(NamedTuple):
         return f"<Order total:{self.totla():.2f} due:{self.due():.2f}>"
 
 
+##装饰器定义
+
+Policy = Callable[['Order'], Decimal]  # 定义Policy变量的全局类为一个可调用对象，且可传参一个Order类的对象，返回Decimal。
+# 这里暗指所有符合条件的子策略
+policies: list[Policy] = []  # 策略列表
+
+
+def PolicyRegister(policy: Policy) -> Policy:
+    """
+    装饰器函数，在函数被装饰后，在被装饰函数被导入时调用。
+    将符合条件的子策略对象，记录进入全局列表policies中。
+    其到一个注册被装饰函数对象的作用。
+    然后原封不动的返回子策略对象。
+    该函数使可能的后续新增的子策略，都会被自动注册。
+    解决在BestPolicy中，用列表记录策略函数对象的缺点。
+    """
+    policies.append(policy)
+    return policy
+
+
+def BestPolicy(order: Order) -> Decimal:
+    """自动获取最佳折扣信息方法"""
+    return max(policy(order) for policy in policies)  # 从被注册装饰器生成的全局policies变量中遍历策略方法，
+    # 并执行调用传入order对象，
+    # 并利用max函数获取最大折扣值
+
+
 # 函数化策略
+@PolicyRegister
 def PointsPolicy(order: Order) -> Decimal:
     """
     积分折扣策略，返回折扣额度
@@ -83,6 +111,7 @@ def PointsPolicy(order: Order) -> Decimal:
     return Decimal(0)
 
 
+@PolicyRegister
 def ItemPolicy(order: Order) -> Decimal:
     """
     商品数量折扣策略，返回折扣额度
@@ -94,6 +123,7 @@ def ItemPolicy(order: Order) -> Decimal:
     return discount
 
 
+@PolicyRegister
 def CartPolicy(order: Order) -> Decimal:
     """
     购物车折扣策略，返回折扣额度
@@ -104,14 +134,6 @@ def CartPolicy(order: Order) -> Decimal:
     if len(distinct_item) >= 10:  # 如果不同商品数大于10
         return order.totla() * rate  # 返回购物车总金额*折扣率的折扣额度
     return Decimal(0)
-
-
-def BestPolicy(order: Order) -> Decimal:
-    """自动获取最佳折扣信息方法"""
-    Policy = Callable[['Order'], Decimal]
-    policies: list[Policy] = [PointsPolicy, ItemPolicy, CartPolicy]  # 此代码目前的缺点是不能自动获取子策略函数并生成列表。
-    return max(policy(order) for policy in policies)  # 从policies中遍历策略方法，并执行调用传入order对象，
-    # 并利用max函数获取最大折扣值
 
 
 if __name__ == "__main__":
