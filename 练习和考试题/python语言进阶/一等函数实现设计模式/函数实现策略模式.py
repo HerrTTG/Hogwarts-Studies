@@ -26,6 +26,9 @@ class LineItem(NamedTuple):
     price: Decimal
 
     def Itemtotal(self):
+        """
+          计算购买的Item总价格
+        """
         return self.price * self.quantity
 
 
@@ -48,6 +51,12 @@ class Order(NamedTuple):
         return sum(totals, start=Decimal(0))  # 为什么这么写
 
     def due(self):
+        """
+        处理客户订单的优惠方法总接口。
+        判断折扣策略是否指定，无指定则折扣金额为0。
+        否则调用对应的折扣子方法。
+        返回折扣后的金额
+        """
         if self.policy is None:
             discount = Decimal(0)
         else:
@@ -55,6 +64,10 @@ class Order(NamedTuple):
         return self.totla() - discount
 
     def __str__(self):
+        """
+        订单打印方法，客制化打印信息。
+        返回折扣前和折扣后的金额
+        """
         return f"<Order total:{self.totla():.2f} due:{self.due():.2f}>"
 
 
