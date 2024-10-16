@@ -1,8 +1,2 @@
-class NewCommand:
-
-    def __init__(self, commands):
-        self.commands = list(commands)
-
-    def __call__(self, *args, **kwargs):
-        for command in self.commands:
-            command()
+name = input('请输入您的姓名：')
+print('您的姓名是' + name)
