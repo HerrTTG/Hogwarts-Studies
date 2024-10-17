@@ -17,6 +17,7 @@ class Seq():
         return f'Seq{self.words}'
 
     def __iter__(self):
+        # 此时此函数其实已经是生成器了
         for match in self.re_word.finditer(self.words):  # finditer将构造一个迭代器，包含words中匹配的单词。
             # 仅在需要时，才从文本中读取下一个符合正则表达式的内容
             yield match.group()
