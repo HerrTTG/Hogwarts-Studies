@@ -1,2 +1,9 @@
-name = input('请输入您的姓名：')
-print('您的姓名是' + name)
+ls = [str(i) for i in range(3)]
+
+a = set()
+b = set(ls)
+
+for i in ls:
+    a.update(i)
+
+print(a, b)
