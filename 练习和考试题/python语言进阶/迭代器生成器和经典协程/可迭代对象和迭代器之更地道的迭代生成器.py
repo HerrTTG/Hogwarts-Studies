@@ -17,9 +17,11 @@ class Seq():
         return f'Seq{self.words}'
 
     def __iter__(self):
+        # 此时此函数是一个生成器，
         for words in self.words:  # 迭代self.words这个标准库序列
             yield words  # 生成器函数表达时。
             # 不再用单独定义迭代器了！
+            # 迭代的实现不在需要委托迭代Iterator构造实例化对象了。
 
 
 # 测试Seq的实例化对象是否可迭代

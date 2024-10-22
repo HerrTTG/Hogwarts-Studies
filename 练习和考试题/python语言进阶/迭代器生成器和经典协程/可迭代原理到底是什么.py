@@ -8,6 +8,7 @@ class Seq():
         self.words = self.re_word.findall(words)  # 根据正则表达式，匹配出所有符合要求的单词，并返回列表。
 
     def __getitem__(self, item):
+        # 实现自我迭代
         return self.words[item]
 
     def __len__(self):

@@ -1,3 +1,2 @@
-s = '(gcd 18 45)'
-
-print(s.replace('(', ' ( ').replace(')', ' ) ').split())
+x = 3.1415
+print(x ** 2)
