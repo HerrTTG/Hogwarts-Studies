@@ -15,23 +15,26 @@ class Flag():
 
 
 def avg(verbool: bool = False) -> Generator[None, float | Flag, Result]:
-    # 生成器根据verbool判断是否打印接收到的值
     # Generator[None, float | Flag, Result]
     # 表示生成器yield不返回任何项,接受float或者Flag类型输入,最后return一个Result类型
     total = 0.0
     count = 0
     avg = 0.0
     while True:
+        # 一个无限循环的生成器主体，当且仅当判断到哨符，跳出循环。
         _tmp = yield  # 不返回任何项，只做接收
         if verbool:
+            #判断是否需要打印接收到的值
             print(f'received:', _tmp)
         # 判断接收的值是否为哨符，是则跳出循环结束迭代
         if isinstance(_tmp, Flag):
             break
-        total += _tmp
-        count += 1
-        avg = total / count
-    # 返回Result类型
+        else:
+            total += _tmp
+            count += 1
+            avg = total / count
+
+    #循环跳出表示结束接收新值，生成器函数返回Result类型。并存在StopIteration的value中
     return Result(count, avg)
 
 
@@ -46,7 +49,7 @@ def factory():
 
 
 if __name__ == '__main__':
-    # 此时fn=res=avg
+    # 此时fn=res=avg(True)
     fn = factory()
 
     # 实例化Stop变量作为哨符

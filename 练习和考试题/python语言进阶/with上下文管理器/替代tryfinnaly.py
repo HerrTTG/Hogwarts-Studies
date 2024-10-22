@@ -19,19 +19,25 @@ class A():
         则以exit(None,None,None)调用，
         如果发生异常，且exit返回False,则由外部程序继续捕获异常。
         """
+
+        # json.loads({'a'}) 会发生异常
+        # 所以在上下文管理对象结束时，调用__exit__(self, exc_type, exc_val, exc_tb)
+
+        # 判断用户构造时传入了可原谅的错误类型，并比对exc_type是否何其一致。
         if self.exception_type and exc_type is self.exception_type:
             print(exc_type, exc_val, exc_tb)
             print(1)
             return self
 
+        #如果不是指定错误类型，则返回False交由外部异常捕获进行处理
         elif self.exception_type is None and issubclass(exc_type, Exception):
-            raise exc_type
+            return False
 
 
 # try:
 #     json.loads({'a'})
-# except Exception as e:
-#     print(e)
+# except TypeError as e:
+#     print(type(e),e)
 # finally:
 #     print(1)
 
