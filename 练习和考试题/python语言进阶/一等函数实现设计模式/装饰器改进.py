@@ -2,6 +2,28 @@ from collections.abc import Sequence
 from decimal import Decimal
 from typing import NamedTuple, Optional, Callable
 
+##装饰器定义
+# 定义Policy变量的全局类为一个可调用对象，且可传参一个Order类的对象，返回Decimal。
+# 这里暗指所有符合条件的子策略
+Policy = Callable[['Order'], Decimal]
+
+# 全局的策略列表，被装饰器装饰后会将函数对象加入列表中
+policies: list[Policy] = []
+
+
+def PolicyRegister(policy: Policy) -> Policy:
+    """
+    装饰器函数，在函数被装饰后，在被装饰函数被导入时调用。
+    将符合条件的子策略对象，记录进入全局列表policies中。
+    起到一个注册被装饰函数对象的作用。
+    然后原封不动的返回子策略对象。
+    该函数使可能的后续新增的子策略，都会被自动注册。
+    解决在BestPolicy中，用列表记录策略函数对象的缺点。
+    """
+    policies.append(policy)
+    return policy
+
+
 
 class Customer(NamedTuple):
     """
@@ -41,7 +63,7 @@ class Order(NamedTuple):
     """
     customer: Customer
     cart: Sequence[LineItem]
-    policy: Optional[Callable[['Order'], Decimal]] = None
+    policy: Optional[Policy] = None
 
     def totla(self):
         """
@@ -70,25 +92,6 @@ class Order(NamedTuple):
         """
         return f"<Order total:{self.totla():.2f} due:{self.due():.2f}>"
 
-
-##装饰器定义
-
-Policy = Callable[['Order'], Decimal]  # 定义Policy变量的全局类为一个可调用对象，且可传参一个Order类的对象，返回Decimal。
-# 这里暗指所有符合条件的子策略
-policies: list[Policy] = []  # 策略列表
-
-
-def PolicyRegister(policy: Policy) -> Policy:
-    """
-    装饰器函数，在函数被装饰后，在被装饰函数被导入时调用。
-    将符合条件的子策略对象，记录进入全局列表policies中。
-    其到一个注册被装饰函数对象的作用。
-    然后原封不动的返回子策略对象。
-    该函数使可能的后续新增的子策略，都会被自动注册。
-    解决在BestPolicy中，用列表记录策略函数对象的缺点。
-    """
-    policies.append(policy)
-    return policy
 
 
 def BestPolicy(order: Order) -> Decimal:
