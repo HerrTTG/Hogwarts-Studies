@@ -1,22 +1,12 @@
-import math
+import concurrent.futures
 
 
-def is_prime(n: int) -> bool:
-    if n < 2:
-        return False
-    if n == 2:
-        return True
-    if n % 2 == 0:
-        return False
-
-    root = math.isqrt(n)
-    for i in range(3, root + 1, 2):
-        if n % i == 0:
-            return False
-    return True
+def some_function(x):
+    return x * x
 
 
-# end::IS_PRIME[]
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    futures = [executor.submit(some_function, i) for i in range(10)]
+    results = [future.result() for future in concurrent.futures.as_completed(futures)]
 
-
-print(is_prime(5000111000222021))
+print(results)
