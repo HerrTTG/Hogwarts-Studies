@@ -1,12 +1,11 @@
-import concurrent.futures
-
-
-def some_function(x):
-    return x * x
-
-
-with concurrent.futures.ThreadPoolExecutor() as executor:
-    futures = [executor.submit(some_function, i) for i in range(10)]
-    results = [future.result() for future in concurrent.futures.as_completed(futures)]
-
-print(results)
+t = [(f"{i}x{j}=", i * j) for i in range(1, 10) for j in range(1, 10) if i <= j]
+1
+x1
+1
+x2
+2
+x2
+1
+x3
+2
+x3
