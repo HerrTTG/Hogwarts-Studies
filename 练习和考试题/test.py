@@ -1,11 +1,10 @@
-t = [(f"{i}x{j}=", i * j) for i in range(1, 10) for j in range(1, 10) if i <= j]
-1
-x1
-1
-x2
-2
-x2
-1
-x3
-2
-x3
+def make(target_class, some_arg):
+    new_object = target_class.__new__(some_arg)
+    if isinstance(new_object, target_class):
+        target_class.__init__(new_object, some_arg)
+    return new_object
+
+
+x = make("Foo", 'bar')
+# 上面的函数解释了下面这个表达式Foo类被实例化的过程
+x = Foo("bar")
