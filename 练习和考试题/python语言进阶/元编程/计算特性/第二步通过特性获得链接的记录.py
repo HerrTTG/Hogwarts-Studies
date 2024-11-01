@@ -32,6 +32,14 @@ conferences events speakers venues 对应的列表中都有个关键字serial
         ]
       }
     ],
+    ...
+ "venues": [
+      {
+        "serial": 1462,
+        "name": "F151",
+        "category": "Conference Venues"
+      }
+    ]
 
 """
 # tag::SCHEDULE1[]
