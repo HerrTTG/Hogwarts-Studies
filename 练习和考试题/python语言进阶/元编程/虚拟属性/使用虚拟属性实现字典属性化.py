@@ -67,7 +67,7 @@ class FrozenJSON:
 
 import json
 
-with open("E:\霍格沃茨学社\Hogwarts-Studies\练习和考试题\python语言进阶\元编程\动态属性\osconfeed-sample.json") as p:
+with open("E:\霍格沃茨学社\Hogwarts-Studies\练习和考试题\python语言进阶\元编程\osconfeed-sample.json") as p:
     feed = FrozenJSON(json.load(p))
 
 print(feed.keys())
@@ -76,3 +76,4 @@ print(dir(feed))
 print(dir(feed.Schedule))
 
 print(feed.Schedule.speakers[-1].name)
+print(feed.Schedule)
