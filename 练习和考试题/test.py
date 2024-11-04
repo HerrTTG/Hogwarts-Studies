@@ -1,13 +1,10 @@
-def func():
-    num = 1000
-
-    def inner(value):
-        nonlocal num
-        num += value
-        return num
-
-    return inner
+a = {"test": 123}
 
 
-t = [func()(i * 10) for i in range(1, 4)]
-print(t)
+def abc(**kwargs):
+    b = {}
+    b.update(kwargs)
+    return b
+
+
+print(abc(**a))

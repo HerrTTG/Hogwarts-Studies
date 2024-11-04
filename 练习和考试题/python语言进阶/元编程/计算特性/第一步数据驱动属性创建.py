@@ -44,7 +44,7 @@ class Record:
 
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)  # <1> 最重要的一步，__dict__字典储存着对象的属性。
-        # 将kwargs字典解包，如name="Robert Lefkowitz"，更新进去，作为属性的一部分。
+        # kwargs关键字，如name="Robert Lefkowitz"，更新进去，作为属性的一部分。
         # 此时对象就拥有了self.name这个属性
 
     def __repr__(self):
