@@ -58,6 +58,7 @@ class Line():
         return self.number * self.price
 
 
-customer = Line("苹果", 10, 0.5)  # 托管实例
-print(customer.subtotal())
-customer.number = -20
+def test_1():
+    customer = Line("苹果", 10, 0.5)  # 托管实例
+    print(customer.subtotal())
+    customer.number = -20
