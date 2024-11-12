@@ -10,7 +10,7 @@ def wait_until():
     driver = webdriver.Chrome()
     driver.get("https://vip.ceshiren.com/#/ui_study")
     # WebDriverWait(driver,最长等待时间)
-    # Dbtools(method)
+    # untils(method)
     # expected_conditions.element_to_be_clickable((选择器,元素))
 
     WebDriverWait(driver, 10).until(

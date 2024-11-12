@@ -20,7 +20,7 @@ def test_case1():
     # 问题： 使用官方提供的expected condition 已经无法满足需求
     # 解决方案： 自己封装期望条件
     # 期望条件的设计： 需求： 一直点击按钮，直到下一个页面出现为止
-    # Dbtools 中传入自己封装的判断函数
+    # untils 中传入自己封装的判断函数
 
     result = WebDriverWait(driver, 10, 1).until(
         muliti_click(
