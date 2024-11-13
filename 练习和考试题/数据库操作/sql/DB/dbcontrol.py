@@ -69,6 +69,7 @@ class Dbconnect():
     # def close(self):
     #     self.db_connect.close()
 
+    @expecterr
     def query(self, commd, fetch_all=True):
         self.cursor.execute(commd)
         if fetch_all:
