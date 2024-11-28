@@ -49,4 +49,4 @@ def index():
 
 # 运行应用程序
 if __name__ == '__main__':
-    API.run()
+    API.run(debug=True, host="0.0.0.0", port=5000)
