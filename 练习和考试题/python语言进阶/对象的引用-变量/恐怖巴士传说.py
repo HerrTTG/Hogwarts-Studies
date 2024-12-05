@@ -65,13 +65,14 @@ class GoodBus():
             self.passengers = []  # 实例属性创建[]副本
         else:
             self.passengers = list(passengers)  # 对形参passengers即实参的别名创建副本，而不是创建一个别名。
+            # 但这里要注意 self.passengers=list(passengers) 只是浅拷贝，如果passengers 容器内包含可变容器，则要使用深拷贝
+            # self.passengers=copy.deepcopy(passengers)
 
     def pickup(self, name):
         self.passengers.append(name)
 
     def drop(self, name):
         self.passengers.remove(name)
-
     def __repr__(self):
         return str(self.passengers)
 
