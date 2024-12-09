@@ -1,3 +1,15 @@
+"""
+假如有个电商网站，制订了以下折扣规则：
+1.有1000或者以上积分的客户，每个订单享受5%折扣。
+2.同一订单中，单个商品的数量达到20个或以上，享10%折扣。
+3.订单中不同商品的数量达到10个或者以上，享7%折扣。
+
+完全面向对象的方法实现，并增加了类装饰器和实现了自动注册策略，自动获取最佳折扣
+
+
+"""
+
+
 from abc import ABC, abstractmethod
 from collections.abc import Sequence
 from functools import lru_cache
@@ -49,10 +61,11 @@ class Order(NamedTuple):
 
     def __due(self) -> int | float:
         if self.policy is None:
-            return 0
+            disocunt = 0
         else:
             #因为discount中要对购物车中的客户信息，商品信息等进行判断，所以传入self对象。
-            return self.total - self.policy.discount(self)
+            disocunt = self.policy.discount(self)
+        return self.total - disocunt
 
     def __str__(self):
         return f"<Order total:{self.total:.2f} Disocunt:{self.__due():.2f}>"
