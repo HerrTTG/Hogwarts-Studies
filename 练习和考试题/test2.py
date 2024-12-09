@@ -1,35 +1,110 @@
-class GoodBus():
-    """
-    优秀的宝宝巴士
-    """
+from abc import ABC, abstractmethod
+from collections.abc import Sequence
+from functools import lru_cache
+from typing import NamedTuple, Optional
 
-    def __init__(self, passengers=None):
-        if passengers is None:
-            self.passengers = []  # 实例属性创建[]副本
+
+class Customer(NamedTuple):
+    name: str
+    point: int | float
+
+
+class Item(NamedTuple):
+    product: str
+    number: int | float
+    price: int | float
+
+    @property
+    @lru_cache
+    def Itemtotal(self):
+        return self.number * self.price
+
+
+class Order(NamedTuple):
+    customer: Customer
+    items: Sequence[Item]
+    policy: Optional['Policys'] = None
+
+    @property
+    @lru_cache
+    def total(self):
+        return sum((item.Itemtotal for item in self.items), start=0)
+
+    def due(self):
+        if self.policy is None:
+            return 0
         else:
-            self.passengers = list(passengers)  # 对形参passengers即实参的别名创建副本，而不是创建一个别名。
-            # 但这里要注意 self.passengers=list(passengers) 只是浅拷贝，如果passengers 容器内包含可变容器，则要使用深拷贝
-            # self.passengers=copy.deepcopy(passengers)
+            return self.total - self.policy.discount(self)
 
-    def pickup(self, name):
-        self.passengers.append(name)
-
-    def drop(self, name):
-        self.passengers.remove(name)
-
-    def __repr__(self):
-        return str(self.passengers)
+    def __str__(self):
+        return f"<Order total:{self.total:.2f} Disocunt:{self.due():.2f}>"
 
 
-team = ["anne", "Dina", "Pat"]
-baobaobus1 = GoodBus()
-baobaobus2 = GoodBus()
-baobaobus3 = GoodBus(team)
+class PolicyRegister():
+    policyslist = []
 
-baobaobus1.pickup("Bill")
-print(baobaobus1)
-print(baobaobus2)
-print(baobaobus3)
-baobaobus3.drop("anne")
-print(baobaobus3)
-print(team)
+    def __init__(self, bool: bool = False):
+        self.__bool = bool
+
+    def __call__(self, policy):
+        if self.__bool == True:
+            self.__class__.policyslist.append(policy())
+        return policy
+
+
+class Policys(ABC):
+
+    @abstractmethod
+    def discount(self, order: Order):
+        pass
+
+
+class BestPolicy(Policys):
+    def discount(self, order: Order):
+        return max(policy.discount(order) for policy in PolicyRegister.policyslist)
+
+
+@PolicyRegister(True)
+class Pointdiscount(Policys):
+    def discount(self, order: Order):
+        if order.customer.point > 1000:
+            return order.total * 0.05
+        else:
+            return 0
+
+
+@PolicyRegister(True)
+class Itemdiscount(Policys):
+    def discount(self, order: Order):
+        discount = 0
+        for item in order.items:
+            if item.number > 20:
+                discount += item.Itemtotal * 0.1
+        else:
+            return discount
+
+
+@PolicyRegister(True)
+class Orderdiscount(Policys):
+    def discount(self, order: Order):
+        if len({item.product for item in order.items}) > 10:
+            return order.total * 0.07
+        else:
+            return 0
+
+
+if __name__ == "__main__":
+    """测试代码"""
+    xueqin = Customer("xueqin", 0)
+    haizhenyu = Customer("haizhenyu", 1001)
+
+    cart1 = (Item("banana", 4, 0.5),
+             Item("Apple", 21, 1.5),
+             Item("watermelon", 5, 5))
+
+    cart2 = (Item("banana", 4, 0.5),
+             Item("Apple", 20, 1.5),
+             Item("watermelon", 5, 5))
+
+    print(Order(xueqin, items=cart1, policy=BestPolicy()))
+    print(Order(haizhenyu, items=cart2, policy=BestPolicy()))
