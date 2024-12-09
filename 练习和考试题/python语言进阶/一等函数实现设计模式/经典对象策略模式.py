@@ -24,7 +24,7 @@ class Item(NamedTuple):
 
     @property
     @lru_cache
-    def Itemtotal(self) -> int | float:
+    def itemtotal(self) -> int | float:
         return self.number * self.price
 
 class Order(NamedTuple):
@@ -45,7 +45,7 @@ class Order(NamedTuple):
     @lru_cache
     def total(self) -> int | float:
         # sum函数的第一个位置传入一个生成器推导式来进行迭代，将每个商品的总价进行累加，从0开始
-        return sum((item.Itemtotal for item in self.items), start=0)
+        return sum((item.itemtotal for item in self.items), start=0)
 
     def __due(self) -> int | float:
         if self.policy is None:
@@ -69,7 +69,7 @@ class Policys(ABC):
         pass
 
 
-class PolicyRegister():
+class PolicyRegister:
     """
     策略的注册装饰器。
     __init__实现参数化装饰器，来控制装饰器是否注册登记这一行为
@@ -79,11 +79,11 @@ class PolicyRegister():
     """
     policyslist = []
 
-    def __init__(self, bool: bool = False):
-        self.__bool = bool
+    def __init__(self, args: bool = False):
+        self.__bool = args
 
     def __call__(self, policy) -> Policys:
-        if self.__bool == True:
+        if self.__bool:
             self.__class__.policyslist.append(policy)
         return policy
 
@@ -123,7 +123,7 @@ class Itemdiscount(Policys):
         discount = 0
         for item in order.items:
             if item.number > 20:
-                discount += item.Itemtotal * 0.1
+                discount += item.itemtotal * 0.1
         else:
             return discount
 
