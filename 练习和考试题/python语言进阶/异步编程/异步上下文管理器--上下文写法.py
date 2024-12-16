@@ -1,19 +1,20 @@
 from asyncio import Future
 
 import asyncio
-from typing import AsyncContextManager
+from typing import AsyncContextManager, Coroutine
 
 
 async def task(n):
     print(f"Task {n} started")
     if n == 1:
+        # 模拟任务1失败了
         raise Exception(f"Task {n} failed")
-    await asyncio.sleep(n)
+    await asyncio.sleep(n)  #模拟程序运行的消耗时间
     print(f"Task {n} completed")
     return f"Result of task {n} is successed"
 
 
-async def rollback(future, exc_type, exc_val, exc_tb):
+async def rollback(future: Future, exc_type, exc_val, exc_tb):
     print(f"Rolling back {future} due to {exc_type},msg:{exc_val}")
     if await asyncio.sleep(10) is None:  # 模拟处理roll的过程消耗的时间
         print("Rolling back done!")
@@ -49,7 +50,7 @@ class Asynccontent(AsyncContextManager):
 
 async def main():
     # 创建协程对象列表
-    coros = [task(n) for n in range(3)]
+    coros: list[Coroutine] = [task(n) for n in range(3)]  # 创建协程对象列表
 
     for future in asyncio.as_completed(coros):
         # 用异步上下文替代try:finnaly结构
