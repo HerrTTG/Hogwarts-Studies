@@ -38,7 +38,7 @@ async def main() -> None:  # <5>
 
     for coro in asyncio.as_completed(coros):
         # <9>as_completed(coros)会触发coros中的协程对象进入事件循环
-        # 注意，as_completed返回一个迭代器，并按照完成顺序返回结果，而不是根据传入时间循环的协程对象来返回。
+        # 注意，as_completed返回一个迭代器,每次迭代返回一个完成的协程的结果，按照完成顺序返回结果，而不是根据传入时间循环的协程对象来返回。
         # 能被as_completed返回结果的协程对象，一定已经完成。
 
         domain, found = await coro  # <10> 这里await的作用是获取coro的返回值而不是等待堵塞，
