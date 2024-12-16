@@ -45,7 +45,7 @@ async def main():
 
     # 使用异步上下文管理器
     async with AsyncCompleted(coros) as completed:
-        # 遍历 completed，它是异步迭代器
+        # 遍历 completed，它是异步迭代器__aiter__
         async for result in completed:
             print(result)
 

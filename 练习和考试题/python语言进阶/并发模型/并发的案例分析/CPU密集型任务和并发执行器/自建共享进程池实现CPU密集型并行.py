@@ -107,7 +107,7 @@ def worker(jobs: JobQueue, results: ResultQueue) -> None:
     while n := jobs.get():  # <8>从队列中取出一个值，只要不为0“毒药丸”，就会循环。同时将值赋值给n。
         results.put(check(n))  # <9>调用check(n)获取计算结果，并塞入结果队列results中
     else:
-        results.put(PrimeResult(0, False, 0.0))  # <10>在队列末尾塞入一个“毒药丸”，表示结束。
+        results.put(PrimeResult(0, False, 0.0))  # <10>在结果队列末尾塞入一个“毒药丸”，表示结束。
 
 
 def check(n: int) -> PrimeResult:  # <6>
@@ -139,7 +139,8 @@ def report(procs: int, results: ResultQueue) -> int:  # <6>
             checked += 1  # <10>记录表报打印了多少个数
             label = 'P' if prime else ' '
             print(f'{n:16}  {label} {elapsed:9.6f}s')
-    return checked
+    else:
+        return checked
 
 
 # end::PRIMES_PROC_TOP[]
@@ -161,7 +162,8 @@ def main() -> None:
     jobs: JobQueue = SimpleQueue()  # <2>实例化待执行任务队列
     results: ResultQueue = SimpleQueue()  # 实例化结果队列
 
-    start_jobs(procs, jobs, results)  # <3>创建并执行子进程
+    start_jobs(procs, jobs, results)  # <3>创建并执行子进程,
+    # start_job启动所有子进程后，代码块不会等待结果。而是向下继续执行
     checked = report(procs, results)  # <4>主进程调用report函数，堵塞主程序。
     # report函数无限循环持续从队列中获取结果进行打印。直到所有进程结束。返回结果。
 
