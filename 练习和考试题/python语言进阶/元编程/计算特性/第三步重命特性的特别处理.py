@@ -67,18 +67,22 @@ class Record:
     def __repr__(self):
         return f'<{self.__class__.__name__} serial={self.serial!r}>'  # <2>
 
-    @staticmethod
-    def fetch(key, path=JSON_PATH) -> dict[str:object] | object:
+    @classmethod
+    def fetch(cls, key, path=JSON_PATH) -> object:
         """
-        有两个用法：
+        该方法对整体字典进行过滤。
+
+
         1.用于筛选conferences events speakers venues 中的任意一个key和key对应的vaule值。
         格式为：key.serial
         例:event.34505
+        从整体字典字典中获取索引值。Record.__index["event.34505"]
         2.用于在第一次类属性为空时，构造整体字典属性化
         """
-        if Record.__index is None:
-            Record.__index = load(path)
-        return Record.__index[key]
+        if cls.__index is None:
+            cls.__index = load(path)
+        return cls.__index[key]
+
 
 
 class Event(Record):
@@ -148,10 +152,12 @@ def load(path=JSON_PATH) -> dict[str:Record]:
 
 # end::SCHEDULE1[]
 event = Record.fetch("event.34505")
-
-# 获取event下本身的属性
-print(event)
-print(event.speakers)
+#
+# # 获取event下本身的属性
+# print(event)
+# print(event.venue_serial)
+# print(event.description)
+# print(event.speakers)
 
 # 获取speakers合集下面的对应属性
 print(event.speakers[-1].name)

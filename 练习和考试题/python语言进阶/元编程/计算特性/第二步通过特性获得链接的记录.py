@@ -63,18 +63,21 @@ class Record:
     def __repr__(self):
         return f'<{self.__class__.__name__} serial={self.serial!r}>'  # <2>
 
-    @staticmethod
-    def fetch(key, path=JSON_PATH) -> dict[str:object]:
+    @classmethod
+    def fetch(cls, key, path=JSON_PATH) -> dict[str:object]:
         """
-        有两个用法：
+        该方法对整体字典进行过滤。
+
+
         1.用于筛选conferences events speakers venues 中的任意一个key和key对应的vaule值。
         格式为：key.serial
         例:event.34505
+        从整体字典字典中获取索引值。Record.__index["event.34505"]
         2.用于在第一次类属性为空时，构造整体字典属性化
         """
-        if Record.__index is None:
-            Record.__index = load(path)
-        return Record.__index[key]
+        if cls.__index is None:
+            cls.__index = load(path)
+        return cls.__index[key]
 
 
 class Event(Record):
@@ -86,17 +89,19 @@ class Event(Record):
             return f"<{self.__class__.__name__}{self.name!r}>"
             ##self.__class__ 用于访问当前实例 (self) 的类
             ##原因是.index字典中的项的对象，可能是record构造，也可能是event
+            ##目的是Event构造的对象，在打印的时候显示的是<Event...>
         except AttributeError:
             return super().__repr__()
 
     @property
-    def venue(self):
+    def venue(self) -> object:
         """
-        特性，让event类构造的对象，能关联到venue
-        event中的venue_serial是关联venues中的serial
-        当前对象有venue_serial属性，拼装为key.vaule的格式
-        转给类的静态方法fetch去筛选结果
+        特性，让event对象event.venue变成一个属性。其值为该函数的返回值。
+
+        从event属性中获取venue_serial，拼接为key
+        并返回返回过滤方法的结果
         """
+        # 拼接venue.serial的值，用于索引整体列表。
         key = f'venue.{self.venue_serial}'
         return self.__class__.fetch(key)
 
@@ -104,16 +109,16 @@ class Event(Record):
 def load(path=JSON_PATH) -> dict[str:Record]:
     records = {}  # <3>整体字典先构造为空
     with open(path) as fp:
-        raw_data = json.load(fp)  # <4>打开文件
+        source_data = json.load(fp)  # <4>打开文件
 
-    for collection, raw_records in raw_data['Schedule'].items():  # 从Schedule下取出key，value
-        # <5>key-collection 是conferences events speakers venues
-        # value-raw_records 是他们对应的列表
-        record_type = collection[:-1]  # <6>去掉s speakers-》speaker
-
+    for keys, list in source_data['Schedule'].items():  #
+        # <5>keys 是conferences events speakers venues这些keys，他们的项都是一个列表
+        # list 就是他们对应的列表
+        record_type = keys[:-1]  # <6>拼接新的keyname，去掉s 从events-》event
         cls_name = record_type.capitalize()  # 将key命的首字母大写，从event-》Event
-        cls = globals().get(cls_name, Record)  # 从全局类中获取cls_name 如果存在cls_name这个类
-        # 则返回这个类，否则返回Record
+
+        # 从全局类的字典中，尝试获取cls_name，默认为Record
+        cls = globals().get(cls_name, Record)
         if isclass(cls) and issubclass(cls, Record):
             # 还是判断cls是不是一个类，并且是Record的子类，这里暗指Event、Speaker等可能创建的子类
             factory = cls
@@ -122,26 +127,32 @@ def load(path=JSON_PATH) -> dict[str:Record]:
         # 这几步的作用是检查keys们是否定义了对应的名称的子类，如果有，则构造的类使用子类，因为子类可能有独特的特性。
         # 如果没有，那还是用record类来构造
 
-        #从values中遍历里面的内容raw_records是一个列表raw_record是字典
-        for raw_record in raw_records:
-            #拼装index的格式，为event.serial
-            key = f'{record_type}.{raw_record["serial"]}'  # <7>字典的key进行拼装，将speakers下的列表中的serial值取出，
-            records[key] = factory(**raw_record)  # <8>字典更新，使用子类或者父类来构造。解包传入key=value的格式。
+        for rocord in list:
+            # <7>字典的key进行拼装，将speakers下的列表中的serial值取出，
+            # 拼装为speaker.157509
+            new_key = f'{record_type}.{rocord["serial"]}'
+            # <8>整体字典更新，映射的vaule是Record对象，将rocord拆包传入。rocord是字典，拆包为key=value给Record进行构造。
+            records[new_key] = factory(**rocord)
 
     return records
 
 
 # end::SCHEDULE1[]
-event = Record.fetch("event.34505")
 
-# 获取event下本身的属性
-print(event)
-print(event.venue_serial)
-print(event.description)
 
-# 获取链接的属性
-# Event下定义了一个特性venues 用于获取venues表头下的内容
-print("----------")
-print(event.venue)
-print(event.venue.name)
-print(event.venue.category)
+# 测试代码
+if __name__ == "__main__":
+    event = Record.fetch("event.34505")  # 赋值event变量，引用Record对象中过滤后的对象。
+
+    # # 获取event下本身的属性
+    # print(event)#由Event类创建的对象，所以打印的结果为<Event...>
+    # #event下自己的属性
+    # print(event.venue_serial)
+    # print(event.description)
+
+    # 获取链接的属性
+    # Event下定义了一个特性venues 用于获取venues表头下的内容
+    print("----------")
+    print(event.venue)  # 访问特性，特性返回的是关联的venue表头内的内容所创建的Record对象
+    print(event.venue.name)  # 该对象有venue下的所有属性。
+    print(event.venue.category)

@@ -67,18 +67,21 @@ class Record:
     def __repr__(self):
         return f'<{self.__class__.__name__} serial={self.serial!r}>'  # <2>
 
-    @staticmethod
-    def fetch(key, path=JSON_PATH) -> dict[str:object] | object:
+    @classmethod
+    def fetch(cls, key, path=JSON_PATH) -> object:
         """
-        有两个用法：
+        该方法对整体字典进行过滤。
+
+
         1.用于筛选conferences events speakers venues 中的任意一个key和key对应的vaule值。
         格式为：key.serial
         例:event.34505
+        从整体字典字典中获取索引值。Record.__index["event.34505"]
         2.用于在第一次类属性为空时，构造整体字典属性化
         """
-        if Record.__index is None:
-            Record.__index = load(path)
-        return Record.__index[key]
+        if cls.__index is None:
+            cls.__index = load(path)
+        return cls.__index[key]
 
 
 class Event(Record):
@@ -109,14 +112,12 @@ class Event(Record):
         """
         event下的speakers特性因为和Schedule下的speakers重名所以需要特殊处理。
         """
+        # 使用一个实例化属性__speaker_objs来储存从speakers获取的内容合集
         if not hasattr(self, '__speaker_objs'):  # event自己的缓存实现，
-            # 使用一个实例化属性__speaker_objs来储存从speakers获取的内容合集
             sp_serials = self.__dict__["speakers"]  # 直取当前对象下的speakers。即event下的speakers。
             fetch = self.__class__.fetch
+            # 给这个私有属性赋值，下次在访问特性的时候，这个私有属性因为已经存在了，就不会再读取一遍fetch而是直接返回结果
             self.__speaker_objs = [fetch(f"speaker.{key}") for key in sp_serials]
-            # 遍历event的speakers 这个列表中的值，也就是speakers的serial
-            # 交给fetch去筛选结果。
-            # 返回一个列表，项是对应的speakers下serial所在的字典组成的属性化对象。
         return self.__speaker_objs
 
 

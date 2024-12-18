@@ -49,7 +49,7 @@ conferences events speakers venues 对应的列表中都有个关键字serial
 
 # tag::SCHEDULE1[]
 import json
-from functools import cache, cached_property
+from functools import lru_cache, cached_property
 from inspect import isclass
 
 JSON_PATH = 'E:\霍格沃茨学社\Hogwarts-Studies\练习和考试题\python语言进阶\元编程\osconfeed-sample.json'
@@ -69,18 +69,21 @@ class Record:
     def __repr__(self):
         return f'<{self.__class__.__name__} serial={self.serial!r}>'  # <2>
 
-    @staticmethod
-    def fetch(key, path=JSON_PATH) -> dict[str:object] | object:
+    @classmethod
+    def fetch(cls, key, path=JSON_PATH) -> object:
         """
-        有两个用法：
+        该方法对整体字典进行过滤。
+
+
         1.用于筛选conferences events speakers venues 中的任意一个key和key对应的vaule值。
         格式为：key.serial
         例:event.34505
+        从整体字典字典中获取索引值。Record.__index["event.34505"]
         2.用于在第一次类属性为空时，构造整体字典属性化
         """
-        if Record.__index is None:
-            Record.__index = load(path)
-        return Record.__index[key]
+        if cls.__index is None:
+            cls.__index = load(path)
+        return cls.__index[key]
 
 
 class Event(Record):
@@ -107,7 +110,7 @@ class Event(Record):
         return self.__class__.fetch(key)
 
     @property
-    @cache
+    @lru_cache
     def speakers(self) -> list[object]:
         """
         event下的speakers特性因为和Schedule下的speakers重名所以需要特殊处理。

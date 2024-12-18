@@ -1,110 +1,35 @@
-from abc import ABC, abstractmethod
-from collections.abc import Sequence
-from functools import lru_cache
-from typing import NamedTuple, Optional
+dic_misiden = {}
+read_handle = open('all_misiden.unl', 'r')
+data_train = read_handle.readline().strip('\n')
+while data_train:
+    file_list = data_train.split('|')
+    dic_misiden[file_list[0]] = 1
+    data_train = read_handle.readline().strip('\n')
+read_handle.close()
 
+dic_segement = {}
+read_handle = open('BP_MOBILE_SEG_ROUTER.unl', 'r')
+data_train = read_handle.readline().strip('\n')
+while data_train:
+    file_list = data_train.split('|')
+    if file_list[6] == "C":
+        dic_segement[file_list[0]] = file_list[1]
+    else:
+        num_temp = 0
+    data_train = read_handle.readline().strip('\n')
+read_handle.close()
 
-class Customer(NamedTuple):
-    name: str
-    point: int | float
-
-
-class Item(NamedTuple):
-    product: str
-    number: int | float
-    price: int | float
-
-    @property
-    @lru_cache
-    def Itemtotal(self):
-        return self.number * self.price
-
-
-class Order(NamedTuple):
-    customer: Customer
-    items: Sequence[Item]
-    policy: Optional['Policys'] = None
-
-    @property
-    @lru_cache
-    def total(self):
-        return sum((item.Itemtotal for item in self.items), start=0)
-
-    def due(self):
-        if self.policy is None:
-            return 0
+write_hanle = open("free_misisden.unl", "w")
+for i in dic_segement:
+    t = int(i)
+    while t <= int(dic_segement[i]):
+        if t >= int(i) and t <= int(dic_segement[i]):
+            str_misiden = str(t)
+            if str_misiden in dic_misiden:
+                num_tem = 0
+            else:
+                write_hanle.write(str(t) + "\n")
+            t = int(t) + 1
         else:
-            return self.total - self.policy.discount(self)
-
-    def __str__(self):
-        return f"<Order total:{self.total:.2f} Disocunt:{self.due():.2f}>"
-
-
-class PolicyRegister():
-    policyslist = []
-
-    def __init__(self, bool: bool = False):
-        self.__bool = bool
-
-    def __call__(self, policy):
-        if self.__bool == True:
-            self.__class__.policyslist.append(policy())
-        return policy
-
-
-class Policys(ABC):
-
-    @abstractmethod
-    def discount(self, order: Order):
-        pass
-
-
-class BestPolicy(Policys):
-    def discount(self, order: Order):
-        return max(policy.discount(order) for policy in PolicyRegister.policyslist)
-
-
-@PolicyRegister(True)
-class Pointdiscount(Policys):
-    def discount(self, order: Order):
-        if order.customer.point > 1000:
-            return order.total * 0.05
-        else:
-            return 0
-
-
-@PolicyRegister(True)
-class Itemdiscount(Policys):
-    def discount(self, order: Order):
-        discount = 0
-        for item in order.items:
-            if item.number > 20:
-                discount += item.Itemtotal * 0.1
-        else:
-            return discount
-
-
-@PolicyRegister(True)
-class Orderdiscount(Policys):
-    def discount(self, order: Order):
-        if len({item.product for item in order.items}) > 10:
-            return order.total * 0.07
-        else:
-            return 0
-
-
-if __name__ == "__main__":
-    """测试代码"""
-    xueqin = Customer("xueqin", 0)
-    haizhenyu = Customer("haizhenyu", 1001)
-
-    cart1 = (Item("banana", 4, 0.5),
-             Item("Apple", 21, 1.5),
-             Item("watermelon", 5, 5))
-
-    cart2 = (Item("banana", 4, 0.5),
-             Item("Apple", 20, 1.5),
-             Item("watermelon", 5, 5))
-
-    print(Order(xueqin, items=cart1, policy=BestPolicy()))
-    print(Order(haizhenyu, items=cart2, policy=BestPolicy()))
+            t = t + 1
+write_hanle.close()

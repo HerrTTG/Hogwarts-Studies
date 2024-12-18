@@ -10,13 +10,13 @@ def factory(prop_name):
     """
 
     def _get_prop(instance):
+        # instance为对象本身，相当于self。
         return instance.__dict__[f"_{prop_name}"]
 
     def _set_prop(instance, value):
         """
         这里选择直接更新实例化属性字典dict来赋值实例化属性，
         是为了防止直接赋值实例化属性发生不必要的bug。
-        instance.prop_name 是给对象赋予"prop_name"这个属性，而不是self.{prop_name}
         """
 
         if value > 0:
