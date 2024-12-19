@@ -53,12 +53,12 @@ customer = Managed()
 customer.over = 1
 print(vars(customer))
 
-# 在调用over这个属性的时候，走的是Overriding.__get__ 参数为(描述符对象self，托管类对象customer，和class Managed)
+# 获取over这个属性的时候，走的是Overriding.__get__ 参数为(描述符对象self，托管类对象customer，和class Managed)
 print(customer.over)
 
-# 绕开描述符，直接给托管对象创建实例化对象over，并赋值为2
+# 绕开描述符，直接给托管实例，创建并赋值属性over值为2
 customer.__dict__["over"] = 2
-print(vars(customer))
+print(vars(customer))  # 托管实例中出现over属性
 
-# 托管对象获取属性依旧走的是Overriding.__get__
+# 但是托管实例在获取属性时，依旧走的是Overriding.__get__
 print(customer.over)

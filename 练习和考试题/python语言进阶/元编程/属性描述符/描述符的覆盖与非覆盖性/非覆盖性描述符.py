@@ -27,6 +27,7 @@ class NonOverriding:  # <4>
         print_args('get', self, instance, owner)
 
 
+
 class Managed:  # <5>托管类，把所有描述符都构造一遍实例
     non_over = NonOverriding()
 
@@ -39,13 +40,13 @@ customer = Managed()
 # 托管对象未赋值同名属性前，属性的读取还是走描述符方法的
 print(customer.non_over)
 
-# 赋值后，托管对象属性覆盖描述符
+# 赋值后，托管实例属性覆盖描述符
 customer.non_over = 1
 print(customer.non_over)
 
-# 描述符为普通类属性
+# 描述符对象为普通类属性
 print(Managed.non_over)
 
-# 删除托管对象属性，描述符恢复
+# 删除托管实例属性，描述符恢复
 del customer.non_over
 print(customer.non_over)

@@ -36,18 +36,24 @@ class Managed:  # <5>托管类，把所有描述符都构造一遍实例
 
 customer = Managed()
 
-# 查看托管对象的属性over_no_get，发现返回的是描述符对象
+# 在托管实例赋值前，查看托管实例的属性over_no_get，返回的是Managed的类属性，引用的描述符对象
 print(customer.over_no_get)
 
-# 对属性赋值，调用的确实是set方法
+# 对属性赋值，调用的确实是描述符类的set方法,但是并没有给托管实例中创建储存属性
 customer.over_no_get = 1
 
-# 重新尝试获取实例属性，发现返回的依然是描述符对象，并且实例属性字典不存在数据
+# 托管实例重新尝试获取属性，发现返回的依然是描述符对象，并且托管实例属性字典不存在数据
+# 因为并没有储存属性
 print(customer.over_no_get)
 print(vars(customer))
 
-# 更新字典检查
+# 绕过__set__方法，直接对托管实例的属性字典进行更新
 customer.__dict__["over_no_get"] = 2
+
+# 然后再赋值，会调用描述符的__set__方法
 customer.over_no_get = 3
+
+# 但是托管实例再次获取属性时，已经是从托管实例的属性字典中获取结果了
+# 并且上述赋值，没有覆盖托管实例属性
 print(customer.over_no_get)
 print(vars(customer))
