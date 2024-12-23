@@ -1,14 +1,1 @@
-class Checked:
-    ...
-
-
-class Movie(Checked):
-    title: str = "123"
-    year: int
-    box_office: float
-
-    def name(self):
-        ...
-
-
-print(Movie.__dict__)
+type(1, 2, 3, 4, 5)
