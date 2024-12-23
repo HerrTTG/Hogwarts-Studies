@@ -12,22 +12,23 @@ def class_factory(class_name: str, filed_names: str | Iterable[str]) -> type:
         # 位置参数和属性的绑定
         # zip打包__slots__元组中的储存的属性名，配合类传入args位置参数，生成key-value映射字典
         attrs = dict(zip(self.__slots__, args))
-        attrs.update(kwargs)  # 关键字传入的不能漏
-
-        # 相当于Dog("Bil",20,owner='Bob')
+        # 相当于init处理Dog("Bil",20,owner='Bob')时
         # args=("Bil",20)
-        # kwargs={"owner":'Bob'}
-        #最后attrs为这三个属性的映射字典
-
-        # 遍历这个字典，对实例化对象属性赋值，相当于self.key=value
+        # __slots__=("name","age","owner")
+        # zip把除了owner之外的两两结合，变为字典
+        # {"name":"Bil","age":20}
+        # 最后遍历这个字典，对实例化对象属性赋值，相当于self.key=value
         for key, value in attrs.items():
             setattr(self, key, value)
+
+        # kwargs={"owner":'Bob'}
+        attrs.update(kwargs)  # 关键字传入的不能漏
 
     def __iter__(self) -> Generator:
         """
         对self迭代的实现
         """
-        # 因为__slots__元组中是属性的name，所以遍历的实现就是生成器函数返回对象self的这几个属性。
+        # 因为__slots__元组中是属性的name，所以迭代的实现就是生成器函数返回对象self的这几个属性。
         for attr_name in self.__slots__:
             yield getattr(self, attr_name)
 
@@ -35,9 +36,8 @@ def class_factory(class_name: str, filed_names: str | Iterable[str]) -> type:
         """
         对象的打印实现
         """
-        # zip将两个迭代对象进行关联，对slef.__slots__中迭代他本身是个元组。
-        # 对self迭代走的是self.__iter__，根据上诉实现的方法，返回的是key对应的属性值。
-        # 最后zip把他们的返回值打包成一个元组(name,value)
+        # zip将两个迭代对象进行关联，对slef.__slots__中迭代他本身是个元组，储存的是属性名
+        # 对self迭代走的是self.__iter__,返回的是属性名对应的属性值。
         values = ','.join(f'{name}={value!r}' for name, value in zip(self.__slots__, self))
         cls_name = self.__class__.__name__
         return f'{cls_name}({values})'
