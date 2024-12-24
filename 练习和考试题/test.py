@@ -1,1 +1,5 @@
-type(1, 2, 3, 4, 5)
+@Checked
+class Movie:
+    title: str
+    year: int
+    box_office: float

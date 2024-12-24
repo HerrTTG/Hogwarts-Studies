@@ -139,5 +139,6 @@ class Movie(Checked):
     box_office: float
 
 
-movie = Movie('The Godfather', year=2024, box_office=123)
-print(movie)
+if __name__ == "__main__":
+    movie = Movie('The Godfather', year=2024, box_office=123)
+    print(movie)
