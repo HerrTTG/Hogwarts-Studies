@@ -8,4 +8,5 @@ class Node:
         self.right = None
 class Solution:
     def invertTree(self, root: Node) -> Node:
+        ...
 # 中间是你要实现的代码
