@@ -23,7 +23,8 @@ def user_info(username):
     动态路由
     比如路由 /user后面想要根据不同的用户名，返回不同的数据
     """
-    return f"User {username} is select info."
+    safe_username = escape(username)
+    return f"User {safe_username} is select info."
 
 
 # 限定类型的动态路由
