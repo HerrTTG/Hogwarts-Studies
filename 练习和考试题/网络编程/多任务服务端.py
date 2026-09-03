@@ -6,7 +6,7 @@ import threading
 
 class MultiTaskTCPServer(object):
     # 在初始化方法中对服务端socket进行初始化操作
-    def __init__(self, ip="", port=8080):
+    def __init__(self, ip="127.0.0.1", port=8080):
         # 创建tcp服务端套接字
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # 设置端口号复用，让程序退出端口号立即释放
