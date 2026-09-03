@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, escape
 
 # 创建 Flask 应用程序实例
 API = Flask(__name__)
@@ -18,7 +18,7 @@ def get_method():
 
 @API.route("/info", methods=["POST", "PUT"])
 def update():
-    return f"Method is {request.method}."
+    return f"Method is {escape(request.method)}."
 
 
 if __name__ == '__main__':

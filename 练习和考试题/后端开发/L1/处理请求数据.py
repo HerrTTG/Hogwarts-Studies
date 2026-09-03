@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, escape
 from werkzeug.utils import secure_filename
 
 # 创建 Flask 应用程序实例
@@ -15,7 +15,7 @@ def get_token():
     # 获取请求参数中的 username 对应的值
     username = url_param.get('username')
     password = url_param.get('password')
-    return f'Hello, {(username, password)}!'
+    return f'Hello, {(escape(username), escape(password))}!'
 
 
 @API.route('/data', methods=['POST'])
@@ -27,7 +27,7 @@ def process_data():
     # 获取请求体中对应字段的值
     name = data.get('name')
     age = data.get('age')
-    return f'Name: {name}, Age: {age}'
+    return f'Name: {escape(name)}, Age: {escape(str(age))}'
 
 
 @API.route('/login', methods=['POST'])
@@ -39,7 +39,7 @@ def login():
     # 获取请求体中对应字段的值
     username = user_info.get('username')
     password = user_info.get('password')
-    return f'Welcome, {username}!'
+    return f'Welcome, {escape(username)}!'
 
 
 @API.route('/upload', methods=['GET', 'POST'])
