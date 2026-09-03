@@ -12,7 +12,8 @@ class Student:
         self.score = score
 
     def getinfo(self):
-        print(self.name, self.age, self.gender, self.score)
+        masked_gender = "***"
+        print(self.name, self.age, masked_gender, self.score)
 
 
 def main():
