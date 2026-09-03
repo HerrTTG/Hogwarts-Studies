@@ -1,4 +1,5 @@
 import json
+import logging
 import sqlalchemy
 from flask import Flask, Blueprint, request
 from pydantic import ValidationError
@@ -146,12 +147,20 @@ def add():
         db_session.add(Course(**data))
         # 提交操作
         db_session.commit()
-    except sqlalchemy.exc.IntegrityError as e:
+    except sqlalchemy.exc.IntegrityError:
         db_session.close()
-        return e
-    except sqlalchemy.exc.PendingRollbackError as a:
+        logging.exception("Failed to add course due to integrity error.")
+        return json.dumps({
+            "errcode": 10003,
+            "errmsg": "课程添加失败"
+        }, ensure_ascii=False)
+    except sqlalchemy.exc.PendingRollbackError:
         db_session.close()
-        return a
+        logging.exception("Failed to add course due to pending rollback.")
+        return json.dumps({
+            "errcode": 10003,
+            "errmsg": "课程添加失败"
+        }, ensure_ascii=False)
     except Exception:
         db_session.close()
     else:
