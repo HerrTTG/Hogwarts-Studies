@@ -17,4 +17,4 @@ def index():
 """
 0.0.0.0 开启局域网访问模式，由本机IP地址进行访问。可设置端口，debug模式开启
 """
-API.run(host="0.0.0.0", port=5050, debug=True)
+API.run(host="0.0.0.0", port=5050, debug=False)

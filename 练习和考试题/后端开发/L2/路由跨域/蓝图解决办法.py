@@ -17,4 +17,4 @@ def hello():
 
 if __name__ == '__main__':
     app.register_blueprint(hello_route)
-    app.run(debug=True, port=5555)
+    app.run(debug=False, port=5555)

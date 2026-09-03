@@ -24,4 +24,4 @@ def show_static():
 
 # 运行应用程序
 if __name__ == '__main__':
-    app.run(debug=True, port=5050)
+    app.run(debug=False, port=5050)

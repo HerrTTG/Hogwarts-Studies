@@ -17,4 +17,4 @@ def home_page():
 
 if __name__ == "__main__":
     app.register_blueprint(index_home)
-    app.run("0.0.0.0", port=5050, debug=True)
+    app.run("0.0.0.0", port=5050, debug=False)

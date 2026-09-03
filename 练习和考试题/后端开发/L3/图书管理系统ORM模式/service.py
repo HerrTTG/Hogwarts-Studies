@@ -188,4 +188,4 @@ def delete(course_id):
 
 if __name__ == "__main__":
     app.register_blueprint(CourseBlue)
-    app.run("0.0.0.0", port=8888, debug=True)
+    app.run("0.0.0.0", port=8888, debug=False)

@@ -29,4 +29,4 @@ def login():
 if __name__ == '__main__':
     # 注册蓝图
     app.register_blueprint(user_router)
-    app.run(port=5055, debug=True)
+    app.run(port=5055, debug=False)
