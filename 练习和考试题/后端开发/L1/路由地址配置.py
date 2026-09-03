@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, escape
 
 # 创建 Flask 应用程序实例
 API = Flask(__name__)
@@ -37,8 +37,8 @@ def user_id(user_id):
 # 类型限定为 path（可以包含 /）
 @API.route('/path/<path:sub_path>')
 def show_subpath(sub_path):
-    # 展示 path 后的子路由
-    return f'Subpath is {sub_path}'
+    # 展示 path 后的子路由（对用户输入做 HTML 转义，避免反射型 XSS）
+    return f'Subpath is {escape(sub_path)}'
 
 
 # 运行应用程序
