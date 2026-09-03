@@ -1,4 +1,5 @@
 from requests_xml import XMLSession
+from urllib.parse import urlparse
 
 # XML解析主要用于对XML类型返回的消息体进行断言。
 # 主要依赖于request_xml中的XMLSession库
@@ -36,7 +37,8 @@ for i in items:
     results.append(i.text)
 print(results)
 for i in results:
-    if 'https://www.nasa.gov' in i:
+    parsed = urlparse(i)
+    if parsed.scheme == 'https' and parsed.hostname == 'www.nasa.gov':
         break
 else:
     assert False
