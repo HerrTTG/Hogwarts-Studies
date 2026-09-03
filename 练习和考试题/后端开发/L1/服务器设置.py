@@ -8,7 +8,7 @@ API = Flask(__name__)
 def index():
     resp = make_response(render_template('demo.html'))
     # 设置cookie
-    resp.set_cookie('username', 'the username')
+    resp.set_cookie('username', 'the username', httponly=True)
     # 设置响应头信息
     resp.headers["hogwarts"] = "HAI"
     return resp
