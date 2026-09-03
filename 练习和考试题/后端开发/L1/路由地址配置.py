@@ -30,8 +30,9 @@ def user_info(username):
 # 类型限定为整型
 @API.route("/user/<int:user_id>")
 def user_id(user_id):
-    # 展示给定的用户 ID，ID 为整型
-    return f"User ID is {user_id}"
+    # 展示给定的用户 ID，ID 为整型（输出前做 HTML 转义，避免反射型 XSS）
+    safe_user_id = escape(str(user_id))
+    return f"User ID is {safe_user_id}"
 
 
 # 类型限定为 path（可以包含 /）
