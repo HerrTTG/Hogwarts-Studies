@@ -4,8 +4,8 @@ import socket
 tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # 设置端口号复用，让程序退出端口号立即释放
 tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
-# 给程序绑定端口号
-tcp_server_socket.bind(("", 8080))
+# 给程序绑定端口号（绑定到专用接口，避免监听所有网卡）
+tcp_server_socket.bind(("127.0.0.1", 8080))
 # 设置监听
 tcp_server_socket.listen(128)
 print("服务端启动成功，等待客户端连接。。。")
