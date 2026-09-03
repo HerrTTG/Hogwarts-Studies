@@ -62,7 +62,10 @@ def upload_file():
             # 保存文件
             f = r_file.get("file")
             f.save('./' + secure_filename(f.filename))
-            return f'File {f.filename} is saved! URL is {r_url}, host is {r_host}'
+            safe_filename = escape(f.filename)
+            safe_url = escape(r_url)
+            safe_host = escape(r_host)
+            return f'File {safe_filename} is saved! URL is {safe_url}, host is {safe_host}'
         return f"My-Header is missing!"
     elif r_method == 'GET':
         return f"Please send POST method and upload file."
